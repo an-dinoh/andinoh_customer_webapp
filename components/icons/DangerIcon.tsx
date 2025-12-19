@@ -1,0 +1,34 @@
+import * as React from "react";
+
+export default function DangerIcon(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      {...props}
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M12 9V14"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M11.9999 21.4112H5.93993C2.46993 21.4112 1.01993 18.9312 2.69993 15.9012L5.81993 10.2812L8.75993 5.00125C10.5399 1.79125 13.4599 1.79125 15.2399 5.00125L18.1799 10.2913L21.2999 15.9113C22.9799 18.9413 21.5199 21.4212 18.0599 21.4212H11.9999V21.4112Z"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M11.9946 17H12.0036"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
