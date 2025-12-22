@@ -80,6 +80,13 @@ export default function LoginPage() {
 
     await new Promise((resolve) => setTimeout(resolve, 500));
 
+    // Simulate successful login - store auth data
+    localStorage.setItem("authToken", "mock-token-" + Date.now());
+    localStorage.setItem("userData", JSON.stringify({
+      email: form.email,
+      firstName: form.email.split("@")[0], // Use email username as first name
+    }));
+
     router.push("/");
 
     setLoading(false);

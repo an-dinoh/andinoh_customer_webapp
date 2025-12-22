@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useParams, useRouter } from "next/navigation";
-import { MapPin, Star, Wifi, Car, Coffee, Dumbbell, UtensilsCrossed, Wind, Tv, Shield, ChevronLeft, ChevronRight, Calendar, Users, Building2, PartyPopper } from "lucide-react";
+import { MapPin, Star, Wifi, Car, Coffee, Dumbbell, UtensilsCrossed, Wind, Tv, Shield, ChevronLeft, ChevronRight, Calendar, Users, Building2, PartyPopper, Bed, Maximize2, Sparkles, Eye } from "lucide-react";
 import Button from "@/components/common/Button";
 import Card from "@/components/common/Card";
 import Input from "@/components/common/Input";
@@ -147,7 +147,7 @@ export default function HotelDetailsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#FAFAFB]">
+    <div className="min-h-screen bg-white">
       {/* Image Gallery */}
       <div className="relative h-96 bg-gray-200">
         <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-[#0F75BD] to-[#02A5E6]">
@@ -265,54 +265,98 @@ export default function HotelDetailsPage() {
 
             {/* Rooms Tab */}
             {selectedTab === "rooms" && (
-              <div className="space-y-4">
-                {hotel.rooms.map((room) => (
-                  <Card key={room.id} className="p-6">
-                    <div className="flex flex-col md:flex-row justify-between gap-4">
-                      <div className="flex-1">
-                        <h3 className="text-xl font-bold text-[#1A1A1A] mb-2">{room.name}</h3>
-                        <p className="text-[#5C5B59] mb-3">{room.description}</p>
-                        <div className="flex flex-wrap gap-2 mb-3">
-                          <span className="px-3 py-1 bg-[#E8F4F8] text-[#0F75BD] text-sm rounded-lg">
-                            <Users className="w-3 h-3 inline mr-1" />
-                            {room.capacity} {room.capacity === 1 ? "guest" : "guests"}
-                          </span>
-                          <span className="px-3 py-1 bg-[#E8F4F8] text-[#0F75BD] text-sm rounded-lg">
-                            {room.size}m²
-                          </span>
-                          <span className="px-3 py-1 bg-green-50 text-green-600 text-sm rounded-lg">
-                            {room.available} available
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {hotel.rooms.map((room, index) => {
+                  const roomNumber = `R${String(index + 1).padStart(2, '0')}`;
+                  return (
+                    <div
+                      key={room.id}
+                      className="bg-white rounded-[22px] overflow-hidden border border-[#E5E7EB] hover:border-[#0F75BD] transition-all group"
+                    >
+                      {/* Room Image */}
+                      <div className="relative h-40 bg-[#E8F4F8] flex items-center justify-center overflow-hidden">
+                        <span className="text-6xl">🏨</span>
+
+                        {/* Room Number */}
+                        <div className="absolute top-4 right-4 w-12 h-12 bg-white/90 backdrop-blur-sm rounded-xl flex items-center justify-center">
+                          <span className="text-sm font-bold text-[#0F75BD]">{roomNumber}</span>
+                        </div>
+
+                        {/* Room Type Badge */}
+                        <div className="absolute top-4 left-4">
+                          <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white/90 backdrop-blur-sm text-[#0F75BD] text-xs font-medium rounded-lg">
+                            <Sparkles className="w-3 h-3" />
+                            {room.type.toUpperCase()}
                           </span>
                         </div>
-                        <div className="flex flex-wrap gap-2">
-                          {room.amenities.map((amenity) => (
-                            <span
-                              key={amenity}
-                              className="text-xs text-[#5C5B59] bg-[#F9FAFB] px-2 py-1 rounded"
-                            >
-                              {amenity}
-                            </span>
-                          ))}
+
+                        {/* Availability Badge */}
+                        <div className="absolute bottom-3 right-3">
+                          <span
+                            className={`px-2.5 py-1 text-xs font-semibold rounded-lg ${
+                              room.available > 0
+                                ? "bg-[#ECFDF5] text-green-700"
+                                : "bg-[#FEE2E2] text-red-700"
+                            }`}
+                          >
+                            {room.available > 0 ? `${room.available} Available` : "Occupied"}
+                          </span>
                         </div>
                       </div>
-                      <div className="flex flex-col justify-between items-end">
-                        <div className="text-right mb-4">
-                          <p className="text-xs text-[#5C5B59]">From</p>
-                          <p className="text-2xl font-bold text-[#0F75BD]">
-                            ₦{room.price.toLocaleString()}
-                          </p>
-                          <p className="text-xs text-[#5C5B59]">per night</p>
+
+                      {/* Room Content */}
+                      <div className="p-5">
+                        {/* Room Title */}
+                        <h3 className="text-lg font-bold text-[#1A1A1A] mb-2 group-hover:text-[#0F75BD] transition-colors truncate">
+                          {room.name}
+                        </h3>
+
+                        {/* Description */}
+                        <p className="text-sm text-[#5C5B59] mb-3 line-clamp-2">
+                          {room.description}
+                        </p>
+
+                        {/* Room Details */}
+                        <div className="grid grid-cols-3 gap-2 mb-3">
+                          <div className="flex flex-col items-center p-2 bg-[#FAFAFB] rounded-lg">
+                            <Bed className="w-4 h-4 text-[#0F75BD] mb-1" />
+                            <span className="text-xs font-semibold text-[#1A1A1A] capitalize">{room.type}</span>
+                          </div>
+                          <div className="flex flex-col items-center p-2 bg-[#FAFAFB] rounded-lg">
+                            <Users className="w-4 h-4 text-[#0F75BD] mb-1" />
+                            <span className="text-xs font-semibold text-[#1A1A1A]">{room.capacity}</span>
+                          </div>
+                          <div className="flex flex-col items-center p-2 bg-[#FAFAFB] rounded-lg">
+                            <Maximize2 className="w-4 h-4 text-[#0F75BD] mb-1" />
+                            <span className="text-xs font-semibold text-[#1A1A1A]">{room.size} m²</span>
+                          </div>
                         </div>
-                        <Button
-                          onClick={() => router.push(`/booking/room/${room.id}`)}
-                          disabled={room.available === 0}
-                        >
-                          {room.available === 0 ? "Fully Booked" : "Book Now"}
-                        </Button>
+
+                        {/* Divider */}
+                        <div className="border-t border-[#E5E7EB] my-3"></div>
+
+                        {/* Price & Actions */}
+                        <div className="flex items-center justify-between">
+                          <div>
+                            <p className="text-xs text-[#5C5B59] mb-0.5">Starting from</p>
+                            <p className="text-xl font-bold text-[#0F75BD]">
+                              ₦{room.price.toLocaleString()}
+                              <span className="text-xs font-normal text-[#5C5B59]">/night</span>
+                            </p>
+                          </div>
+                          <button
+                            onClick={() => router.push(`/booking/room/${room.id}`)}
+                            disabled={room.available === 0}
+                            className="px-4 py-2 bg-[#0F75BD] text-white text-sm font-medium rounded-xl hover:bg-[#0050C8] transition-colors flex items-center gap-2 disabled:bg-gray-400 disabled:cursor-not-allowed"
+                          >
+                            <Eye className="w-4 h-4" />
+                            {room.available === 0 ? "Booked" : "View"}
+                          </button>
+                        </div>
                       </div>
                     </div>
-                  </Card>
-                ))}
+                  );
+                })}
               </div>
             )}
 

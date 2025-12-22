@@ -110,16 +110,16 @@ export default function HotelsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#FAFAFB] py-8">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-[#1A1A1A] mb-2">Find Your Perfect Hotel</h1>
-          <p className="text-[#5C5B59]">Discover amazing hotels across Nigeria</p>
-        </div>
+    <div className="min-h-screen bg-white py-8">
+      {/* Header */}
+      <div className="mb-8">
+        <h1 className="text-3xl font-bold text-[#1A1A1A] mb-2">Find Your Perfect Hotel</h1>
+        <p className="text-[#5C5B59]">Discover amazing hotels across Nigeria</p>
+      </div>
 
-        {/* Search Bar */}
-        <Card className="mb-6 p-4">
+      {/* Search Bar - Sticky */}
+      <div className="sticky top-[80px] z-40 bg-white pb-4 -mx-16 px-16 border-b border-[#E5E7EB]">
+        <Card className="p-4">
           <div className="flex flex-col md:flex-row gap-4">
             <div className="flex-1">
               <Input
@@ -156,103 +156,88 @@ export default function HotelsPage() {
               </div>
             </div>
           </div>
-        </Card>
 
-        <div className="flex gap-6">
-          {/* Filters Sidebar */}
+          {/* Filters Dropdown */}
           {showFilters && (
-            <aside className="hidden lg:block w-80 flex-shrink-0">
-              <Card className="p-6 sticky top-24">
-                <h3 className="text-lg font-bold text-[#1A1A1A] mb-4">Filters</h3>
-
-                {/* Price Range */}
-                <div className="mb-6">
-                  <label className="block text-sm font-semibold text-[#1A1A1A] mb-3">
-                    Price Range (per night)
-                  </label>
-                  <div className="space-y-2">
-                    <input
-                      type="range"
-                      min="0"
-                      max="200000"
-                      step="5000"
-                      value={filters.priceRange[1]}
-                      onChange={(e) =>
-                        setFilters({ ...filters, priceRange: [0, parseInt(e.target.value)] })
-                      }
-                      className="w-full"
-                    />
-                    <div className="flex justify-between text-sm text-[#5C5B59]">
-                      <span>₦0</span>
-                      <span>₦{filters.priceRange[1].toLocaleString()}</span>
-                    </div>
+            <div className="mt-4 pt-4 border-t border-[#E5E7EB] grid grid-cols-1 md:grid-cols-3 gap-6">
+              {/* Price Range */}
+              <div>
+                <label className="block text-sm font-semibold text-[#1A1A1A] mb-3">
+                  Price Range (per night)
+                </label>
+                <div className="space-y-2">
+                  <input
+                    type="range"
+                    min="0"
+                    max="200000"
+                    step="5000"
+                    value={filters.priceRange[1]}
+                    onChange={(e) =>
+                      setFilters({ ...filters, priceRange: [0, parseInt(e.target.value)] })
+                    }
+                    className="w-full"
+                  />
+                  <div className="flex justify-between text-sm text-[#5C5B59]">
+                    <span>₦0</span>
+                    <span>₦{filters.priceRange[1].toLocaleString()}</span>
                   </div>
                 </div>
+              </div>
 
-                {/* Rating */}
-                <div className="mb-6">
-                  <label className="block text-sm font-semibold text-[#1A1A1A] mb-3">
-                    Minimum Rating
-                  </label>
-                  <div className="space-y-2">
-                    {[4.5, 4.0, 3.5, 3.0].map((rating) => (
-                      <label key={rating} className="flex items-center gap-2 cursor-pointer">
+              {/* Rating */}
+              <div>
+                <label className="block text-sm font-semibold text-[#1A1A1A] mb-3">
+                  Minimum Rating
+                </label>
+                <div className="space-y-2">
+                  {[4.5, 4.0, 3.5, 3.0].map((rating) => (
+                    <label key={rating} className="flex items-center gap-2 cursor-pointer">
+                      <input
+                        type="radio"
+                        name="rating"
+                        checked={filters.rating === rating}
+                        onChange={() => setFilters({ ...filters, rating })}
+                        className="w-4 h-4 text-[#0F75BD]"
+                      />
+                      <div className="flex items-center gap-1">
+                        <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                        <span className="text-sm text-[#5C5B59]">{rating}+</span>
+                      </div>
+                    </label>
+                  ))}
+                </div>
+              </div>
+
+              {/* Amenities */}
+              <div>
+                <label className="block text-sm font-semibold text-[#1A1A1A] mb-3">
+                  Amenities
+                </label>
+                <div className="space-y-2">
+                  {amenitiesList.map((amenity) => {
+                    const Icon = amenity.icon;
+                    return (
+                      <label key={amenity.id} className="flex items-center gap-2 cursor-pointer">
                         <input
-                          type="radio"
-                          name="rating"
-                          checked={filters.rating === rating}
-                          onChange={() => setFilters({ ...filters, rating })}
-                          className="w-4 h-4 text-[#0F75BD]"
+                          type="checkbox"
+                          checked={filters.amenities.includes(amenity.id)}
+                          onChange={() => toggleAmenity(amenity.id)}
+                          className="w-4 h-4 text-[#0F75BD] rounded"
                         />
-                        <div className="flex items-center gap-1">
-                          <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-                          <span className="text-sm text-[#5C5B59]">{rating}+</span>
-                        </div>
+                        <Icon className="w-4 h-4 text-[#5C5B59]" />
+                        <span className="text-sm text-[#5C5B59]">{amenity.label}</span>
                       </label>
-                    ))}
-                  </div>
+                    );
+                  })}
                 </div>
-
-                {/* Amenities */}
-                <div className="mb-6">
-                  <label className="block text-sm font-semibold text-[#1A1A1A] mb-3">
-                    Amenities
-                  </label>
-                  <div className="space-y-2">
-                    {amenitiesList.map((amenity) => {
-                      const Icon = amenity.icon;
-                      return (
-                        <label key={amenity.id} className="flex items-center gap-2 cursor-pointer">
-                          <input
-                            type="checkbox"
-                            checked={filters.amenities.includes(amenity.id)}
-                            onChange={() => toggleAmenity(amenity.id)}
-                            className="w-4 h-4 text-[#0F75BD] rounded"
-                          />
-                          <Icon className="w-4 h-4 text-[#5C5B59]" />
-                          <span className="text-sm text-[#5C5B59]">{amenity.label}</span>
-                        </label>
-                      );
-                    })}
-                  </div>
-                </div>
-
-                {/* Clear Filters */}
-                <Button
-                  variant="outline"
-                  fullWidth
-                  onClick={() =>
-                    setFilters({ priceRange: [0, 200000], rating: 0, amenities: [], city: "" })
-                  }
-                >
-                  Clear All Filters
-                </Button>
-              </Card>
-            </aside>
+              </div>
+            </div>
           )}
+        </Card>
+      </div>
 
-          {/* Hotels Grid/List */}
-          <main className="flex-1">
+      {/* Hotels Grid/List */}
+      <div className="mt-6">
             <div className="mb-4 flex items-center justify-between">
               <p className="text-[#5C5B59]">
                 <span className="font-semibold text-[#1A1A1A]">{hotels.length}</span> hotels found
@@ -270,51 +255,82 @@ export default function HotelsPage() {
               <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
                 {hotels.map((hotel) => (
                   <Link href={`/hotels/${hotel.id}`} key={hotel.id}>
-                    <Card hover className="overflow-hidden h-full">
-                      <div className="aspect-video bg-gray-200 relative">
-                        <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-[#0F75BD] to-[#02A5E6]">
-                          <Building2 className="w-16 h-16 text-white/30" />
+                    <div className="bg-white rounded-[22px] overflow-hidden border border-[#E5E7EB] hover:border-[#0F75BD] transition-all group">
+                      {/* Hotel Image */}
+                      <div className="relative h-48 bg-[#E8F4F8] flex items-center justify-center overflow-hidden">
+                        <span className="text-6xl">🏨</span>
+
+                        {/* Rating Badge */}
+                        <div className="absolute top-4 right-4">
+                          <div className="flex items-center gap-1 px-3 py-1.5 bg-white/90 backdrop-blur-sm rounded-lg">
+                            <Star className="w-3.5 h-3.5 fill-yellow-400 text-yellow-400" />
+                            <span className="text-sm font-bold text-[#1A1A1A]">{hotel.rating}</span>
+                          </div>
+                        </div>
+
+                        {/* Location Badge */}
+                        <div className="absolute top-4 left-4">
+                          <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white/90 backdrop-blur-sm text-[#0F75BD] text-xs font-medium rounded-lg">
+                            <MapPin className="w-3 h-3" />
+                            {hotel.city}
+                          </span>
+                        </div>
+
+                        {/* Reviews Count */}
+                        <div className="absolute bottom-3 right-3">
+                          <span className="px-2.5 py-1 text-xs font-semibold rounded-lg bg-white/90 backdrop-blur-sm text-[#5C5B59]">
+                            {hotel.reviews} reviews
+                          </span>
                         </div>
                       </div>
+
+                      {/* Hotel Content */}
                       <div className="p-5">
-                        <h3 className="text-xl font-bold text-[#1A1A1A] mb-2">{hotel.name}</h3>
-                        <p className="text-[#5C5B59] text-sm mb-3 flex items-center gap-1">
-                          <MapPin className="w-4 h-4" />
-                          {hotel.city}, {hotel.country}
-                        </p>
-                        <p className="text-sm text-[#5C5B59] mb-4 line-clamp-2">
+                        {/* Hotel Title */}
+                        <h3 className="text-lg font-bold text-[#1A1A1A] mb-2 group-hover:text-[#0F75BD] transition-colors">
+                          {hotel.name}
+                        </h3>
+
+                        {/* Description */}
+                        <p className="text-sm text-[#5C5B59] mb-3 line-clamp-2">
                           {hotel.description}
                         </p>
-                        <div className="flex items-center justify-between mb-4">
-                          <div className="flex items-center gap-1">
-                            <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-                            <span className="font-semibold text-[#1A1A1A]">{hotel.rating}</span>
-                            <span className="text-[#5C5B59] text-sm">({hotel.reviews})</span>
-                          </div>
-                          <div className="text-right">
-                            <p className="text-xl font-bold text-[#0F75BD]">
-                              ₦{hotel.price.toLocaleString()}
-                            </p>
-                            <p className="text-xs text-[#5C5B59]">per night</p>
-                          </div>
-                        </div>
-                        <div className="flex flex-wrap gap-2">
+
+                        {/* Amenities */}
+                        <div className="flex flex-wrap gap-2 mb-3">
                           {hotel.amenities.slice(0, 3).map((amenity) => (
                             <span
                               key={amenity}
-                              className="px-2 py-1 bg-[#E8F4F8] text-[#0F75BD] text-xs rounded-lg"
+                              className="px-2 py-1 bg-[#FAFAFB] text-[#5C5B59] text-xs rounded-lg"
                             >
                               {amenity}
                             </span>
                           ))}
                           {hotel.amenities.length > 3 && (
-                            <span className="px-2 py-1 bg-[#F9FAFB] text-[#5C5B59] text-xs rounded-lg">
-                              +{hotel.amenities.length - 3} more
+                            <span className="px-2 py-1 bg-[#FAFAFB] text-[#5C5B59] text-xs rounded-lg">
+                              +{hotel.amenities.length - 3}
                             </span>
                           )}
                         </div>
+
+                        {/* Divider */}
+                        <div className="border-t border-[#E5E7EB] my-3"></div>
+
+                        {/* Price */}
+                        <div className="flex items-center justify-between">
+                          <div>
+                            <p className="text-xs text-[#5C5B59] mb-0.5">Starting from</p>
+                            <p className="text-xl font-bold text-[#0F75BD]">
+                              ₦{hotel.price.toLocaleString()}
+                              <span className="text-xs font-normal text-[#5C5B59]">/night</span>
+                            </p>
+                          </div>
+                          <button className="px-4 py-2 bg-[#0F75BD] text-white text-sm font-medium rounded-xl hover:bg-[#0050C8] transition-colors">
+                            View
+                          </button>
+                        </div>
                       </div>
-                    </Card>
+                    </div>
                   </Link>
                 ))}
               </div>
@@ -375,8 +391,6 @@ export default function HotelsPage() {
                 ))}
               </div>
             )}
-          </main>
-        </div>
       </div>
     </div>
   );

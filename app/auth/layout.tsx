@@ -1,4 +1,8 @@
+"use client";
+
 import Image from "next/image";
+import Link from "next/link";
+import { ArrowLeft } from "lucide-react";
 
 export default function AuthLayout({
   children,
@@ -6,7 +10,16 @@ export default function AuthLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="h-screen flex overflow-hidden">
+    <div className="h-screen flex overflow-hidden relative">
+      {/* Back Button */}
+      <Link
+        href="/"
+        className="absolute top-6 left-6 z-50 flex items-center gap-2 px-4 py-2 bg-white border border-[#E5E7EB] rounded-xl hover:border-[#0F75BD] transition-all text-[#0F75BD] font-semibold"
+      >
+        <ArrowLeft className="w-5 h-5" />
+        <span className="hidden sm:inline">Back to Home</span>
+      </Link>
+
       {/* Left side - Blue container with big flowers (fixed, no scroll) */}
       <div className="hidden lg:flex lg:w-1/2 bg-[#0F75BD] relative items-center justify-center overflow-hidden">
         {/* Large flower flowing from top-left */}

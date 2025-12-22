@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import Navbar from "@/components/common/Navbar";
+import ClientLayout from "@/components/common/ClientLayout";
 
 const rational = localFont({
   src: [
@@ -98,17 +98,7 @@ export default function RootLayout({
         <link rel="icon" href="/logos/ANDINOH-FAV.jpg" />
       </head>
       <body className={`${rational.variable} ${rational.className} antialiased`}>
-        <Navbar />
-        <main className="min-h-screen bg-[#FAFAFB]">
-          {children}
-        </main>
-        <footer className="bg-white border-t border-[#E5E7EB] py-8">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center text-[#5C5B59] text-sm">
-              <p>© 2024 Andinoh. All rights reserved.</p>
-            </div>
-          </div>
-        </footer>
+        <ClientLayout>{children}</ClientLayout>
       </body>
     </html>
   );

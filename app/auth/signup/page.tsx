@@ -95,6 +95,16 @@ export default function SignupPage() {
 
     setLoading(true);
     await new Promise((resolve) => setTimeout(resolve, 500));
+
+    // Simulate successful signup - store auth data
+    localStorage.setItem("authToken", "mock-token-" + Date.now());
+    localStorage.setItem("userData", JSON.stringify({
+      firstName: form.firstName,
+      lastName: form.lastName,
+      email: form.email,
+      phone: form.phone,
+    }));
+
     router.push("/");
     setLoading(false);
   };

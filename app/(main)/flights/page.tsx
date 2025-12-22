@@ -299,7 +299,7 @@ export default function FlightsPage() {
 
             <div className="space-y-4">
               {flights.map((flight) => (
-                <Card key={flight.id} className="p-6 hover:shadow-lg transition-shadow">
+                <Card key={flight.id} className="p-6 hover:border-[#0F75BD] transition-colors">
                   <div className="flex flex-col md:flex-row gap-6">
                     {/* Airline Logo & Name */}
                     <div className="flex items-center gap-3">

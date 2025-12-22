@@ -215,7 +215,7 @@ export default function BookingsPage() {
         ) : (
           <div className="space-y-4">
             {filteredBookings.map((booking) => (
-              <Card key={booking.id} className="p-6 hover:shadow-lg transition-shadow">
+              <Card key={booking.id} className="p-6 hover:border-[#0F75BD] transition-colors">
                 <div className="flex flex-col md:flex-row gap-6">
                   {/* Icon & Type */}
                   <div className="flex items-start gap-4">
@@ -304,38 +304,6 @@ export default function BookingsPage() {
                 </div>
               </Card>
             ))}
-          </div>
-        )}
-
-        {/* Summary Stats */}
-        {filteredBookings.length > 0 && (
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mt-8">
-            <Card className="p-4">
-              <p className="text-sm text-[#5C5B59] mb-1">Total Bookings</p>
-              <p className="text-2xl font-bold text-[#1A1A1A]">{allBookings.length}</p>
-            </Card>
-            <Card className="p-4">
-              <p className="text-sm text-[#5C5B59] mb-1">Confirmed</p>
-              <p className="text-2xl font-bold text-green-600">
-                {allBookings.filter((b) => b.status === "confirmed").length}
-              </p>
-            </Card>
-            <Card className="p-4">
-              <p className="text-sm text-[#5C5B59] mb-1">Pending</p>
-              <p className="text-2xl font-bold text-yellow-600">
-                {allBookings.filter((b) => b.status === "pending").length}
-              </p>
-            </Card>
-            <Card className="p-4">
-              <p className="text-sm text-[#5C5B59] mb-1">Total Spent</p>
-              <p className="text-2xl font-bold text-[#0F75BD]">
-                ₦
-                {allBookings
-                  .filter((b) => b.status !== "cancelled")
-                  .reduce((sum, b) => sum + b.amount, 0)
-                  .toLocaleString()}
-              </p>
-            </Card>
           </div>
         )}
       </div>
