@@ -108,8 +108,8 @@ export default function Navbar() {
 
   return (
     <nav className="h-20 bg-white border-b border-[#E5E7EB] sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto px-8 h-full flex items-center justify-between">
-        {/* Logo - Only show when not logged in */}
+      <div className={`${!isLoggedIn ? 'max-w-7xl mx-auto' : ''} px-4 sm:px-6 md:px-8 h-full flex items-center justify-between`}>
+        {/* Logo - Show when not logged in */}
         {!isLoggedIn && (
           <Link href="/" className="flex items-center">
             <Image
@@ -148,7 +148,7 @@ export default function Navbar() {
         ) : (
           // Show search bar only on home page when logged in
           pathname === "/" && (
-            <div className="flex-1 max-w-xl mx-auto">
+            <div className="flex-1 max-w-xl">
               <div className="relative">
                 <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#8F8E8D]" />
                 <input

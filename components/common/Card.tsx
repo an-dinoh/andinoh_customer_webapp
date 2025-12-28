@@ -27,7 +27,7 @@ export default function Card({
 
   return (
     <div
-      className={`bg-white rounded-lg border border-gray-200 ${paddingStyles[padding]} ${hoverClass} ${clickClass} ${className}`}
+      className={`bg-white rounded-[22px] border border-[#E5E7EB] ${paddingStyles[padding]} ${hoverClass} ${clickClass} ${className}`}
       onClick={onClick}
     >
       {children}

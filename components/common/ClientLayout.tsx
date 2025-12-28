@@ -1,6 +1,7 @@
 "use client";
 
 import { usePathname } from "next/navigation";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Navbar from "./Navbar";
 import Sidebar from "./Sidebar";
@@ -8,13 +9,19 @@ import Sidebar from "./Sidebar";
 export default function ClientLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const isAuthPage = pathname?.startsWith("/auth");
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const authToken = localStorage.getItem("authToken");
+    setIsLoggedIn(!!authToken);
+  }, []);
 
   return (
     <>
       {!isAuthPage ? (
         <div className="flex h-screen overflow-hidden">
-          {/* Sidebar */}
-          <Sidebar />
+          {/* Sidebar - Only show when logged in */}
+          {isLoggedIn && <Sidebar />}
 
           {/* Main Content Area */}
           <div className="flex flex-col flex-1 overflow-hidden">
@@ -22,14 +29,14 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
             <Navbar />
 
             {/* Main Content with Footer */}
-            <main className="flex-1 overflow-y-auto bg-white px-16">
+            <main className={`flex-1 overflow-y-auto bg-white ${isLoggedIn ? 'px-6 sm:px-8 md:px-12 lg:px-16 xl:px-20 2xl:px-24' : 'px-6 sm:px-8 md:px-12 lg:px-16'}`}>
               <div className="min-h-full flex flex-col">
                 <div className="flex-1">
                   {children}
                 </div>
 
                 {/* Footer */}
-                <footer className="bg-white border-t border-[#E5E7EB] py-16 mt-auto">
+                <footer className="bg-white border-t border-[#E5E7EB] py-8 sm:py-12 md:py-16 mt-auto">
                   <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex flex-col items-center gap-6">
                       <Image

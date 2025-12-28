@@ -156,7 +156,7 @@ export default function EventsPage() {
       </div>
 
       {/* Search Bar - Sticky */}
-      <div className="sticky top-[80px] z-40 bg-white pb-4 -mx-16 px-16 border-b border-[#E5E7EB]">
+      <div className="sticky top-[80px] z-40 bg-white pb-4 -mx-6 sm:-mx-8 md:-mx-12 lg:-mx-16 xl:-mx-20 2xl:-mx-24 px-6 sm:px-8 md:px-12 lg:px-16 xl:px-20 2xl:px-24 border-b border-[#E5E7EB]">
         <Card className="p-4">
           <div className="flex flex-col md:flex-row gap-4">
             <div className="flex-1">

@@ -8,9 +8,10 @@ import Input from "@/components/common/Input";
 import Card from "@/components/common/Card";
 
 export default function FlightsPage() {
+  const [viewMode, setViewMode] = useState<"grid" | "list">("list");
   const [tripType, setTripType] = useState<"round-trip" | "one-way">("round-trip");
   const [cabinClass, setCabinClass] = useState<"economy" | "business" | "first">("economy");
-  const [showFilters, setShowFilters] = useState(true);
+  const [showFilters, setShowFilters] = useState(false);
   const [searchParams, setSearchParams] = useState({
     from: "",
     to: "",
@@ -91,6 +92,20 @@ export default function FlightsPage() {
       class: "Economy",
       seatsAvailable: 10,
     },
+    {
+      id: "6",
+      airline: "Dana Air",
+      flightNumber: "9J125",
+      from: "Abuja (ABV)",
+      to: "Lagos (LOS)",
+      departure: "07:30",
+      arrival: "08:45",
+      duration: "1h 15m",
+      stops: 0,
+      price: 43000,
+      class: "Economy",
+      seatsAvailable: 20,
+    },
   ];
 
   const handleSearch = () => {
@@ -99,273 +114,212 @@ export default function FlightsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#FAFAFB]">
-      {/* Search Section */}
-      <section className="bg-gradient-to-br from-[#0F75BD] to-[#02A5E6] text-white py-12 px-4">
-        <div className="max-w-7xl mx-auto">
-          <h1 className="text-3xl font-bold mb-8">Find Your Perfect Flight</h1>
+    <div className="min-h-screen bg-white py-4 sm:py-6 md:py-8">
+      {/* Header */}
+      <div className="mb-6 sm:mb-8">
+        <h1 className="text-2xl sm:text-3xl font-bold text-[#1A1A1A] mb-2">Find Your Perfect Flight</h1>
+        <p className="text-sm sm:text-base text-[#5C5B59]">Book flights across Nigeria with the best prices</p>
+      </div>
 
-          <Card className="p-6">
-            {/* Trip Type Toggle */}
-            <div className="flex gap-4 mb-6">
-              <button
-                onClick={() => setTripType("round-trip")}
-                className={`px-4 py-2 rounded-lg font-semibold transition-colors ${
-                  tripType === "round-trip"
-                    ? "bg-[#0F75BD] text-white"
-                    : "bg-[#F9FAFB] text-[#5C5B59]"
-                }`}
-              >
-                Round Trip
-              </button>
-              <button
-                onClick={() => setTripType("one-way")}
-                className={`px-4 py-2 rounded-lg font-semibold transition-colors ${
-                  tripType === "one-way"
-                    ? "bg-[#0F75BD] text-white"
-                    : "bg-[#F9FAFB] text-[#5C5B59]"
-                }`}
-              >
-                One Way
-              </button>
+      {/* Search Bar - Sticky */}
+      <div className="sticky top-[80px] z-40 bg-white pb-4 -mx-6 sm:-mx-8 md:-mx-12 lg:-mx-16 xl:-mx-20 2xl:-mx-24 px-6 sm:px-8 md:px-12 lg:px-16 xl:px-20 2xl:px-24 border-b border-[#E5E7EB]">
+        <Card className="p-4">
+          <div className="flex flex-col md:flex-row gap-4">
+            <div className="flex-1">
+              <Input
+                placeholder="Search flights by route, airline..."
+                icon={<Search className="w-5 h-5" />}
+              />
             </div>
-
-            {/* Search Form */}
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4">
-              <Input
-                placeholder="From (City or Airport)"
-                value={searchParams.from}
-                onChange={(e) => setSearchParams({ ...searchParams, from: e.target.value })}
-                icon={<Plane className="w-5 h-5" />}
-              />
-              <Input
-                placeholder="To (City or Airport)"
-                value={searchParams.to}
-                onChange={(e) => setSearchParams({ ...searchParams, to: e.target.value })}
-                icon={<MapPin className="w-5 h-5" />}
-              />
-              <Input
-                type="date"
-                placeholder="Departure"
-                value={searchParams.departure}
-                onChange={(e) => setSearchParams({ ...searchParams, departure: e.target.value })}
-                icon={<Calendar className="w-5 h-5" />}
-              />
-              {tripType === "round-trip" && (
-                <Input
-                  type="date"
-                  placeholder="Return"
-                  value={searchParams.returnDate}
-                  onChange={(e) => setSearchParams({ ...searchParams, returnDate: e.target.value })}
-                  icon={<Calendar className="w-5 h-5" />}
-                />
-              )}
-              <Input
-                type="number"
-                placeholder="Passengers"
-                value={searchParams.passengers.toString()}
-                onChange={(e) =>
-                  setSearchParams({ ...searchParams, passengers: parseInt(e.target.value) })
-                }
-                icon={<Users className="w-5 h-5" />}
-                min={1}
-              />
-              <div>
-                <select
-                  value={cabinClass}
-                  onChange={(e) => setCabinClass(e.target.value as any)}
-                  className="w-full px-4 py-3 border border-[#E5E7EB] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#0F75BD]"
-                >
-                  <option value="economy">Economy</option>
-                  <option value="business">Business Class</option>
-                  <option value="first">First Class</option>
-                </select>
-              </div>
-            </div>
-
-            <Button fullWidth size="lg" onClick={handleSearch}>
-              <Search className="w-5 h-5" />
-              Search Flights
+            <Button
+              variant="outline"
+              onClick={() => setShowFilters(!showFilters)}
+              className="flex items-center gap-2"
+            >
+              <SlidersHorizontal className="w-5 h-5" />
+              Filters
             </Button>
-          </Card>
-        </div>
-      </section>
+          </div>
 
-      {/* Results Section */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="flex gap-6">
-          {/* Filters Sidebar */}
+          {/* Filters Dropdown */}
           {showFilters && (
-            <aside className="hidden lg:block w-80 flex-shrink-0">
-              <Card className="p-6 sticky top-24">
-                <h3 className="text-lg font-bold text-[#1A1A1A] mb-4">Filters</h3>
-
-                {/* Price Range */}
-                <div className="mb-6">
-                  <label className="block text-sm font-semibold text-[#1A1A1A] mb-3">
-                    Price Range
-                  </label>
-                  <input
-                    type="range"
-                    min="0"
-                    max="500000"
-                    step="10000"
-                    className="w-full"
-                  />
-                  <div className="flex justify-between text-sm text-[#5C5B59] mt-2">
-                    <span>₦0</span>
-                    <span>₦500,000</span>
-                  </div>
+            <div className="mt-4 pt-4 border-t border-[#E5E7EB] grid grid-cols-1 md:grid-cols-4 gap-6">
+              {/* Price Range */}
+              <div>
+                <label className="block text-sm font-semibold text-[#1A1A1A] mb-3">
+                  Price Range
+                </label>
+                <input
+                  type="range"
+                  min="0"
+                  max="500000"
+                  step="10000"
+                  className="w-full"
+                />
+                <div className="flex justify-between text-sm text-[#5C5B59] mt-2">
+                  <span>₦0</span>
+                  <span>₦500,000</span>
                 </div>
+              </div>
 
-                {/* Stops */}
-                <div className="mb-6">
-                  <label className="block text-sm font-semibold text-[#1A1A1A] mb-3">Stops</label>
-                  <div className="space-y-2">
-                    {["Direct", "1 Stop", "2+ Stops"].map((stop) => (
-                      <label key={stop} className="flex items-center gap-2 cursor-pointer">
-                        <input type="checkbox" className="w-4 h-4 text-[#0F75BD] rounded" />
-                        <span className="text-sm text-[#5C5B59]">{stop}</span>
-                      </label>
-                    ))}
-                  </div>
+              {/* Stops */}
+              <div>
+                <label className="block text-sm font-semibold text-[#1A1A1A] mb-3">Stops</label>
+                <div className="space-y-2">
+                  {["Direct", "1 Stop", "2+ Stops"].map((stop) => (
+                    <label key={stop} className="flex items-center gap-2 cursor-pointer">
+                      <input type="checkbox" className="w-4 h-4 text-[#0F75BD] rounded" />
+                      <span className="text-sm text-[#5C5B59]">{stop}</span>
+                    </label>
+                  ))}
                 </div>
+              </div>
 
-                {/* Airlines */}
-                <div className="mb-6">
-                  <label className="block text-sm font-semibold text-[#1A1A1A] mb-3">
-                    Airlines
-                  </label>
-                  <div className="space-y-2">
-                    {["Air Peace", "Arik Air", "Dana Air"].map((airline) => (
-                      <label key={airline} className="flex items-center gap-2 cursor-pointer">
-                        <input type="checkbox" className="w-4 h-4 text-[#0F75BD] rounded" />
-                        <span className="text-sm text-[#5C5B59]">{airline}</span>
-                      </label>
-                    ))}
-                  </div>
+              {/* Airlines */}
+              <div>
+                <label className="block text-sm font-semibold text-[#1A1A1A] mb-3">
+                  Airlines
+                </label>
+                <div className="space-y-2">
+                  {["Air Peace", "Arik Air", "Dana Air"].map((airline) => (
+                    <label key={airline} className="flex items-center gap-2 cursor-pointer">
+                      <input type="checkbox" className="w-4 h-4 text-[#0F75BD] rounded" />
+                      <span className="text-sm text-[#5C5B59]">{airline}</span>
+                    </label>
+                  ))}
                 </div>
+              </div>
 
-                {/* Departure Time */}
-                <div className="mb-6">
-                  <label className="block text-sm font-semibold text-[#1A1A1A] mb-3">
-                    Departure Time
-                  </label>
-                  <div className="space-y-2">
-                    {[
-                      { label: "Morning (6AM - 12PM)", value: "morning" },
-                      { label: "Afternoon (12PM - 6PM)", value: "afternoon" },
-                      { label: "Evening (6PM - 12AM)", value: "evening" },
-                    ].map((time) => (
-                      <label key={time.value} className="flex items-center gap-2 cursor-pointer">
-                        <input type="checkbox" className="w-4 h-4 text-[#0F75BD] rounded" />
-                        <span className="text-sm text-[#5C5B59]">{time.label}</span>
-                      </label>
-                    ))}
-                  </div>
+              {/* Departure Time */}
+              <div>
+                <label className="block text-sm font-semibold text-[#1A1A1A] mb-3">
+                  Departure Time
+                </label>
+                <div className="space-y-2">
+                  {[
+                    { label: "Morning (6AM - 12PM)", value: "morning" },
+                    { label: "Afternoon (12PM - 6PM)", value: "afternoon" },
+                    { label: "Evening (6PM - 12AM)", value: "evening" },
+                  ].map((time) => (
+                    <label key={time.value} className="flex items-center gap-2 cursor-pointer">
+                      <input type="checkbox" className="w-4 h-4 text-[#0F75BD] rounded" />
+                      <span className="text-sm text-[#5C5B59]">{time.label}</span>
+                    </label>
+                  ))}
                 </div>
-
-                <Button variant="outline" fullWidth>
-                  Clear All Filters
-                </Button>
-              </Card>
-            </aside>
-          )}
-
-          {/* Flights List */}
-          <main className="flex-1">
-            <div className="mb-4 flex items-center justify-between">
-              <p className="text-[#5C5B59]">
-                <span className="font-semibold text-[#1A1A1A]">{flights.length}</span> flights
-                available
-              </p>
-              <div className="flex gap-2">
-                <Button
-                  variant="outline"
-                  onClick={() => setShowFilters(!showFilters)}
-                  className="lg:hidden"
-                >
-                  <SlidersHorizontal className="w-5 h-5" />
-                </Button>
-                <select className="px-4 py-2 border border-[#E5E7EB] rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#0F75BD]">
-                  <option>Price: Low to High</option>
-                  <option>Price: High to Low</option>
-                  <option>Departure: Earliest</option>
-                  <option>Departure: Latest</option>
-                  <option>Duration: Shortest</option>
-                </select>
               </div>
             </div>
+          )}
+        </Card>
+      </div>
 
-            <div className="space-y-4">
-              {flights.map((flight) => (
-                <Card key={flight.id} className="p-6 hover:border-[#0F75BD] transition-colors">
-                  <div className="flex flex-col md:flex-row gap-6">
-                    {/* Airline Logo & Name */}
-                    <div className="flex items-center gap-3">
-                      <div className="w-12 h-12 bg-[#E8F4F8] rounded-lg flex items-center justify-center">
-                        <Plane className="w-6 h-6 text-[#0F75BD]" />
-                      </div>
-                      <div>
-                        <p className="font-bold text-[#1A1A1A]">{flight.airline}</p>
-                        <p className="text-xs text-[#5C5B59]">{flight.flightNumber}</p>
-                      </div>
-                    </div>
+      {/* Flights List */}
+      <div className="mt-6">
+        <div className="mb-4 flex items-center justify-between">
+          <p className="text-sm sm:text-base text-[#5C5B59]">
+            <span className="font-semibold text-[#1A1A1A]">{flights.length}</span> flights available
+          </p>
+          <select className="px-3 sm:px-4 py-2 border border-[#E5E7EB] rounded-xl text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-[#0F75BD]">
+            <option>Price: Low to High</option>
+            <option>Price: High to Low</option>
+            <option>Departure: Earliest</option>
+            <option>Departure: Latest</option>
+            <option>Duration: Shortest</option>
+          </select>
+        </div>
 
-                    {/* Flight Details */}
-                    <div className="flex-1">
-                      <div className="flex items-center justify-between mb-4">
-                        <div className="text-center">
-                          <p className="text-2xl font-bold text-[#1A1A1A]">{flight.departure}</p>
-                          <p className="text-sm text-[#5C5B59]">{flight.from}</p>
-                        </div>
+        <div className="space-y-4">
+          {flights.map((flight) => (
+            <Link href={`/booking/flight/${flight.id}`} key={flight.id} className="block">
+              <Card hover className="overflow-hidden">
+                <div className="flex flex-col md:flex-row">
+                  {/* Flight Visual */}
+                  <div className="md:w-64 h-32 md:h-auto bg-gradient-to-br from-[#E8F4F8] to-[#F0F9FF] relative flex items-center justify-center">
+                    <span className="text-5xl sm:text-6xl">✈️</span>
 
-                        <div className="flex-1 px-4">
-                          <div className="flex items-center justify-center gap-2 mb-1">
-                            <div className="flex-1 h-px bg-[#E5E7EB]"></div>
-                            <Plane className="w-4 h-4 text-[#5C5B59] rotate-90" />
-                            <div className="flex-1 h-px bg-[#E5E7EB]"></div>
-                          </div>
-                          <p className="text-xs text-[#5C5B59] text-center">{flight.duration}</p>
-                          <p className="text-xs text-[#0F75BD] text-center font-semibold">
-                            {flight.stops === 0 ? "Direct" : `${flight.stops} stop${flight.stops > 1 ? "s" : ""}`}
-                          </p>
-                        </div>
-
-                        <div className="text-center">
-                          <p className="text-2xl font-bold text-[#1A1A1A]">{flight.arrival}</p>
-                          <p className="text-sm text-[#5C5B59]">{flight.to}</p>
-                        </div>
-                      </div>
-
-                      <div className="flex flex-wrap items-center gap-2">
-                        <span className="px-3 py-1 bg-[#E8F4F8] text-[#0F75BD] text-xs rounded-lg">
-                          {flight.class}
-                        </span>
-                        <span className="px-3 py-1 bg-green-50 text-green-600 text-xs rounded-lg">
-                          {flight.seatsAvailable} seats left
-                        </span>
+                    {/* Flight Number Badge */}
+                    <div className="absolute top-4 right-4">
+                      <div className="px-3 py-1.5 bg-white/90 backdrop-blur-sm rounded-lg shadow-sm">
+                        <span className="text-xs font-bold text-[#0F75BD]">{flight.flightNumber}</span>
                       </div>
                     </div>
 
-                    {/* Price & Book Button */}
-                    <div className="flex flex-col justify-between items-end">
-                      <div className="text-right mb-4">
-                        <p className="text-xs text-[#5C5B59]">From</p>
-                        <p className="text-2xl font-bold text-[#0F75BD]">
-                          ₦{flight.price.toLocaleString()}
-                        </p>
-                        <p className="text-xs text-[#5C5B59]">per person</p>
-                      </div>
-                      <Link href={`/booking/flight/${flight.id}`}>
-                        <Button>Select Flight</Button>
-                      </Link>
+                    {/* Seats Badge - Bottom */}
+                    <div className="absolute bottom-4 right-4">
+                      <span className="px-3 py-1.5 bg-green-50 text-green-600 text-xs font-semibold rounded-lg shadow-sm">
+                        {flight.seatsAvailable} seats
+                      </span>
                     </div>
                   </div>
-                </Card>
-              ))}
-            </div>
-          </main>
+
+                  {/* Flight Details */}
+                  <div className="flex-1 p-4 sm:p-5">
+                    <div className="flex flex-col lg:flex-row justify-between gap-4">
+                      <div className="flex-1">
+                        {/* Airline Name & Logo Space */}
+                        <div className="flex items-center gap-3 mb-3">
+                          {/* Airline Logo Placeholder - You can replace this div with an actual image */}
+                          <div className="w-10 h-10 rounded-full bg-white border-2 border-[#E5E7EB] flex items-center justify-center flex-shrink-0">
+                            <Plane className="w-5 h-5 text-[#0F75BD]" />
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <h3 className="text-base sm:text-lg font-bold text-[#1A1A1A] truncate">
+                              {flight.airline}
+                            </h3>
+                            <p className="text-xs text-[#5C5B59]">{flight.class}</p>
+                          </div>
+                        </div>
+
+                        {/* Route Information */}
+                        <div className="flex items-center gap-3 mb-2">
+                          <div className="flex-1">
+                            <p className="text-lg font-bold text-[#1A1A1A]">{flight.departure}</p>
+                            <p className="text-xs text-[#5C5B59] truncate">{flight.from}</p>
+                          </div>
+
+                          <div className="flex flex-col items-center px-2">
+                            <div className="flex items-center gap-1.5">
+                              <div className="w-8 h-px bg-[#E5E7EB]"></div>
+                              <Plane className="w-3.5 h-3.5 text-[#0F75BD] rotate-90" />
+                              <div className="w-8 h-px bg-[#E5E7EB]"></div>
+                            </div>
+                            <p className="text-[10px] text-[#5C5B59] mt-1 whitespace-nowrap">{flight.duration}</p>
+                          </div>
+
+                          <div className="flex-1 text-right">
+                            <p className="text-lg font-bold text-[#1A1A1A]">{flight.arrival}</p>
+                            <p className="text-xs text-[#5C5B59] truncate">{flight.to}</p>
+                          </div>
+                        </div>
+
+                        {/* Additional Info */}
+                        <div className="flex items-center gap-2 mt-2">
+                          <span className="px-2.5 py-1 bg-[#F0F9FF] text-[#0F75BD] text-xs font-medium rounded-lg border border-[#E8F4F8]">
+                            {flight.stops === 0 ? "Direct Flight" : `${flight.stops} Stop${flight.stops > 1 ? "s" : ""}`}
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* Price & Actions Section */}
+                      <div className="flex flex-row lg:flex-col justify-between lg:justify-start items-center lg:items-end gap-3 lg:min-w-[160px] border-t lg:border-t-0 lg:border-l border-[#E5E7EB] pt-3 lg:pt-0 lg:pl-4">
+                        <div className="text-left lg:text-right">
+                          <p className="text-xs text-[#5C5B59] mb-0.5">From</p>
+                          <p className="text-xl sm:text-2xl font-bold text-[#0F75BD]">
+                            ₦{flight.price.toLocaleString()}
+                          </p>
+                          <p className="text-xs text-[#5C5B59]">per person</p>
+                        </div>
+
+                        <Button size="sm" className="w-full lg:w-auto lg:min-w-[120px] shadow-sm">
+                          Select
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </Card>
+            </Link>
+          ))}
         </div>
       </div>
     </div>
