@@ -27,28 +27,38 @@ export default function Sidebar() {
   const [collapsed, setCollapsed] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
+  const toggleCollapse = () => {
+    const newCollapsed = !collapsed;
+    setCollapsed(newCollapsed);
+    // Dispatch custom event to notify layout of sidebar state change
+    window.dispatchEvent(new CustomEvent("sidebarToggle", { detail: { collapsed: newCollapsed } }));
+  };
+
   const handleLogout = () => {
     localStorage.removeItem("authToken");
     localStorage.removeItem("userData");
+    // Dispatch custom event to notify layout of auth change
+    window.dispatchEvent(new Event("authChange"));
     window.location.href = "/";
   };
 
   const SidebarContent = () => (
-    <div className="flex flex-col h-full bg-white relative">
-      {/* Collapse Button - Positioned at top right edge */}
-      <button
-        onClick={() => setCollapsed(!collapsed)}
-        className="absolute top-6 -right-3 z-50 w-6 h-6 bg-white border border-[#E5E7EB] rounded-full flex items-center justify-center text-[#5C5B59] hover:bg-[#FAFAFB] hover:text-[#0F75BD] transition-all duration-200"
-      >
-        {collapsed ? (
-          <ChevronRight className="w-3.5 h-3.5" />
-        ) : (
-          <ChevronLeft className="w-3.5 h-3.5" />
-        )}
-      </button>
+    <div className="h-full bg-white relative border-r border-[#E5E7EB] overflow-y-auto scrollbar-hide">
+      <div className="flex flex-col min-h-full">
+        {/* Collapse Button - Positioned at top right edge */}
+        <button
+          onClick={toggleCollapse}
+          className="absolute top-6 -right-3 z-50 w-6 h-6 bg-white border border-[#E5E7EB] rounded-full flex items-center justify-center text-[#5C5B59] hover:bg-[#B3B3B2]/20 hover:text-[#B3B3B2] transition-all duration-200"
+        >
+          {collapsed ? (
+            <ChevronRight className="w-3.5 h-3.5" />
+          ) : (
+            <ChevronLeft className="w-3.5 h-3.5" />
+          )}
+        </button>
 
-      {/* Logo Section - Aligned with Navbar height */}
-      <div className="h-[80px] flex items-center overflow-hidden">
+        {/* Logo Section - Aligned with Navbar height */}
+        <div className="h-[80px] flex items-center overflow-hidden flex-shrink-0">
         {!collapsed ? (
           <div className="flex items-center gap-3 pl-4">
             <div className="w-10 h-10 bg-white border border-[#0F75BD] rounded-xl flex items-center justify-center p-1.5">
@@ -80,11 +90,11 @@ export default function Sidebar() {
         )}
       </div>
 
-      {/* Divider to match navbar border */}
-      <div className="border-b border-[#E5E7EB]"></div>
+        {/* Divider to match navbar border */}
+        <div className="border-b border-[#E5E7EB] flex-shrink-0"></div>
 
-      {/* Navigation */}
-      <nav className="px-4 pt-8 space-y-3 overflow-y-auto scrollbar-hide flex-1">
+        {/* Navigation */}
+        <nav className="px-4 pt-8 space-y-3 flex-shrink-0">
         {navigationMain.map((item) => {
           const isActive = pathname === item.href || (item.href !== "/" && pathname.startsWith(item.href));
           return (
@@ -141,11 +151,11 @@ export default function Sidebar() {
         })}
       </nav>
 
-      {/* Divider */}
-      <div className="mx-4 my-6 border-t border-[#E5E7EB] space-y-3"></div>
+        {/* Divider */}
+        <div className="mx-4 my-6 border-t border-[#E5E7EB] flex-shrink-0"></div>
 
-      {/* Secondary Navigation */}
-      <nav className="px-4 space-y-3">
+        {/* Secondary Navigation */}
+        <nav className="px-4 space-y-3 flex-shrink-0">
         {navigationSecondary.map((item) => {
           const isActive = pathname === item.href || pathname.startsWith(item.href + "/");
           return (
@@ -202,10 +212,10 @@ export default function Sidebar() {
         })}
       </nav>
 
-      <div className="mx-4 my-10 border-t border-[#E5E7EB]"></div>
+        <div className="mx-4 my-10 border-t border-[#E5E7EB] flex-shrink-0"></div>
 
-      {/* Bottom Section */}
-      <div className="px-4 pb-4 pt-2 space-y-1 mt-auto">
+        {/* Bottom Section */}
+        <div className="px-4 pb-4 pt-2 space-y-1 mt-auto flex-shrink-0">
         {/* Logout Button */}
         <button
           onClick={handleLogout}
@@ -223,6 +233,7 @@ export default function Sidebar() {
           )}
         </button>
       </div>
+      </div>
     </div>
   );
 
@@ -230,13 +241,11 @@ export default function Sidebar() {
     <>
       {/* Desktop Sidebar */}
       <aside
-        className={`hidden lg:block bg-white transition-all duration-300 ${
+        className={`hidden lg:block bg-white transition-all duration-300 h-screen ${
           collapsed ? "w-20" : "w-[244px]"
         }`}
       >
-        <div className="h-screen sticky top-0">
-          <SidebarContent />
-        </div>
+        <SidebarContent />
       </aside>
 
       {/* Mobile Sidebar Overlay */}

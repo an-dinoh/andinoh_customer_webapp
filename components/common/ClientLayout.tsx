@@ -10,21 +10,61 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
   const pathname = usePathname();
   const isAuthPage = pathname?.startsWith("/auth");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
 
   useEffect(() => {
-    const authToken = localStorage.getItem("authToken");
-    setIsLoggedIn(!!authToken);
-  }, []);
+    // Check auth status on mount
+    const checkAuthStatus = () => {
+      const authToken = localStorage.getItem("authToken");
+      setIsLoggedIn(!!authToken);
+    };
+
+    checkAuthStatus();
+
+    // Listen for storage changes (when auth token is added/removed)
+    const handleStorageChange = (e: StorageEvent) => {
+      if (e.key === "authToken") {
+        checkAuthStatus();
+      }
+    };
+
+    // Listen for custom auth events
+    const handleAuthChange = () => {
+      checkAuthStatus();
+    };
+
+    // Listen for sidebar collapse events
+    const handleSidebarToggle = ((e: CustomEvent) => {
+      setSidebarCollapsed(e.detail.collapsed);
+    }) as EventListener;
+
+    window.addEventListener("storage", handleStorageChange);
+    window.addEventListener("authChange", handleAuthChange);
+    window.addEventListener("sidebarToggle", handleSidebarToggle);
+
+    // Also check on pathname change (when navigating after login)
+    checkAuthStatus();
+
+    return () => {
+      window.removeEventListener("storage", handleStorageChange);
+      window.removeEventListener("authChange", handleAuthChange);
+      window.removeEventListener("sidebarToggle", handleSidebarToggle);
+    };
+  }, [pathname]);
 
   return (
     <>
       {!isAuthPage ? (
-        <div className="flex h-screen overflow-hidden">
-          {/* Sidebar - Only show when logged in */}
-          {isLoggedIn && <Sidebar />}
+        <div className="flex h-screen overflow-hidden relative">
+          {/* Sidebar - Only show when logged in - overlaps navbar */}
+          {isLoggedIn && (
+            <div className="fixed top-0 left-0 h-screen z-50">
+              <Sidebar />
+            </div>
+          )}
 
           {/* Main Content Area */}
-          <div className="flex flex-col flex-1 overflow-hidden">
+          <div className={`flex flex-col flex-1 overflow-hidden transition-all duration-300 ${isLoggedIn ? (sidebarCollapsed ? 'lg:ml-20' : 'lg:ml-[244px]') : ''}`}>
             {/* Navbar */}
             <Navbar />
 

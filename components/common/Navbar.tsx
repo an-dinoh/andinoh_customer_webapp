@@ -95,6 +95,8 @@ export default function Navbar() {
     setIsLoggedIn(false);
     setUserName("Guest");
     setUserEmail("");
+    // Dispatch custom event to notify layout of auth change
+    window.dispatchEvent(new Event("authChange"));
     window.location.href = "/";
   };
 
@@ -108,10 +110,10 @@ export default function Navbar() {
 
   return (
     <nav className="h-20 bg-white border-b border-[#E5E7EB] sticky top-0 z-50">
-      <div className={`${!isLoggedIn ? 'max-w-7xl mx-auto' : ''} px-4 sm:px-6 md:px-8 h-full flex items-center justify-between`}>
+      <div className={`${!isLoggedIn ? 'max-w-7xl mx-auto' : ''} px-4 sm:px-6 md:px-8 h-full flex items-center gap-4`}>
         {/* Logo - Show when not logged in */}
         {!isLoggedIn && (
-          <Link href="/" className="flex items-center">
+          <Link href="/" className="flex items-center flex-shrink-0">
             <Image
               src="/logos/ANDINOH.svg"
               alt="Andinoh"
@@ -125,7 +127,7 @@ export default function Navbar() {
         {/* Center Section - Navigation or Search Bar */}
         {!isLoggedIn ? (
           // Show navigation when not logged in
-          <div className="hidden md:flex items-center gap-1 absolute left-1/2 -translate-x-1/2">
+          <div className="hidden md:flex items-center gap-1 flex-1 justify-center">
             {navItems.map((item) => {
               const Icon = item.icon;
               const isActive = pathname === item.href;
@@ -163,8 +165,11 @@ export default function Navbar() {
           )
         )}
 
+        {/* Spacer to push right section to the right when logged in and not on home page */}
+        {isLoggedIn && pathname !== "/" && <div className="flex-1"></div>}
+
         {/* Right Section - Auth Buttons or User Menu */}
-        <div className="hidden md:flex items-center gap-3">
+        <div className="hidden md:flex items-center gap-3 flex-shrink-0 ml-auto">
           {!isLoggedIn ? (
             <>
               <Link
@@ -198,7 +203,7 @@ export default function Navbar() {
 
                 {/* Notifications Dropdown */}
                 {showNotifications && (
-                  <div className="absolute right-0 mt-2 w-96 bg-white border border-[#E5E7EB] rounded-2xl overflow-hidden z-50 shadow-xl">
+                  <div className="absolute right-0 mt-2 w-96 bg-white border border-[#E5E7EB] rounded-2xl overflow-hidden z-50">
                     {/* Header */}
                     <div className="px-6 py-4 border-b border-[#E5E7EB] bg-[#FAFAFB]">
                       <div className="flex items-center justify-between">
@@ -263,18 +268,21 @@ export default function Navbar() {
               <div className="relative" ref={profileRef}>
                 <button
                   onClick={() => setShowProfileMenu(!showProfileMenu)}
-                  className="flex items-center gap-3 hover:bg-[#F9FAFB] rounded-2xl transition-all h-12 px-3 border border-transparent hover:border-[#E5E7EB]"
+                  className="flex items-center gap-3 hover:bg-[#F9FAFB] rounded-2xl transition-all px-3 py-2 border border-transparent hover:border-[#E5E7EB]"
                 >
-                  <div className="w-8 h-8 bg-gradient-to-br from-[#0F75BD] to-[#02A5E6] rounded-full flex items-center justify-center text-white text-sm font-bold">
+                  <div className="w-9 h-9 bg-gradient-to-br from-[#0F75BD] to-[#02A5E6] rounded-full flex items-center justify-center text-white text-sm font-bold flex-shrink-0">
                     {userName.charAt(0).toUpperCase()}
                   </div>
-                  <span className="text-sm font-semibold text-[#1A1A1A]">{userName}</span>
+                  <div className="flex flex-col items-start">
+                    <span className="text-sm font-semibold text-[#1A1A1A] leading-tight">{userName}</span>
+                    <span className="text-xs text-[#5C5B59] leading-tight">{userEmail}</span>
+                  </div>
                   <ChevronDown className={`w-4 h-4 text-[#5C5B59] transition-transform ${showProfileMenu ? 'rotate-180' : ''}`} />
                 </button>
 
                 {/* Profile Dropdown */}
                 {showProfileMenu && (
-                  <div className="absolute right-0 mt-2 w-64 bg-white border border-[#E5E7EB] rounded-2xl overflow-hidden z-50 shadow-xl">
+                  <div className="absolute right-0 mt-2 w-64 bg-white border border-[#E5E7EB] rounded-2xl overflow-hidden z-50">
                     {/* Profile Header */}
                     <div className="px-4 py-4 bg-gradient-to-br from-[#0F75BD] to-[#02A5E6]">
                       <div className="flex items-center gap-3">

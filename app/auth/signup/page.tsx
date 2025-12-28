@@ -105,6 +105,9 @@ export default function SignupPage() {
       phone: form.phone,
     }));
 
+    // Dispatch custom event to notify layout of auth change
+    window.dispatchEvent(new Event("authChange"));
+
     router.push("/");
     setLoading(false);
   };
