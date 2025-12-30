@@ -1,9 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { ChevronDown } from "lucide-react";
-import ArrowLeftIcon from "@/icons/ArrowLeftIcon";
-import ArrowRightIcon from "@/icons/ArrowRightIcon";
+import { ChevronDown, ChevronLeft, ChevronRight } from "lucide-react";
 
 export default function AnalyticsDatePicker() {
   const [selectedYear, setSelectedYear] = useState(2024);
@@ -103,7 +101,7 @@ export default function AnalyticsDatePicker() {
                 onClick={() => setYearPage((prev) => prev - 1)}
                 className="p-1.5 hover:bg-gray-100 rounded-2xl transition-colors"
               >
-                <ArrowLeftIcon className="w-4 h-4 text-[#0B0A07]" />
+                <ChevronLeft className="w-4 h-4 text-[#0B0A07]" />
               </button>
 
               <span className="text-sm font-regular text-[#0B0A07] tracking-tight">
@@ -114,7 +112,7 @@ export default function AnalyticsDatePicker() {
                 onClick={() => setYearPage((prev) => prev + 1)}
                 className="p-1.5 hover:bg-gray-100 rounded-2xl transition-colors"
               >
-                <ArrowRightIcon className="w-4 h-4 text-[#0B0A07]" />
+                <ChevronRight className="w-4 h-4 text-[#0B0A07]" />
               </button>
             </div>
 
@@ -149,7 +147,7 @@ export default function AnalyticsDatePicker() {
             onClick={handlePreviousMonth}
             className="p-0.5 hover:bg-gray-100 rounded transition-colors flex-shrink-0"
           >
-            <ArrowLeftIcon className="w-3 h-3 text-[#0B0A07]" />
+            <ChevronLeft className="w-3 h-3 text-[#0B0A07]" />
           </button>
         )}
 
@@ -187,7 +185,7 @@ export default function AnalyticsDatePicker() {
             onClick={handleNextMonth}
             className="p-0.5 hover:bg-gray-100 rounded transition-colors flex-shrink-0"
           >
-            <ArrowRightIcon className="w-3 h-3 text-[#0B0A07]" />
+            <ChevronRight className="w-3 h-3 text-[#0B0A07]" />
           </button>
         )}
       </div>
