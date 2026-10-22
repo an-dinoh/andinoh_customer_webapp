@@ -1,0 +1,13 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/customers/referrals/",
+    "body": {
+      "referral_email": "chioma@example.com"
+    }
+  },
+  "status": 201,
+  "body": {
+    "referral_email": "chioma@example.com"
+  }
+}

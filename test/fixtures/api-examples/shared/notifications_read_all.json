@@ -1,0 +1,10 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/shared/notifications/read-all/"
+  },
+  "status": 200,
+  "body": {
+    "marked_read": 0
+  }
+}

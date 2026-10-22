@@ -1,0 +1,22 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/customers/reviews/1/images/",
+    "multipart": {
+      "images": "<file view.png>"
+    }
+  },
+  "status": 201,
+  "body": {
+    "message": "1 images added successfully",
+    "images": [
+      {
+        "id": 1,
+        "image": "/media/review_images/view.png",
+        "caption": "",
+        "order": 0,
+        "created_at": "2026-10-12T23:50:05.550612Z"
+      }
+    ]
+  }
+}

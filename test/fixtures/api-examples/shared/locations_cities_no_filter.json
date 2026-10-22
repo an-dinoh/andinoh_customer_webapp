@@ -1,0 +1,10 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/shared/locations/cities/"
+  },
+  "status": 400,
+  "body": {
+    "error": "Send state (a state id) or search (2+ letters)."
+  }
+}

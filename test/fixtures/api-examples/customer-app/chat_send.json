@@ -1,0 +1,17 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/customers/chats/62746e11-6ca2-4d41-ab28-28fc5badbfa1/messages/",
+    "body": {
+      "message": "Thank you!"
+    }
+  },
+  "status": 201,
+  "body": {
+    "message": "Thank you!",
+    "message_type": "text",
+    "media_url": "",
+    "attachment_url": "",
+    "attachment_type": ""
+  }
+}

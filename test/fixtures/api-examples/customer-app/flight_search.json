@@ -1,0 +1,45 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/flights/search/",
+    "query": {
+      "origin": "LOS",
+      "destination": "LHR",
+      "departure_date": "2026-11-11",
+      "adults": 1
+    }
+  },
+  "status": 200,
+  "body": {
+    "flights": [
+      {
+        "id": "AMD-LOS-LHR-BA75",
+        "airline": "British Airways",
+        "airline_code": "BA",
+        "airline_logo": "",
+        "origin": "LOS",
+        "destination": "LHR",
+        "departure_datetime": "2026-11-11T23:25:00",
+        "arrival_datetime": "2026-11-12T05:50:00",
+        "duration": "PT6H25M",
+        "price": "1450000.00",
+        "currency": "NGN",
+        "available_seats": 4,
+        "cabin_class": "ECONOMY",
+        "is_refundable": false,
+        "stops": 0,
+        "segments": [],
+        "validating_airline": "",
+        "source": "amadeus",
+        "converted_prices": [],
+        "return_flight": null,
+        "raw": {
+          "id": "1",
+          "type": "flight-offer"
+        }
+      }
+    ],
+    "count": 1,
+    "source": "amadeus"
+  }
+}

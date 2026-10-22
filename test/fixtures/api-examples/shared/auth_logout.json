@@ -1,0 +1,13 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/auth/logout/",
+    "body": {
+      "refresh_token": "eyJhbGciOiJIUzI1…(JWT)"
+    }
+  },
+  "status": 200,
+  "body": {
+    "message": "Successfully logged out"
+  }
+}

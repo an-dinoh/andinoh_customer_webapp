@@ -1,0 +1,10 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/customers/chats/62746e11-6ca2-4d41-ab28-28fc5badbfa1/read/"
+  },
+  "status": 200,
+  "body": {
+    "message": "1 messages marked as read"
+  }
+}

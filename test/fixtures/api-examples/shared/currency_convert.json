@@ -1,0 +1,18 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/shared/currencies/convert/",
+    "query": {
+      "amount": "55000",
+      "from": "NGN",
+      "to": "USD"
+    }
+  },
+  "status": 200,
+  "body": {
+    "from": "NGN",
+    "to": "USD",
+    "original_amount": "55000",
+    "converted_amount": "35.48"
+  }
+}

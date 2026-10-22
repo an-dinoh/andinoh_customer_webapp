@@ -1,0 +1,28 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/bookings/f5f60630-0689-456b-9a20-49e75df0c8b3/pay/",
+    "body": {}
+  },
+  "status": 200,
+  "body": {
+    "status": "already_paid",
+    "booking": {
+      "id": "f5f60630-0689-456b-9a20-49e75df0c8b3",
+      "status": "confirmed",
+      "rooms": [
+        {
+          "id": "e48b2d1f-d506-4ef2-8601-372144689896",
+          "title": "Deluxe Lagoon View",
+          "physical_instances": [
+            {
+              "id": "0a340370-1fe1-4969-8041-10b12039ac1b",
+              "room_number": "101",
+              "status": "available"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

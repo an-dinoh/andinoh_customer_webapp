@@ -1,0 +1,34 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/bookings/guest/LWUEUDVKIN/verify-payment/",
+    "headers": {
+      "X-Booking-Token": "…"
+    },
+    "body": {
+      "transaction_id": "9300004"
+    }
+  },
+  "status": 200,
+  "body": {
+    "status": "success",
+    "transaction_id": "9300004",
+    "booking": {
+      "id": "daf8b239-6e59-4fac-a8e5-e59a86cc0148",
+      "status": "confirmed",
+      "rooms": [
+        {
+          "id": "e48b2d1f-d506-4ef2-8601-372144689896",
+          "title": "Deluxe Lagoon View",
+          "physical_instances": [
+            {
+              "id": "0a340370-1fe1-4969-8041-10b12039ac1b",
+              "room_number": "101",
+              "status": "available"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

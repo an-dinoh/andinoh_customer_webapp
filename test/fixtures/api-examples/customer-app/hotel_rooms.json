@@ -1,0 +1,52 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/hotels/6d5e551c-e520-42ed-bb07-ee8add772705/rooms/",
+    "query": {
+      "check_in_date": "2026-10-19",
+      "check_out_date": "2026-10-21"
+    }
+  },
+  "status": 200,
+  "body": {
+    "count": 1,
+    "next": null,
+    "previous": null,
+    "results": [
+      {
+        "id": "e48b2d1f-d506-4ef2-8601-372144689896",
+        "hotel": "6d5e551c-e520-42ed-bb07-ee8add772705",
+        "room_type": "deluxe",
+        "title": "Deluxe Lagoon View",
+        "description": "King bed, lagoon view, rain shower.",
+        "room_size": 38,
+        "bed_type": "king",
+        "max_occupancy": 3,
+        "base_price": "55000.00",
+        "current_price": 46750.0,
+        "offer": {
+          "nights": 2,
+          "list_price_per_night": "55000.00",
+          "price_per_night": "46750.00",
+          "list_total": "110000.00",
+          "total": "93500.00",
+          "discount": "16500.00",
+          "discount_titles": [
+            "Lagoon Escape 15% off"
+          ]
+        },
+        "display_price": null,
+        "is_available": true,
+        "total_rooms": 4,
+        "primary_image": null,
+        "availability_summary": {
+          "date": "2026-10-12",
+          "rooms_available": 4,
+          "is_available": true
+        },
+        "fully_booked_dates": [],
+        "min_availability_for_search": 4
+      }
+    ]
+  }
+}

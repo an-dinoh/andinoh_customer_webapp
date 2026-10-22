@@ -1,0 +1,21 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/customers/chats/62746e11-6ca2-4d41-ab28-28fc5badbfa1/messages/",
+    "body": {
+      "message": "hi",
+      "message_type": "system"
+    }
+  },
+  "status": 400,
+  "body": {
+    "error": "Validation failed: message_type: Not a message type you can send",
+    "code": "validation_error",
+    "request_id": "d93eca028aa24bd9",
+    "errors": {
+      "message_type": [
+        "Not a message type you can send"
+      ]
+    }
+  }
+}

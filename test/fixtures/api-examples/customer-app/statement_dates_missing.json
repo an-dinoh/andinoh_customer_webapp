@@ -1,0 +1,15 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/customers/statement/"
+  },
+  "status": 400,
+  "body": {
+    "error": "Validation failed: start: Choose the date the statement starts from (YYYY-MM-DD).",
+    "code": "validation_error",
+    "request_id": "f6a3adcc0ad744bb",
+    "errors": {
+      "start": "Choose the date the statement starts from (YYYY-MM-DD)."
+    }
+  }
+}

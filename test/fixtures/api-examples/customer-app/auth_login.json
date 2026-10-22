@@ -1,0 +1,25 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/auth/login/",
+    "body": {
+      "email": "ada@example.com",
+      "password": "Sunny@Lagos2026",
+      "device_name": "Google Pixel 8",
+      "platform": "android",
+      "os_version": "Android 14",
+      "app_version": "1.4.2+37"
+    }
+  },
+  "status": 200,
+  "body": {
+    "refresh_token": "eyJhbGciOiJIUzI1…(JWT)",
+    "access_token": "eyJhbGciOiJIUzI1…(JWT)",
+    "user": {
+      "id": "20d90017-f548-47c1-8c0c-9751625140ab",
+      "email": "ada@example.com",
+      "role": "customer",
+      "full_name": "Ada Obi"
+    }
+  }
+}

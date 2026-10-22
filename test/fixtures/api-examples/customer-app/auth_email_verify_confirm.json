@@ -1,0 +1,14 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/auth/email/verify/confirm/",
+    "body": {
+      "otp": "482913"
+    }
+  },
+  "status": 200,
+  "body": {
+    "message": "Email verified successfully.",
+    "is_verified": true
+  }
+}

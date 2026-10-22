@@ -1,0 +1,38 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/bookings/f5f60630-0689-456b-9a20-49e75df0c8b3/pay/",
+    "body": {}
+  },
+  "status": 200,
+  "body": {
+    "status": "success",
+    "message": "Payment initiated",
+    "data": {
+      "link": "https://checkout.test/pay/ANDINOH-N7PBCWJIZ3-4CC79DBE",
+      "tx_ref": "ANDINOH-N7PBCWJIZ3-4CC79DBE"
+    },
+    "checkout": {
+      "public_key": "FLWPUBK_TEST-tests-only",
+      "tx_ref": "ANDINOH-N7PBCWJIZ3-4CC79DBE",
+      "amount": "131437.50",
+      "currency": "NGN",
+      "payment_options": "card,banktransfer,ussd,account",
+      "customer": {
+        "email": "ada@example.com",
+        "name": "Ada N. Obi",
+        "phonenumber": "+2348031234567"
+      },
+      "customizations": {
+        "title": "Andinoh Hotel Booking",
+        "description": "Payment for stay at Palmview Resort & Spa — N7PBCWJIZ3",
+        "logo": "https://res.cloudinary.com/andinoh/image/upload/v1/assets/logo_wide.png"
+      },
+      "meta": {
+        "booking_id": "f5f60630-0689-456b-9a20-49e75df0c8b3",
+        "kind": "hotel_booking"
+      },
+      "redirect_url": "https://app.test/payments/complete"
+    }
+  }
+}

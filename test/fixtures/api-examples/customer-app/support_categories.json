@@ -1,0 +1,22 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/support/categories/"
+  },
+  "status": 200,
+  "body": {
+    "count": 1,
+    "next": null,
+    "previous": null,
+    "results": [
+      {
+        "id": "14e19e2f-27b2-4394-aa9f-cace64c53db9",
+        "title": "Payments & payouts",
+        "slug": "payments-payouts",
+        "icon": "wallet",
+        "description": "Wallet, withdrawals and fees",
+        "article_count": 1
+      }
+    ]
+  }
+}

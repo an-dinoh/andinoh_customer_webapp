@@ -1,0 +1,13 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/bookings/guest/LWUEUDVKIN/",
+    "headers": {
+      "X-Booking-Token": "…"
+    }
+  },
+  "status": 404,
+  "body": {
+    "error": "Booking not found. Check the confirmation code and the link from your booking email."
+  }
+}

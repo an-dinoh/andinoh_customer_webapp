@@ -1,0 +1,170 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/customers/profile/notifications/"
+  },
+  "status": 200,
+  "body": {
+    "count": 13,
+    "next": null,
+    "previous": null,
+    "results": [
+      {
+        "id": 13,
+        "notification_type": "CHECK_OUT_REMINDER",
+        "title": "Check-out Confirmed",
+        "message": "You have been checked out from Palmview Resort & Spa. We hope you enjoyed your stay!",
+        "is_read": false,
+        "delivery_channel": "IN_APP",
+        "reference_id": "e1b274cb-2cf3-4292-8fd2-9df2e9176a35",
+        "reference_type": "booking",
+        "metadata": {},
+        "created_at": "2026-10-12T23:50:05.541166Z"
+      },
+      {
+        "id": 12,
+        "notification_type": "PICKUP_CONFIRMATION",
+        "title": "Pickup Request Cancelled",
+        "message": "Your pickup request has been cancelled. Cancellation fee: NGN 0.00",
+        "is_read": false,
+        "delivery_channel": "IN_APP",
+        "reference_id": "PUVUFRQQ",
+        "reference_type": "pickup",
+        "metadata": {},
+        "created_at": "2026-10-12T23:50:05.516693Z"
+      },
+      {
+        "id": 11,
+        "notification_type": "PICKUP_CONFIRMATION",
+        "title": "Pickup Request Confirmed",
+        "message": "Your pickup request has been confirmed. Confirmation code: PUVUFRQQ",
+        "is_read": false,
+        "delivery_channel": "IN_APP",
+        "reference_id": "PUVUFRQQ",
+        "reference_type": "pickup",
+        "metadata": {},
+        "created_at": "2026-10-12T23:50:05.489742Z"
+      },
+      {
+        "id": 10,
+        "notification_type": "CHAT_MESSAGE",
+        "title": "New message from Palmview Resort & Spa",
+        "message": "On the way to your room now.",
+        "is_read": false,
+        "delivery_channel": "BOTH",
+        "reference_id": "62746e11-6ca2-4d41-ab28-28fc5badbfa1",
+        "reference_type": "chat",
+        "metadata": {},
+        "created_at": "2026-10-12T23:50:05.440812Z"
+      },
+      {
+        "id": 9,
+        "notification_type": "CHECK_IN_REMINDER",
+        "title": "Check-in Confirmed",
+        "message": "You have been checked in at Palmview Resort & Spa.",
+        "is_read": false,
+        "delivery_channel": "IN_APP",
+        "reference_id": "e1b274cb-2cf3-4292-8fd2-9df2e9176a35",
+        "reference_type": "booking",
+        "metadata": {},
+        "created_at": "2026-10-12T23:50:05.430749Z"
+      },
+      {
+        "id": 8,
+        "notification_type": "BOOKING_CONFIRMATION",
+        "title": "Booking Confirmed",
+        "message": "Your booking F13U0QF07D is now confirmed.",
+        "is_read": false,
+        "delivery_channel": "BOTH",
+        "reference_id": "e1b274cb-2cf3-4292-8fd2-9df2e9176a35",
+        "reference_type": "booking",
+        "metadata": {},
+        "created_at": "2026-10-12T23:50:05.396192Z"
+      },
+      {
+        "id": 7,
+        "notification_type": "PAYMENT_CONFIRMATION",
+        "title": "Payment received",
+        "message": "NGN 105,187.50 paid for booking F13U0QF07D. Receipt AND-20261012-BF95C7 is in your email and booking details.",
+        "is_read": false,
+        "delivery_channel": "IN_APP",
+        "reference_id": "e1b274cb-2cf3-4292-8fd2-9df2e9176a35",
+        "reference_type": "booking",
+        "metadata": {},
+        "created_at": "2026-10-12T23:50:05.394026Z"
+      },
+      {
+        "id": 6,
+        "notification_type": "BOOKING_CONFIRMATION",
+        "title": "Booking Received",
+        "message": "Your booking at Palmview Resort & Spa has been received and is awaiting payment. Confirmation code: F13U0QF07D",
+        "is_read": false,
+        "delivery_channel": "IN_APP",
+        "reference_id": "e1b274cb-2cf3-4292-8fd2-9df2e9176a35",
+        "reference_type": "booking",
+        "metadata": {},
+        "created_at": "2026-10-12T23:50:05.378679Z"
+      },
+      {
+        "id": 5,
+        "notification_type": "BOOKING_CANCELLATION",
+        "title": "Booking Cancelled",
+        "message": "Your booking B6UBB9G2WB has been cancelled.",
+        "is_read": false,
+        "delivery_channel": "BOTH",
+        "reference_id": "11298e17-eb9f-46ee-a4d1-b00b059a8b69",
+        "reference_type": "booking",
+        "metadata": {},
+        "created_at": "2026-10-12T23:50:05.357585Z"
+      },
+      {
+        "id": 4,
+        "notification_type": "BOOKING_CONFIRMATION",
+        "title": "Booking Confirmed",
+        "message": "Your booking N7PBCWJIZ3 is now confirmed.",
+        "is_read": false,
+        "delivery_channel": "BOTH",
+        "reference_id": "f5f60630-0689-456b-9a20-49e75df0c8b3",
+        "reference_type": "booking",
+        "metadata": {},
+        "created_at": "2026-10-12T23:50:05.144622Z"
+      },
+      {
+        "id": 3,
+        "notification_type": "PAYMENT_CONFIRMATION",
+        "title": "Payment received",
+        "message": "NGN 131,437.50 paid for booking N7PBCWJIZ3. Receipt AND-20261012-509351 is in your email and booking details.",
+        "is_read": false,
+        "delivery_channel": "IN_APP",
+        "reference_id": "f5f60630-0689-456b-9a20-49e75df0c8b3",
+        "reference_type": "booking",
+        "metadata": {},
+        "created_at": "2026-10-12T23:50:05.142382Z"
+      },
+      {
+        "id": 2,
+        "notification_type": "BOOKING_CONFIRMATION",
+        "title": "Booking Received",
+        "message": "Your booking at Palmview Resort & Spa has been received and is awaiting payment. Confirmation code: N7PBCWJIZ3",
+        "is_read": false,
+        "delivery_channel": "IN_APP",
+        "reference_id": "f5f60630-0689-456b-9a20-49e75df0c8b3",
+        "reference_type": "booking",
+        "metadata": {},
+        "created_at": "2026-10-12T23:50:05.105913Z"
+      },
+      {
+        "id": 1,
+        "notification_type": "SYSTEM",
+        "title": "Welcome to Andinoh!",
+        "message": "Welcome to Andinoh! Explore top hotels and start booking your next stay today.",
+        "is_read": false,
+        "delivery_channel": "IN_APP",
+        "reference_id": "",
+        "reference_type": "",
+        "metadata": {},
+        "created_at": "2026-10-12T23:50:04.523095Z"
+      }
+    ]
+  }
+}

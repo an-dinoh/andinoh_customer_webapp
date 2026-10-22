@@ -1,0 +1,10 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/auth/email/verify/request/"
+  },
+  "status": 200,
+  "body": {
+    "message": "A verification code has been sent to your email."
+  }
+}

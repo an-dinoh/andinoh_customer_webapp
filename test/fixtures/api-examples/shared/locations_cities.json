@@ -1,0 +1,19 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/shared/locations/cities/",
+    "query": {
+      "state": "648b7c88-b198-481b-9892-0360bccd6461"
+    }
+  },
+  "status": 200,
+  "body": [
+    {
+      "id": "acae9e13-fa39-4c0a-a493-d5d3a10eb3df",
+      "name": "Ikeja",
+      "state": "648b7c88-b198-481b-9892-0360bccd6461",
+      "state_name": "Lagos",
+      "is_capital": true
+    }
+  ]
+}

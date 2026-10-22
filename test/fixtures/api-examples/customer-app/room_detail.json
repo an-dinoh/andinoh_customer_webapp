@@ -1,0 +1,300 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/hotels/public/rooms/e48b2d1f-d506-4ef2-8601-372144689896/"
+  },
+  "status": 200,
+  "body": {
+    "id": "e48b2d1f-d506-4ef2-8601-372144689896",
+    "hotel": "6d5e551c-e520-42ed-bb07-ee8add772705",
+    "room_type": "deluxe",
+    "title": "Deluxe Lagoon View",
+    "description": "King bed, lagoon view, rain shower.",
+    "room_size": 38,
+    "bed_type": "king",
+    "max_occupancy": 3,
+    "max_adults": 2,
+    "max_children": 1,
+    "base_price": "55000.00",
+    "current_price": 46750.0,
+    "offer": {
+      "nights": 1,
+      "list_price_per_night": "55000.00",
+      "price_per_night": "46750.00",
+      "list_total": "55000.00",
+      "total": "46750.00",
+      "discount": "8250.00",
+      "discount_titles": [
+        "Lagoon Escape 15% off"
+      ]
+    },
+    "currency": null,
+    "currency_details": null,
+    "display_price": null,
+    "weekend_price": null,
+    "peak_season_price": null,
+    "has_balcony": false,
+    "has_sea_view": false,
+    "has_city_view": false,
+    "has_garden_view": false,
+    "has_mountain_view": false,
+    "is_available": true,
+    "total_rooms": 4,
+    "created_at": "2026-10-12T23:50:04.349278Z",
+    "updated_at": "2026-10-12T23:50:04.349284Z",
+    "amenities": [],
+    "images": [],
+    "physical_instances": [
+      {
+        "id": "0a340370-1fe1-4969-8041-10b12039ac1b",
+        "room_number": "101",
+        "description": null,
+        "room_size": null,
+        "bed_type": "king",
+        "three_d_tour_url": null,
+        "is_available": true,
+        "is_operational": true,
+        "status": "available",
+        "housekeeping_status": "clean",
+        "images": [],
+        "amenities": [],
+        "booked_dates": []
+      },
+      {
+        "id": "c3578537-a6d5-4a1b-946f-5c8d086f579a",
+        "room_number": "102",
+        "description": null,
+        "room_size": null,
+        "bed_type": "king",
+        "three_d_tour_url": null,
+        "is_available": true,
+        "is_operational": true,
+        "status": "available",
+        "housekeeping_status": "clean",
+        "images": [],
+        "amenities": [],
+        "booked_dates": []
+      },
+      {
+        "id": "67e0694c-897a-49d8-835c-9e5a964c2d21",
+        "room_number": "103",
+        "description": null,
+        "room_size": null,
+        "bed_type": "king",
+        "three_d_tour_url": null,
+        "is_available": true,
+        "is_operational": true,
+        "status": "available",
+        "housekeeping_status": "clean",
+        "images": [],
+        "amenities": [],
+        "booked_dates": []
+      },
+      {
+        "id": "885468d7-64b9-4195-b852-fde94410c815",
+        "room_number": "104",
+        "description": null,
+        "room_size": null,
+        "bed_type": "king",
+        "three_d_tour_url": null,
+        "is_available": true,
+        "is_operational": true,
+        "status": "available",
+        "housekeeping_status": "clean",
+        "images": [],
+        "amenities": [],
+        "booked_dates": []
+      }
+    ],
+    "availability": [
+      {
+        "date": "2026-10-12",
+        "rooms_available": 4,
+        "is_available": true,
+        "price": "55000.00"
+      },
+      {
+        "date": "2026-10-13",
+        "rooms_available": 4,
+        "is_available": true,
+        "price": "55000.00"
+      },
+      {
+        "date": "2026-10-14",
+        "rooms_available": 4,
+        "is_available": true,
+        "price": "55000.00"
+      },
+      {
+        "date": "2026-10-15",
+        "rooms_available": 4,
+        "is_available": true,
+        "price": "55000.00"
+      },
+      {
+        "date": "2026-10-16",
+        "rooms_available": 4,
+        "is_available": true,
+        "price": "55000.00"
+      },
+      {
+        "date": "2026-10-17",
+        "rooms_available": 4,
+        "is_available": true,
+        "price": "55000.00"
+      },
+      {
+        "date": "2026-10-18",
+        "rooms_available": 4,
+        "is_available": true,
+        "price": "55000.00"
+      },
+      {
+        "date": "2026-10-19",
+        "rooms_available": 4,
+        "is_available": true,
+        "price": "55000.00"
+      },
+      {
+        "date": "2026-10-20",
+        "rooms_available": 4,
+        "is_available": true,
+        "price": "55000.00"
+      },
+      {
+        "date": "2026-10-21",
+        "rooms_available": 4,
+        "is_available": true,
+        "price": "55000.00"
+      },
+      {
+        "date": "2026-10-22",
+        "rooms_available": 4,
+        "is_available": true,
+        "price": "55000.00"
+      },
+      {
+        "date": "2026-10-23",
+        "rooms_available": 4,
+        "is_available": true,
+        "price": "55000.00"
+      },
+      {
+        "date": "2026-10-24",
+        "rooms_available": 4,
+        "is_available": true,
+        "price": "55000.00"
+      },
+      {
+        "date": "2026-10-25",
+        "rooms_available": 4,
+        "is_available": true,
+        "price": "55000.00"
+      },
+      {
+        "date": "2026-10-26",
+        "rooms_available": 4,
+        "is_available": true,
+        "price": "55000.00"
+      },
+      {
+        "date": "2026-10-27",
+        "rooms_available": 4,
+        "is_available": true,
+        "price": "55000.00"
+      },
+      {
+        "date": "2026-10-28",
+        "rooms_available": 4,
+        "is_available": true,
+        "price": "55000.00"
+      },
+      {
+        "date": "2026-10-29",
+        "rooms_available": 4,
+        "is_available": true,
+        "price": "55000.00"
+      },
+      {
+        "date": "2026-10-30",
+        "rooms_available": 4,
+        "is_available": true,
+        "price": "55000.00"
+      },
+      {
+        "date": "2026-10-31",
+        "rooms_available": 4,
+        "is_available": true,
+        "price": "55000.00"
+      },
+      {
+        "date": "2026-11-01",
+        "rooms_available": 4,
+        "is_available": true,
+        "price": "55000.00"
+      },
+      {
+        "date": "2026-11-02",
+        "rooms_available": 4,
+        "is_available": true,
+        "price": "55000.00"
+      },
+      {
+        "date": "2026-11-03",
+        "rooms_available": 4,
+        "is_available": true,
+        "price": "55000.00"
+      },
+      {
+        "date": "2026-11-04",
+        "rooms_available": 4,
+        "is_available": true,
+        "price": "55000.00"
+      },
+      {
+        "date": "2026-11-05",
+        "rooms_available": 4,
+        "is_available": true,
+        "price": "55000.00"
+      },
+      {
+        "date": "2026-11-06",
+        "rooms_available": 4,
+        "is_available": true,
+        "price": "55000.00"
+      },
+      {
+        "date": "2026-11-07",
+        "rooms_available": 4,
+        "is_available": true,
+        "price": "55000.00"
+      },
+      {
+        "date": "2026-11-08",
+        "rooms_available": 4,
+        "is_available": true,
+        "price": "55000.00"
+      },
+      {
+        "date": "2026-11-09",
+        "rooms_available": 4,
+        "is_available": true,
+        "price": "55000.00"
+      },
+      {
+        "date": "2026-11-10",
+        "rooms_available": 4,
+        "is_available": true,
+        "price": "55000.00"
+      },
+      {
+        "date": "2026-11-11",
+        "rooms_available": 4,
+        "is_available": true,
+        "price": "55000.00"
+      }
+    ],
+    "pricing_rules": [],
+    "fully_booked_dates": []
+  }
+}

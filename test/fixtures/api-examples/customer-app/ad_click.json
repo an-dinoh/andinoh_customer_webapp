@@ -1,0 +1,12 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/customers/ads/1f49efa2-a066-4707-b097-dd1a9ccb48d8/click/"
+  },
+  "status": 200,
+  "body": {
+    "success": true,
+    "message": "Click tracked for ad 1f49efa2-a066-4707-b097-dd1a9ccb48d8",
+    "current_clicks": 1
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/customers/bookings/"
+  },
+  "status": 401,
+  "body": {
+    "error": "Authentication credentials were not provided.",
+    "code": "not_authenticated",
+    "request_id": "e7fc888c96394ad4"
+  }
+}

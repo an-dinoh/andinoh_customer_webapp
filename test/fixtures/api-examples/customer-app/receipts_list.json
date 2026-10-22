@@ -1,0 +1,31 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/customers/receipts/"
+  },
+  "status": 200,
+  "body": {
+    "count": 1,
+    "next": null,
+    "previous": null,
+    "results": [
+      {
+        "id": "bceac707-b93e-4645-ba9a-ca26669b2cb3",
+        "number": "AND-20261012-509351",
+        "kind": "booking_payment",
+        "kind_display": "Booking payment",
+        "issued_at": "2026-10-12T23:50:05.142035Z",
+        "amount": "131437.50",
+        "currency": "NGN",
+        "payment_method": "online",
+        "transaction_reference": "9300003",
+        "object_type": "booking",
+        "object_id": "f5f60630-0689-456b-9a20-49e75df0c8b3",
+        "reference": "N7PBCWJIZ3",
+        "recipient_name": "Ada N. Obi",
+        "recipient_email": "ada@example.com",
+        "emailed_at": "2026-10-12T23:50:05.166904Z"
+      }
+    ]
+  }
+}

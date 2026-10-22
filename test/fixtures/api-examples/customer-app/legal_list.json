@@ -1,0 +1,30 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/shared/legal/"
+  },
+  "status": 200,
+  "body": {
+    "count": 2,
+    "next": null,
+    "previous": null,
+    "results": [
+      {
+        "id": "041efd6f-ff04-43dc-a875-8f7f5c113c5b",
+        "slug": "privacy-policy",
+        "title": "Privacy Policy",
+        "content": "We collect only what we need to run your bookings.",
+        "created_at": "2026-10-12T23:50:04.204247Z",
+        "updated_at": "2026-10-12T23:50:04.204253Z"
+      },
+      {
+        "id": "c02310f7-cc8c-4591-a594-7974c6de2d94",
+        "slug": "terms-of-service",
+        "title": "Terms of Service",
+        "content": "## 1. Using Andinoh\nBy creating an account you agree to these terms.",
+        "created_at": "2026-10-12T23:50:04.203956Z",
+        "updated_at": "2026-10-12T23:50:04.203962Z"
+      }
+    ]
+  }
+}

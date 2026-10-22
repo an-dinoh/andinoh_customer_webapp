@@ -1,0 +1,76 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/customers/bookings/summary/"
+  },
+  "status": 200,
+  "body": {
+    "statistics": {
+      "total_bookings": 3,
+      "total_spent": 236625.0,
+      "completed_bookings": 0,
+      "cancelled_bookings": 0,
+      "average_rating": 0.0,
+      "membership_tier": "BRONZE",
+      "loyalty_points": 131437
+    },
+    "recent_bookings": [
+      {
+        "id": "6fb821b0-5674-407f-81ed-d4a28d2060be",
+        "confirmation_code": "MHYQJ5QKOT",
+        "check_in_date": "2026-10-26",
+        "check_out_date": "2026-10-27",
+        "total_amount": "52593.75",
+        "status": "pending",
+        "created_at": "2026-10-12T23:50:05.303078Z"
+      },
+      {
+        "id": "11298e17-eb9f-46ee-a4d1-b00b059a8b69",
+        "confirmation_code": "B6UBB9G2WB",
+        "check_in_date": "2026-11-01",
+        "check_out_date": "2026-11-02",
+        "total_amount": "52593.75",
+        "status": "pending",
+        "created_at": "2026-10-12T23:50:05.182319Z"
+      },
+      {
+        "id": "f5f60630-0689-456b-9a20-49e75df0c8b3",
+        "confirmation_code": "N7PBCWJIZ3",
+        "check_in_date": "2026-10-19",
+        "check_out_date": "2026-10-21",
+        "total_amount": "131437.50",
+        "status": "confirmed",
+        "created_at": "2026-10-12T23:50:05.101932Z"
+      }
+    ],
+    "upcoming_bookings": [
+      {
+        "id": "f5f60630-0689-456b-9a20-49e75df0c8b3",
+        "confirmation_code": "N7PBCWJIZ3",
+        "check_in_date": "2026-10-19",
+        "check_out_date": "2026-10-21",
+        "total_amount": "131437.50",
+        "status": "confirmed",
+        "created_at": "2026-10-12T23:50:05.101932Z"
+      },
+      {
+        "id": "6fb821b0-5674-407f-81ed-d4a28d2060be",
+        "confirmation_code": "MHYQJ5QKOT",
+        "check_in_date": "2026-10-26",
+        "check_out_date": "2026-10-27",
+        "total_amount": "52593.75",
+        "status": "pending",
+        "created_at": "2026-10-12T23:50:05.303078Z"
+      },
+      {
+        "id": "11298e17-eb9f-46ee-a4d1-b00b059a8b69",
+        "confirmation_code": "B6UBB9G2WB",
+        "check_in_date": "2026-11-01",
+        "check_out_date": "2026-11-02",
+        "total_amount": "52593.75",
+        "status": "pending",
+        "created_at": "2026-10-12T23:50:05.182319Z"
+      }
+    ]
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/customers/statement/",
+    "query": {
+      "start": "2026-10-13",
+      "end": "2026-10-13"
+    }
+  },
+  "status": 200,
+  "body": {
+    "content_type": "application/pdf",
+    "bytes": 4126,
+    "content_disposition": "attachment; filename=\"statement-Ada-N--Obi-20261013-20261013.pdf\""
+  }
+}

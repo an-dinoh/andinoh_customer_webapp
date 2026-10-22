@@ -1,0 +1,25 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/hotels/event-services/",
+    "query": {
+      "hotel_id": "6d5e551c-e520-42ed-bb07-ee8add772705"
+    }
+  },
+  "status": 200,
+  "body": {
+    "count": 1,
+    "next": null,
+    "previous": null,
+    "results": [
+      {
+        "id": "471b07fc-d035-4b11-aea5-df58e17e7495",
+        "hotel": "6d5e551c-e520-42ed-bb07-ee8add772705",
+        "name": "Buffet catering",
+        "description": "",
+        "price": "9500.00",
+        "billing_type": "per_person"
+      }
+    ]
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/shared/locations/countries/"
+  },
+  "status": 200,
+  "body": [
+    {
+      "id": "845f93a4-3a25-447c-b5f1-19ee176f70ba",
+      "name": "Nigeria",
+      "code": "NG",
+      "phone_code": "+234",
+      "currency_code": "NGN"
+    }
+  ]
+}

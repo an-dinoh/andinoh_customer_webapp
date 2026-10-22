@@ -1,0 +1,51 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/hotels/feed/"
+  },
+  "status": 200,
+  "body": {
+    "personalized_greeting": "Welcome, Traveler",
+    "sections": [
+      {
+        "id": "domestic_deals",
+        "title": "Top Nigerian Destinations",
+        "subtitle": "Speed, Relevance, Simplicity",
+        "type": "HORIZONTAL_HOTEL_LIST",
+        "items": [
+          {
+            "id": "6d5e551c-e520-42ed-bb07-ee8add772705",
+            "name": "Palmview Resort & Spa",
+            "description": "",
+            "hotel_type": "resort",
+            "star_rating": 4,
+            "city_name": "Ikeja",
+            "state_name": "Lagos",
+            "country_name": "Nigeria",
+            "city": "a069223f-5d3c-4245-94b3-23a6b361afae",
+            "state": "003b51ef-c3df-461f-b8d9-b4da277c879e",
+            "country": "8a030f46-cd23-4097-9c92-db8c71444399",
+            "area": null,
+            "phone": "+2348031234567",
+            "email": "frontdesk@example.com",
+            "logo": null,
+            "primary_image": null,
+            "is_active": true,
+            "is_verified": true,
+            "average_rating": null,
+            "total_rooms": 4,
+            "total_reviews": 0,
+            "distance": null
+          }
+        ]
+      },
+      {
+        "id": "african_luxury",
+        "title": "Pan-African Luxury",
+        "subtitle": "Trust the journey",
+        "type": "HORIZONTAL_HOTEL_LIST",
+        "items": []
+      }
+    ]
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/customers/tips/",
+    "body": {
+      "booking_id": "e1b274cb-2cf3-4292-8fd2-9df2e9176a35",
+      "staff_id": "a1fa12bf-fb39-435a-bdd6-b3c3762b3263",
+      "amount": "2000",
+      "charge_to_room": true
+    }
+  },
+  "status": 201,
+  "body": {
+    "tip": {
+      "id": "c00855d7-2a6e-4ce3-86a1-0210a38afd23",
+      "customer": "7b026867-fdaf-4cce-9a03-ec81678f92f0",
+      "booking": "e1b274cb-2cf3-4292-8fd2-9df2e9176a35",
+      "staff_id": "a1fa12bf-fb39-435a-bdd6-b3c3762b3263",
+      "staff_name": "Sarah Bello",
+      "staff_role": "Front Desk",
+      "hotel_id": "6d5e551c-e520-42ed-bb07-ee8add772705",
+      "hotel_name": "Palmview Resort & Spa",
+      "amount": "2000.00",
+      "currency": "NGN",
+      "message": "",
+      "payment_status": "pending",
+      "payment_status_display": "Pending",
+      "payment_method": "room_charge",
+      "payment_transaction_id": "",
+      "created_at": "2026-10-12T23:50:05.476003Z",
+      "paid_at": null,
+      "charged_to_room": true
+    },
+    "payment": null,
+    "charged_to_room": true,
+    "message": "Tip added to your bill for booking F13U0QF07D."
+  }
+}

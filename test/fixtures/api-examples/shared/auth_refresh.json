@@ -1,0 +1,14 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/auth/refresh/",
+    "body": {
+      "refresh_token": "eyJhbGciOiJIUzI1…(JWT)"
+    }
+  },
+  "status": 200,
+  "body": {
+    "access_token": "eyJhbGciOiJIUzI1…(JWT)",
+    "refresh_token": "eyJhbGciOiJIUzI1…(JWT)"
+  }
+}

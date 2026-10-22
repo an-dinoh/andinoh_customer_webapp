@@ -1,0 +1,31 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/inspectors/apply/"
+  },
+  "status": 201,
+  "body": {
+    "id": "ba491d58-bb58-4d22-9514-ce8d4b2a44cf",
+    "status": "draft",
+    "full_name": "Ada N. Obi",
+    "phone_number": "+2348031234567",
+    "email": "ada@example.com",
+    "email_verified": true,
+    "id_type": "",
+    "id_number_masked": "",
+    "id_document_url": "",
+    "license_number": "",
+    "certification": "",
+    "certificate_url": "",
+    "cv_url": "",
+    "years_experience": null,
+    "bio": "",
+    "address": "",
+    "coverage_states": [],
+    "declared_no_conflicts": false,
+    "submitted_at": null,
+    "reviewed_at": null,
+    "rejection_reason": "",
+    "suspension_reason": ""
+  }
+}

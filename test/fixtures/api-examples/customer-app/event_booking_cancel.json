@@ -1,0 +1,8 @@
+{
+  "request": {
+    "method": "DELETE",
+    "path": "/hotels/event-bookings/5c36ea31-2b4d-48f1-86d8-4c76c86a09d8/"
+  },
+  "status": 204,
+  "body": null
+}

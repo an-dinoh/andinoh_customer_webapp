@@ -1,0 +1,81 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/customers/bookings/create/",
+    "body": {
+      "flight_offer": {
+        "id": "AMD-LOS-LHR-BA75",
+        "airline": "British Airways",
+        "airline_code": "BA",
+        "origin": "LOS",
+        "destination": "LHR",
+        "departure_datetime": "2026-11-11T23:25:00",
+        "arrival_datetime": "2026-11-12T05:50:00",
+        "duration": "PT6H25M",
+        "price": "1450000.00",
+        "currency": "NGN",
+        "available_seats": 4,
+        "cabin_class": "ECONOMY",
+        "is_refundable": false,
+        "stops": 0,
+        "source": "amadeus",
+        "raw": {
+          "id": "1",
+          "type": "flight-offer"
+        }
+      },
+      "passengers": [
+        {
+          "first_name": "Ada",
+          "last_name": "Obi",
+          "title": "MS",
+          "email": "ada@example.com",
+          "date_of_birth": "1994-05-02",
+          "gender": "F",
+          "passport_number": "A12345678",
+          "passport_expiry": "2031-05-01",
+          "passport_country_of_issue": "NG",
+          "nationality": "NG"
+        }
+      ]
+    }
+  },
+  "status": 201,
+  "body": {
+    "id": "4aff2637-36a9-454c-9b6c-c0ea8fd4d598",
+    "booking_type": "flight",
+    "customer": "7b026867-fdaf-4cce-9a03-ec81678f92f0",
+    "flight_id": "AMD-LOS-LHR-BA75",
+    "airline": "British Airways",
+    "origin": "LOS",
+    "destination": "LHR",
+    "departure_datetime": "2026-11-11T23:25:00",
+    "arrival_datetime": "2026-11-12T05:50:00",
+    "price": "1450000.00",
+    "total_price": "1450000.00",
+    "currency": "NGN",
+    "status": "pending",
+    "num_passengers": 1,
+    "booking_reference": "FL-B6F75EEF",
+    "confirmation_code": "FL-B6F75EEF",
+    "passenger_details": [
+      {
+        "id": "d3220bfb-bb19-458b-b9c9-be50aaba5e39",
+        "passenger_type": "adult",
+        "first_name": "Ada",
+        "last_name": "Obi",
+        "date_of_birth": "1994-05-02",
+        "nationality": "NG",
+        "passport_number": "A12345678",
+        "passport_expiry": "2031-05-01",
+        "passport_country_of_issue": "NG",
+        "seat_number": "",
+        "meal_preference": "standard",
+        "baggage_allowance_kg": 23,
+        "special_assistance": "",
+        "ticket_number": ""
+      }
+    ],
+    "created_at": "2026-10-12T23:50:05.603032Z"
+  }
+}

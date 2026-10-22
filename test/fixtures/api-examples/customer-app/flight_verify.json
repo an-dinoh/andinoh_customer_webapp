@@ -1,0 +1,16 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/flights/bookings/4aff2637-36a9-454c-9b6c-c0ea8fd4d598/verify-payment/",
+    "body": {
+      "transaction_id": "9300008"
+    }
+  },
+  "status": 200,
+  "body": {
+    "status": "success",
+    "transaction_id": "9300008",
+    "booking_id": "4aff2637-36a9-454c-9b6c-c0ea8fd4d598",
+    "confirmation_code": "FL-B6F75EEF"
+  }
+}

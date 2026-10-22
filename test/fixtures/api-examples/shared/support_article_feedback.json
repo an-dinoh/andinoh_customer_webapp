@@ -1,0 +1,13 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/support/articles/when-can-i-withdraw/feedback/",
+    "body": {
+      "is_helpful": true
+    }
+  },
+  "status": 201,
+  "body": {
+    "message": "Feedback submitted successfully"
+  }
+}

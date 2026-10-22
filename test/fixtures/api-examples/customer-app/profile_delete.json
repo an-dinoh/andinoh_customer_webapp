@@ -1,0 +1,14 @@
+{
+  "request": {
+    "method": "DELETE",
+    "path": "/customers/profile/delete/",
+    "body": {
+      "password": "Sunny@Lagos2026"
+    }
+  },
+  "status": 200,
+  "body": {
+    "message": "Your account has been successfully deleted",
+    "note": "Your data will be retained for 30 days before permanent deletion"
+  }
+}

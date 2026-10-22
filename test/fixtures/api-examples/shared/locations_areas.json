@@ -1,0 +1,27 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/shared/locations/areas/",
+    "query": {
+      "city": "acae9e13-fa39-4c0a-a493-d5d3a10eb3df"
+    }
+  },
+  "status": 200,
+  "body": [
+    {
+      "id": "de520b73-98d7-48a4-8b0a-b703376bfe1f",
+      "name": "Allen",
+      "city": "acae9e13-fa39-4c0a-a493-d5d3a10eb3df"
+    },
+    {
+      "id": "713ba2dd-4c62-46b0-b4ba-f03508d250c3",
+      "name": "GRA",
+      "city": "acae9e13-fa39-4c0a-a493-d5d3a10eb3df"
+    },
+    {
+      "id": "6626e352-db0f-4836-96e5-9ac0cb0c1327",
+      "name": "Opebi",
+      "city": "acae9e13-fa39-4c0a-a493-d5d3a10eb3df"
+    }
+  ]
+}

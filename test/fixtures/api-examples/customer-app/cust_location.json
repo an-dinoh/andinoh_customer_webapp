@@ -1,0 +1,17 @@
+{
+  "request": {
+    "method": "PATCH",
+    "path": "/customers/profile/location/",
+    "body": {
+      "latitude": "6.442500",
+      "longitude": "3.471100"
+    }
+  },
+  "status": 200,
+  "body": {
+    "status": "success",
+    "message": "Location updated",
+    "latitude": "6.442500",
+    "longitude": "3.471100"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/customers/profile/notifications/read-all/"
+  },
+  "status": 200,
+  "body": {
+    "message": "All notifications marked as read"
+  }
+}

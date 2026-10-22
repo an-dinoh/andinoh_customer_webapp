@@ -1,0 +1,18 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/shared/currencies/detect/",
+    "query": {
+      "country_id": "845f93a4-3a25-447c-b5f1-19ee176f70ba"
+    }
+  },
+  "status": 200,
+  "body": {
+    "id": "8e097455-e619-4e53-a81d-4a813f704700",
+    "code": "NGN",
+    "name": "Nigerian Naira",
+    "symbol": "₦",
+    "rate_to_usd": "1550.000000",
+    "is_active": true
+  }
+}

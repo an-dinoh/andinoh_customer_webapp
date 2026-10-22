@@ -1,0 +1,29 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/auth/sessions/"
+  },
+  "status": 200,
+  "body": [
+    {
+      "id": "37e53b0d-b930-48ff-9671-a17972a46b5f",
+      "device_name": "Google Pixel 8",
+      "platform": "android",
+      "os_version": "Android 14",
+      "app_version": "1.4.2+37",
+      "ip_address": "127.0.0.1",
+      "last_seen_at": "2026-10-13T10:46:14.724226+00:00",
+      "created_at": "2026-10-13T10:46:14.724237+00:00"
+    },
+    {
+      "id": "d827db66-ff6a-498d-b940-ab42f3f0917b",
+      "device_name": "Google Pixel 8",
+      "platform": "android",
+      "os_version": "Android 14",
+      "app_version": "1.4.2+37",
+      "ip_address": "127.0.0.1",
+      "last_seen_at": "2026-10-13T10:46:14.246787+00:00",
+      "created_at": "2026-10-13T10:46:14.246793+00:00"
+    }
+  ]
+}

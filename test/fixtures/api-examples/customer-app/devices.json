@@ -1,0 +1,26 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/customers/devices/"
+  },
+  "status": 200,
+  "body": {
+    "count": 1,
+    "next": null,
+    "previous": null,
+    "results": [
+      {
+        "id": 1,
+        "registration_id": "fcm-token-example",
+        "device_name": "Google Pixel 8",
+        "device_type": "android",
+        "os_version": "Android 14",
+        "app_version": "1.4.2+37",
+        "is_active": true,
+        "created_at": "2026-10-13T10:46:15.499825Z",
+        "updated_at": "2026-10-13T10:46:15.501761Z",
+        "last_used_at": "2026-10-13T10:46:15.501731Z"
+      }
+    ]
+  }
+}

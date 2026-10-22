@@ -1,0 +1,19 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/customers/statement/",
+    "query": {
+      "start": "2026-10-13",
+      "end": "2026-10-14"
+    }
+  },
+  "status": 400,
+  "body": {
+    "error": "Validation failed: end: A statement can't end in the future; the latest is now.",
+    "code": "validation_error",
+    "request_id": "14544f53f84447f4",
+    "errors": {
+      "end": "A statement can't end in the future; the latest is now."
+    }
+  }
+}

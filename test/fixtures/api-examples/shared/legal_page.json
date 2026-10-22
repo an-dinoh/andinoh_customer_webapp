@@ -1,0 +1,15 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/shared/legal/terms-of-service/"
+  },
+  "status": 200,
+  "body": {
+    "id": "5472708c-548e-46eb-9f3f-65eb38c4776b",
+    "slug": "terms-of-service",
+    "title": "Terms of Service",
+    "content": "## 1. Using Andinoh\nBy creating an account you agree to these terms.",
+    "created_at": "2026-10-12T23:50:08.280978Z",
+    "updated_at": "2026-10-12T23:50:08.280983Z"
+  }
+}

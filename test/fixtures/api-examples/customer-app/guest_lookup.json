@@ -1,0 +1,14 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/bookings/guest/lookup/",
+    "body": {
+      "confirmation_code": "LWUEUDVKIN",
+      "email": "tunde@example.com"
+    }
+  },
+  "status": 200,
+  "body": {
+    "message": "If a booking matches, we've emailed a link to it."
+  }
+}

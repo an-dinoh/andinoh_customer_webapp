@@ -1,0 +1,14 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/auth/email/verify/confirm/",
+    "body": {
+      "otp": "000000"
+    }
+  },
+  "status": 400,
+  "body": {
+    "error": "Invalid verification code. 2 attempt(s) remaining.",
+    "message": "Invalid verification code. 2 attempt(s) remaining."
+  }
+}

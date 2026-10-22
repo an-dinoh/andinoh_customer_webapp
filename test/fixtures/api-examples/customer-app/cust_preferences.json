@@ -1,0 +1,20 @@
+{
+  "request": {
+    "method": "PATCH",
+    "path": "/customers/profile/preferences/",
+    "body": {
+      "preference_type": "BOOKING",
+      "key": "room_floor",
+      "value": "high"
+    }
+  },
+  "status": 200,
+  "body": {
+    "id": 1,
+    "preference_type": "BOOKING",
+    "key": "room_floor",
+    "value": "high",
+    "created_at": "2026-10-12T23:50:05.598808Z",
+    "updated_at": "2026-10-12T23:50:05.599129Z"
+  }
+}

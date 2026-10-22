@@ -1,0 +1,71 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/bookings/guest/LWUEUDVKIN/receipts/4e8870cd-e6dd-4b3d-b313-b0bdf3f41c14/",
+    "headers": {
+      "X-Booking-Token": "…"
+    }
+  },
+  "status": 200,
+  "body": {
+    "id": "4e8870cd-e6dd-4b3d-b313-b0bdf3f41c14",
+    "number": "AND-20261012-67172E",
+    "kind": "booking_payment",
+    "kind_display": "Booking payment",
+    "issued_at": "2026-10-12T23:50:05.219453Z",
+    "amount": "52593.75",
+    "currency": "NGN",
+    "payment_method": "online",
+    "transaction_reference": "9300004",
+    "object_type": "booking",
+    "object_id": "daf8b239-6e59-4fac-a8e5-e59a86cc0148",
+    "reference": "LWUEUDVKIN",
+    "recipient_name": "Tunde Bakare",
+    "recipient_email": "tunde@example.com",
+    "emailed_at": "2026-10-12T23:50:05.251978Z",
+    "details": {
+      "booking": {
+        "confirmation_code": "LWUEUDVKIN",
+        "status": "pending",
+        "hotel": {
+          "name": "Palmview Resort & Spa",
+          "address": "12 Admiralty Way, Lekki Phase 1",
+          "phone": "+2348031234567",
+          "email": "frontdesk@example.com",
+          "check_in_time": "14:00:00",
+          "check_out_time": "11:00:00"
+        },
+        "check_in_date": "2026-10-22",
+        "check_out_date": "2026-10-23",
+        "nights": 1,
+        "guests": 2,
+        "rooms": [
+          {
+            "room_type": "Deluxe Lagoon View",
+            "room_number": "101",
+            "nights": 1,
+            "price_per_night": "46750.00",
+            "list_price_per_night": "55000.00",
+            "discounts": "Lagoon Escape 15% off",
+            "total": "46750.00"
+          }
+        ],
+        "services": [],
+        "room_charges": "46750.00",
+        "discount": "8250.00",
+        "incidentals": "0.00",
+        "taxes_and_fees": "5843.75",
+        "taxes": "3506.25",
+        "service_fee": "2337.50",
+        "points_discount": "0.00",
+        "total": "52593.75",
+        "paid": "52593.75",
+        "balance_due": "0.00",
+        "pay_at_hotel": false,
+        "currency": "NGN"
+      },
+      "paid_at": "2026-10-12T23:50:05.219143+00:00",
+      "notes": ""
+    }
+  }
+}

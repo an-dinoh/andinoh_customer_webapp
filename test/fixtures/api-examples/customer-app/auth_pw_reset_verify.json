@@ -1,0 +1,16 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/auth/password-reset/verify-otp/",
+    "body": {
+      "email": "ada@example.com",
+      "otp": "482913"
+    }
+  },
+  "status": 200,
+  "body": {
+    "message": "OTP verified successfully.",
+    "valid": true,
+    "reset_token": "eyJ1IjoyLCJvIjoiZGRhNDM4YjgtYWUzMi00YTNmLTgxYzgtMTdjM2I4MjYyZTY5In0:1xGPmO:RDtlDbGYdL1EB90aLD7Phuaowy6hqipFdUOWWeowO8w"
+  }
+}

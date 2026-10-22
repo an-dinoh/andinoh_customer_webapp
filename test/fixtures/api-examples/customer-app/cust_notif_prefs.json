@@ -1,0 +1,34 @@
+{
+  "request": {
+    "method": "PATCH",
+    "path": "/customers/profile/notification-preferences/",
+    "body": {
+      "push_promotions": false,
+      "digest_frequency": "WEEKLY"
+    }
+  },
+  "status": 200,
+  "body": {
+    "email_booking_confirmations": true,
+    "email_reminders": true,
+    "email_promotions": true,
+    "email_reviews": true,
+    "email_points": true,
+    "email_complaints": true,
+    "sms_booking_confirmations": false,
+    "sms_reminders": false,
+    "sms_urgent_only": true,
+    "push_booking_confirmations": true,
+    "push_reminders": true,
+    "push_promotions": false,
+    "push_reviews": true,
+    "push_points": true,
+    "app_all_notifications": true,
+    "digest_frequency": "WEEKLY",
+    "quiet_hours_enabled": false,
+    "quiet_hours_start": null,
+    "quiet_hours_end": null,
+    "quiet_hours_timezone": "UTC",
+    "updated_at": "2026-10-12T23:50:05.597212Z"
+  }
+}

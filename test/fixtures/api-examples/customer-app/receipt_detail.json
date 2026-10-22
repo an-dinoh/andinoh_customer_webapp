@@ -1,0 +1,74 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/customers/receipts/bceac707-b93e-4645-ba9a-ca26669b2cb3/"
+  },
+  "status": 200,
+  "body": {
+    "id": "bceac707-b93e-4645-ba9a-ca26669b2cb3",
+    "number": "AND-20261012-509351",
+    "kind": "booking_payment",
+    "kind_display": "Booking payment",
+    "issued_at": "2026-10-12T23:50:05.142035Z",
+    "amount": "131437.50",
+    "currency": "NGN",
+    "payment_method": "online",
+    "transaction_reference": "9300003",
+    "object_type": "booking",
+    "object_id": "f5f60630-0689-456b-9a20-49e75df0c8b3",
+    "reference": "N7PBCWJIZ3",
+    "recipient_name": "Ada N. Obi",
+    "recipient_email": "ada@example.com",
+    "emailed_at": "2026-10-12T23:50:05.166904Z",
+    "details": {
+      "booking": {
+        "confirmation_code": "N7PBCWJIZ3",
+        "status": "pending",
+        "hotel": {
+          "name": "Palmview Resort & Spa",
+          "address": "12 Admiralty Way, Lekki Phase 1",
+          "phone": "+2348031234567",
+          "email": "frontdesk@example.com",
+          "check_in_time": "14:00:00",
+          "check_out_time": "11:00:00"
+        },
+        "check_in_date": "2026-10-19",
+        "check_out_date": "2026-10-21",
+        "nights": 2,
+        "guests": 2,
+        "rooms": [
+          {
+            "room_type": "Deluxe Lagoon View",
+            "room_number": "101",
+            "nights": 2,
+            "price_per_night": "46750.00",
+            "list_price_per_night": "55000.00",
+            "discounts": "Lagoon Escape 15% off",
+            "total": "93500.00"
+          }
+        ],
+        "services": [
+          {
+            "name": "Deep Tissue Massage",
+            "quantity": 1,
+            "total": "25000.00"
+          }
+        ],
+        "room_charges": "93500.00",
+        "discount": "16500.00",
+        "incidentals": "0.00",
+        "taxes_and_fees": "12937.50",
+        "taxes": "7012.50",
+        "service_fee": "5925.00",
+        "points_discount": "0.00",
+        "total": "131437.50",
+        "paid": "131437.50",
+        "balance_due": "0.00",
+        "pay_at_hotel": false,
+        "currency": "NGN"
+      },
+      "paid_at": "2026-10-12T23:50:05.141717+00:00",
+      "notes": ""
+    }
+  }
+}

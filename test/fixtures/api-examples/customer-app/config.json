@@ -1,0 +1,20 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/customers/config/"
+  },
+  "status": 200,
+  "body": {
+    "app_name": "Andinoh",
+    "version": "1.0.0",
+    "support_email": "support@andinoh.com",
+    "support_phone": "+234 707 972 6698",
+    "support_whatsapp": "+44 7400730594",
+    "currency": "NGN",
+    "payments": {
+      "provider": "flutterwave",
+      "public_key": "FLWPUBK_TEST-tests-only",
+      "currency": "NGN"
+    }
+  }
+}

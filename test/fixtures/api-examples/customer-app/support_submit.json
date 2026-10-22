@@ -1,0 +1,16 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/customers/support/",
+    "body": {
+      "subject": "Cannot add my card",
+      "message": "The checkout closes before I can type the OTP.",
+      "category": "payments"
+    }
+  },
+  "status": 201,
+  "body": {
+    "message": "Support request submitted successfully.",
+    "ticket_id": "TKT-0001"
+  }
+}

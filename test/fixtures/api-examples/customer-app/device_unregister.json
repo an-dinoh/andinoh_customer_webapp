@@ -1,0 +1,8 @@
+{
+  "request": {
+    "method": "DELETE",
+    "path": "/customers/devices/1/"
+  },
+  "status": 204,
+  "body": null
+}

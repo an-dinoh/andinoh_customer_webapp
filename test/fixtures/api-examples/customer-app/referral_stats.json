@@ -1,0 +1,12 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/customers/referrals/stats/"
+  },
+  "status": 200,
+  "body": {
+    "total_referrals": 1,
+    "completed_referrals": 0,
+    "pending_referrals": 1
+  }
+}

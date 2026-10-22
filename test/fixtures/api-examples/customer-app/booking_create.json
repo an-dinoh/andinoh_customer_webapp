@@ -1,0 +1,115 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/customers/bookings/create/",
+    "body": {
+      "hotel_id": "6d5e551c-e520-42ed-bb07-ee8add772705",
+      "check_in_date": "2026-10-19",
+      "check_out_date": "2026-10-21",
+      "adults": 2,
+      "children": 0,
+      "rooms": [
+        {
+          "room_id": "e48b2d1f-d506-4ef2-8601-372144689896",
+          "quantity": 1
+        }
+      ],
+      "services": [
+        {
+          "offering_id": "b40cce0b-7677-4aea-b80e-4674cba8eb53",
+          "quantity": 1
+        }
+      ],
+      "payment_method": "online"
+    }
+  },
+  "status": 201,
+  "body": {
+    "id": "f5f60630-0689-456b-9a20-49e75df0c8b3",
+    "booking_type": "hotel",
+    "customer": "7b026867-fdaf-4cce-9a03-ec81678f92f0",
+    "hotel": "6d5e551c-e520-42ed-bb07-ee8add772705",
+    "confirmation_code": "N7PBCWJIZ3",
+    "check_in_date": "2026-10-19",
+    "check_out_date": "2026-10-21",
+    "num_guests": 2,
+    "status": "pending",
+    "currency": "NGN",
+    "total_amount": "131437.50",
+    "paid_amount": "0.00",
+    "balance_due": "131437.50",
+    "pay_at_hotel": false,
+    "price_breakdown": {
+      "nights": 2,
+      "room_charges": "93500.00",
+      "discount": "16500.00",
+      "incidentals": "0.00",
+      "taxes_and_fees": "12937.50",
+      "taxes": "7012.50",
+      "service_fee": "5925.00",
+      "points_discount": "0.00",
+      "total": "131437.50",
+      "paid": "0.00",
+      "balance_due": "131437.50"
+    },
+    "rooms": [
+      {
+        "id": "78402b95-0597-41dd-a208-a6e2f69e20d5",
+        "room_number": "101",
+        "room_type": "deluxe",
+        "price_per_night": "46750.00",
+        "num_nights": 2,
+        "list_price_per_night": "55000.00",
+        "discount_titles": "Lagoon Escape 15% off"
+      }
+    ],
+    "services": [
+      {
+        "id": 1,
+        "service_type": "SPA",
+        "service_name": "Deep Tissue Massage",
+        "description": "",
+        "price": "25000.00",
+        "quantity": 1,
+        "service_date": null,
+        "notes": ""
+      }
+    ],
+    "payments": [],
+    "receipts": [],
+    "folio": null,
+    "hotel_name": "Palmview Resort & Spa",
+    "hotel_image": null,
+    "hotel_city": "Ikeja, Lagos",
+    "hotel_address": "12 Admiralty Way, Lekki Phase 1",
+    "hotel_phone": "+2348031234567",
+    "hotel_email": "frontdesk@example.com",
+    "check_in_time": "14:00:00",
+    "check_out_time": "11:00:00",
+    "cancellation_policy": {
+      "type": "flexible",
+      "label": "Flexible",
+      "deposit_required_pct": "20.00",
+      "refund_schedule": [
+        {
+          "min_days_before_check_in": 7,
+          "refund_percent": "100.00"
+        },
+        {
+          "min_days_before_check_in": 3,
+          "refund_percent": "75.00"
+        },
+        {
+          "min_days_before_check_in": 1,
+          "refund_percent": "50.00"
+        }
+      ]
+    },
+    "special_requests": "",
+    "guest_notes": "",
+    "hold_expires_at": "2026-10-13T00:20:05.101811Z",
+    "cancelled_at": null,
+    "created_at": "2026-10-12T23:50:05.101932Z",
+    "updated_at": "2026-10-12T23:50:05.101939Z"
+  }
+}

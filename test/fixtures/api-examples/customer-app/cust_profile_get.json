@@ -1,0 +1,32 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/customers/profile/"
+  },
+  "status": 200,
+  "body": {
+    "profile": "7b026867-fdaf-4cce-9a03-ec81678f92f0",
+    "username": "ada@example.com",
+    "email": "ada@example.com",
+    "first_name": "",
+    "last_name": "",
+    "full_name": "Ada N. Obi",
+    "phone_number": "+2348031234567",
+    "date_of_birth": null,
+    "gender": "",
+    "profile_picture_url": null,
+    "membership_tier": "DIAMOND",
+    "membership_tier_display": "Diamond",
+    "total_points": 236674,
+    "available_points": 236674,
+    "lifetime_spent": "236625.00",
+    "email_verified": true,
+    "phone_verified": false,
+    "is_vip": false,
+    "latitude": null,
+    "longitude": null,
+    "location_updated_at": null,
+    "date_joined": "2026-10-12T23:50:04.521395Z",
+    "last_login": null
+  }
+}

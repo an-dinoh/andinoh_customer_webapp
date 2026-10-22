@@ -1,0 +1,15 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/hotels/event-spaces/4b7f27f3-b2dd-4c0d-9ac1-a54404292fcf/availability/",
+    "query": {
+      "date": "2026-11-21"
+    }
+  },
+  "status": 200,
+  "body": {
+    "space_id": "4b7f27f3-b2dd-4c0d-9ac1-a54404292fcf",
+    "date": "2026-11-21",
+    "booked_slots": []
+  }
+}

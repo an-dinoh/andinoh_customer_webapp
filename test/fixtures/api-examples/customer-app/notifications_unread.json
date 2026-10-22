@@ -1,0 +1,10 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/customers/profile/notifications/unread-count/"
+  },
+  "status": 200,
+  "body": {
+    "unread": 13
+  }
+}
