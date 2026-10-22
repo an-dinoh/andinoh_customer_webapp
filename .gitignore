@@ -47,3 +47,7 @@ next-env.d.ts
 public/sw.js
 public/workbox-*.js
 public/swe-worker-*.js
+
+# Python bytecode (scripts/live-backend)
+__pycache__/
+*.pyc
