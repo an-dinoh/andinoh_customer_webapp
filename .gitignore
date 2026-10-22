@@ -39,3 +39,11 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# local live-test backend database (scripts/live-backend)
+/.live/
+
+# PWA build output
+public/sw.js
+public/workbox-*.js
+public/swe-worker-*.js
