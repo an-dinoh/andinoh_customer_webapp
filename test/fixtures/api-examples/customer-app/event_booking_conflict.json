@@ -1,0 +1,26 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/hotels/event-bookings/",
+    "body": {
+      "space": "4b7f27f3-b2dd-4c0d-9ac1-a54404292fcf",
+      "event_title": "Clash",
+      "event_type": "party",
+      "setup_style": "theatre",
+      "estimated_guests": 50,
+      "start_time": "2026-11-21T13:00:00Z",
+      "end_time": "2026-11-21T15:00:00Z",
+      "setup_duration": "00:30:00",
+      "teardown_duration": "00:30:00"
+    }
+  },
+  "status": 400,
+  "body": {
+    "error": "Validation failed: conflict: This space is already booked during the requested time (including setup/teardown buffers).",
+    "code": "validation_error",
+    "request_id": "387c2cdf71584559",
+    "errors": {
+      "conflict": "This space is already booked during the requested time (including setup/teardown buffers)."
+    }
+  }
+}

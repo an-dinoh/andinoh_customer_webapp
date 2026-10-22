@@ -1,0 +1,66 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/customers/tips/",
+    "body": {
+      "booking_id": "e1b274cb-2cf3-4292-8fd2-9df2e9176a35",
+      "staff_id": "a1fa12bf-fb39-435a-bdd6-b3c3762b3263",
+      "amount": "5000",
+      "message": "Thank you Sarah!"
+    }
+  },
+  "status": 201,
+  "body": {
+    "tip": {
+      "id": "4dfb7cfc-a1bc-4e16-b1d0-fb08d43b08e4",
+      "customer": "7b026867-fdaf-4cce-9a03-ec81678f92f0",
+      "booking": "e1b274cb-2cf3-4292-8fd2-9df2e9176a35",
+      "staff_id": "a1fa12bf-fb39-435a-bdd6-b3c3762b3263",
+      "staff_name": "Sarah Bello",
+      "staff_role": "Front Desk",
+      "hotel_id": "6d5e551c-e520-42ed-bb07-ee8add772705",
+      "hotel_name": "Palmview Resort & Spa",
+      "amount": "5000.00",
+      "currency": "NGN",
+      "message": "Thank you Sarah!",
+      "payment_status": "pending",
+      "payment_status_display": "Pending",
+      "payment_method": "flutterwave",
+      "payment_transaction_id": "",
+      "created_at": "2026-10-12T23:50:05.460067Z",
+      "paid_at": null,
+      "charged_to_room": false
+    },
+    "payment": {
+      "status": "success",
+      "message": "Payment initiated",
+      "data": {
+        "link": "https://checkout.test/pay/ANDINOH-TIP-4DFB7CFCA1BC-ADC23BFD",
+        "tx_ref": "ANDINOH-TIP-4DFB7CFCA1BC-ADC23BFD"
+      },
+      "checkout": {
+        "public_key": "FLWPUBK_TEST-tests-only",
+        "tx_ref": "ANDINOH-TIP-4DFB7CFCA1BC-ADC23BFD",
+        "amount": "5000.00",
+        "currency": "NGN",
+        "payment_options": "card,banktransfer,ussd,account",
+        "customer": {
+          "email": "ada@example.com",
+          "name": "Ada N. Obi",
+          "phonenumber": "+2348031234567"
+        },
+        "customizations": {
+          "title": "Andinoh Staff Tip",
+          "description": "Tip for Sarah Bello at Palmview Resort & Spa",
+          "logo": "https://res.cloudinary.com/andinoh/image/upload/v1/assets/logo_wide.png"
+        },
+        "meta": {
+          "tip_id": "4dfb7cfc-a1bc-4e16-b1d0-fb08d43b08e4",
+          "kind": "staff_tip"
+        },
+        "redirect_url": "https://app.test/payments/complete"
+      }
+    },
+    "charged_to_room": false
+  }
+}

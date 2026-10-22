@@ -1,0 +1,20 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/shared/analytics/track/",
+    "body": {
+      "event_name": "search_filters_applied",
+      "event_category": "search",
+      "event_data": {
+        "city": "Ikeja",
+        "max_price": 90000
+      },
+      "session_id": "app-session-7f3a"
+    }
+  },
+  "status": 201,
+  "body": {
+    "message": "Analytics event logged successfully",
+    "event": "search_filters_applied"
+  }
+}

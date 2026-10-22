@@ -1,0 +1,58 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/customers/ads/"
+  },
+  "status": 200,
+  "body": {
+    "status": "success",
+    "error": false,
+    "data": [
+      {
+        "id": "1f49efa2-a066-4707-b097-dd1a9ccb48d8",
+        "image": "http://testserver/media/ads/banners/ad.png",
+        "image_url": "http://testserver/media/ads/banners/ad.png",
+        "link": "app://hotels/detail/6d5e551c-e520-42ed-bb07-ee8add772705",
+        "action_url": "app://hotels/detail/6d5e551c-e520-42ed-bb07-ee8add772705",
+        "title": "Lagoon weekend at Palmview",
+        "date": "2026-10-12T23:50:04.958144Z"
+      }
+    ],
+    "banners": [
+      {
+        "id": "1f49efa2-a066-4707-b097-dd1a9ccb48d8",
+        "sponsor": "Palmview Resort & Spa",
+        "headline": "Lagoon weekend at Palmview",
+        "image": "http://testserver/media/ads/banners/ad.png",
+        "image_url": "http://testserver/media/ads/banners/ad.png",
+        "hotel": "6d5e551c-e520-42ed-bb07-ee8add772705",
+        "hotel_name": "Palmview Resort & Spa",
+        "redirect_url": "app://hotels/detail/6d5e551c-e520-42ed-bb07-ee8add772705",
+        "action_type": "deep_link",
+        "detail_body": "Two nights with breakfast.",
+        "detail_image": null,
+        "detail_image_url": null,
+        "video_url": "",
+        "video_file": null,
+        "video_file_url": null,
+        "action_button_text": "Book now",
+        "ad_type": "banner",
+        "is_active": true,
+        "priority": 0,
+        "view_count": 2,
+        "click_count": 0,
+        "start_date": "2026-10-12T22:50:04.958649Z",
+        "end_date": "2026-10-17T23:00:00Z",
+        "max_views": 0,
+        "max_clicks": 0,
+        "target_membership_tiers": [],
+        "target_vip_only": false,
+        "target_genders": [],
+        "target_cities": [],
+        "created_at": "2026-10-12T23:50:04.958144Z",
+        "updated_at": "2026-10-12T23:50:04.958149Z"
+      }
+    ],
+    "promotions": []
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/customers/complaints/stats/"
+  },
+  "status": 200,
+  "body": {
+    "total_complaints": 1,
+    "open": 0,
+    "in_progress": 0,
+    "resolved": 0,
+    "closed": 1,
+    "by_type": {
+      "ROOM": 1
+    }
+  }
+}

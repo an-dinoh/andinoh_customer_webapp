@@ -1,0 +1,27 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/customers/tips/staff/",
+    "query": {
+      "booking_id": "e1b274cb-2cf3-4292-8fd2-9df2e9176a35"
+    }
+  },
+  "status": 200,
+  "body": {
+    "booking": {
+      "id": "e1b274cb-2cf3-4292-8fd2-9df2e9176a35",
+      "hotel_id": "6d5e551c-e520-42ed-bb07-ee8add772705",
+      "hotel_name": "Palmview Resort & Spa",
+      "check_in_date": "2026-10-12",
+      "check_out_date": "2026-10-14"
+    },
+    "staff": [
+      {
+        "id": "a1fa12bf-fb39-435a-bdd6-b3c3762b3263",
+        "full_name": "Sarah Bello",
+        "role": "Front Desk",
+        "department": "Front Office"
+      }
+    ]
+  }
+}

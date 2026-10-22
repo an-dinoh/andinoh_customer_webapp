@@ -1,0 +1,48 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/hotels/event-bookings/"
+  },
+  "status": 200,
+  "body": {
+    "count": 1,
+    "next": null,
+    "previous": null,
+    "results": [
+      {
+        "id": "5c36ea31-2b4d-48f1-86d8-4c76c86a09d8",
+        "space": "4b7f27f3-b2dd-4c0d-9ac1-a54404292fcf",
+        "customer_id": "7b026867-fdaf-4cce-9a03-ec81678f92f0",
+        "client_name": "",
+        "client_email": "",
+        "client_phone": "",
+        "created_by": null,
+        "event_title": "Obi Wedding Reception",
+        "event_type": "wedding",
+        "setup_style": "banquet",
+        "estimated_guests": 200,
+        "start_time": "2026-11-21T12:00:00Z",
+        "end_time": "2026-11-21T18:00:00Z",
+        "setup_duration": "02:00:00",
+        "teardown_duration": "01:00:00",
+        "services": [
+          {
+            "id": "471b07fc-d035-4b11-aea5-df58e17e7495",
+            "hotel": "6d5e551c-e520-42ed-bb07-ee8add772705",
+            "name": "Buffet catering",
+            "description": "",
+            "price": "9500.00",
+            "billing_type": "per_person"
+          }
+        ],
+        "venue_rate": "450000.00",
+        "add_ons_total": "1900000.00",
+        "total_amount": "2350000.00",
+        "deposit_paid": false,
+        "amount_paid": "0.00",
+        "balance_due": "2350000.00",
+        "status": "draft"
+      }
+    ]
+  }
+}

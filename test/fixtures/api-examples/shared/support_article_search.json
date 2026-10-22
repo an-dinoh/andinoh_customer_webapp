@@ -1,0 +1,25 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/support/articles/search/",
+    "query": {
+      "q": "withdraw"
+    }
+  },
+  "status": 200,
+  "body": {
+    "count": 1,
+    "next": null,
+    "previous": null,
+    "results": [
+      {
+        "id": "42db3280-5103-41cc-a986-9c8595754b5a",
+        "title": "When can I withdraw my earnings?",
+        "slug": "when-can-i-withdraw",
+        "category_name": "Payments & payouts",
+        "views_count": 1,
+        "created_at": "2026-10-12T23:50:08.281586Z"
+      }
+    ]
+  }
+}

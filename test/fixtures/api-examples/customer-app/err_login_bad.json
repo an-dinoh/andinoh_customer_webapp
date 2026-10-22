@@ -1,0 +1,16 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/auth/login/",
+    "body": {
+      "email": "ada@example.com",
+      "password": "wrong"
+    }
+  },
+  "status": 401,
+  "body": {
+    "error": "The email or password you entered is incorrect.",
+    "code": "invalid_credentials",
+    "request_id": "cf4410d8537a4424"
+  }
+}

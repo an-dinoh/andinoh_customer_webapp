@@ -1,0 +1,18 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/customers/uploads/",
+    "multipart": {
+      "file": "<file towel.png>",
+      "purpose": "chat"
+    }
+  },
+  "status": 201,
+  "body": {
+    "url": "http://testserver/media/customer_uploads/chat/7b026867-fdaf-4cce-9a03-ec81678f92f0/67e6b6daa6cd4546afe71dc59fbb75b2.png",
+    "kind": "image",
+    "content_type": "image/png",
+    "size": 77,
+    "name": "towel.png"
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/bookings/quote/",
+    "body": {
+      "hotel_id": "6d5e551c-e520-42ed-bb07-ee8add772705",
+      "check_in_date": "2026-10-19",
+      "check_out_date": "2026-10-21",
+      "adults": 2,
+      "children": 0,
+      "rooms": [
+        {
+          "room_id": "e48b2d1f-d506-4ef2-8601-372144689896",
+          "quantity": 9
+        }
+      ],
+      "services": [
+        {
+          "offering_id": "b40cce0b-7677-4aea-b80e-4674cba8eb53",
+          "quantity": 1
+        }
+      ],
+      "payment_method": "online"
+    }
+  },
+  "status": 400,
+  "body": {
+    "error": "Validation failed: rooms: Room quantity must be between 1 and 5",
+    "code": "validation_error",
+    "request_id": "69f996211ac54827",
+    "errors": {
+      "rooms": [
+        "Room quantity must be between 1 and 5"
+      ]
+    }
+  }
+}

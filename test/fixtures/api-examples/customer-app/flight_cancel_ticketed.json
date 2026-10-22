@@ -1,0 +1,32 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/customers/bookings/4aff2637-36a9-454c-9b6c-c0ea8fd4d598/cancel/",
+    "body": {
+      "cancellation_reason": "Meeting moved"
+    }
+  },
+  "status": 202,
+  "body": {
+    "message": "Cancellation requested. We will confirm your refund after checking the airline fare rules.",
+    "cancellation_request": {
+      "id": "5ecfe678-8532-4574-baf7-a12c21639929",
+      "flight_booking_id": "4aff2637-36a9-454c-9b6c-c0ea8fd4d598",
+      "confirmation_code": "FL-B6F75EEF",
+      "route": "LOS → LHR",
+      "departure_datetime": "2026-11-11T23:25:00Z",
+      "reason": "Meeting moved",
+      "status": "pending",
+      "status_display": "Awaiting review",
+      "ticket_issued": true,
+      "paid_amount": "1450000.00",
+      "refund_amount": null,
+      "currency": "NGN",
+      "airline_cancelled": false,
+      "review_notes": "",
+      "reviewed_at": null,
+      "created_at": "2026-10-12T23:50:05.617732Z",
+      "updated_at": "2026-10-12T23:50:05.617739Z"
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/customers/bookings/00000000-0000-0000-0000-000000000000/"
+  },
+  "status": 404,
+  "body": {
+    "error": "No Booking matches the given query.",
+    "code": "error",
+    "request_id": "ae742fd23e5148b8"
+  }
+}

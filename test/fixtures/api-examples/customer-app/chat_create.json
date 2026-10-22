@@ -1,0 +1,16 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/customers/chats/",
+    "body": {
+      "booking_id": "e1b274cb-2cf3-4292-8fd2-9df2e9176a35",
+      "subject": "Towels",
+      "initial_message": "Could we get two extra towels please?"
+    }
+  },
+  "status": 201,
+  "body": {
+    "id": "62746e11-6ca2-4d41-ab28-28fc5badbfa1",
+    "subject": "Towels"
+  }
+}

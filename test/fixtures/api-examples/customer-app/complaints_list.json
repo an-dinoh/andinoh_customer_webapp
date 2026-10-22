@@ -1,0 +1,51 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/customers/complaints/"
+  },
+  "status": 200,
+  "body": {
+    "count": 1,
+    "next": null,
+    "previous": null,
+    "results": [
+      {
+        "id": 1,
+        "complaint_id": "CMPG3Q3B54",
+        "customer": "7b026867-fdaf-4cce-9a03-ec81678f92f0",
+        "booking": "e1b274cb-2cf3-4292-8fd2-9df2e9176a35",
+        "complaint_type": "ROOM",
+        "complaint_type_display": "Room Problem",
+        "subject": "Air conditioning not cooling",
+        "description": "The AC in room 102 blows warm air since last night.",
+        "hotel_id": null,
+        "hotel_name": "",
+        "room_number": "",
+        "incident_date": null,
+        "incident_location": "",
+        "priority": "MEDIUM",
+        "priority_display": "Medium",
+        "status": "OPEN",
+        "status_display": "Open",
+        "assigned_to": "",
+        "department": "",
+        "escalated_to": "",
+        "resolution_description": "",
+        "compensation_offered": "",
+        "compensation_amount": null,
+        "is_customer_satisfied": null,
+        "customer_rating": null,
+        "customer_feedback": "",
+        "attachments": [],
+        "responses": [],
+        "created_at": "2026-10-12T23:50:05.521377Z",
+        "updated_at": "2026-10-12T23:50:05.521383Z",
+        "resolved_at": null,
+        "closed_at": null,
+        "response_due_at": null,
+        "resolution_due_at": null,
+        "first_response_at": null
+      }
+    ]
+  }
+}

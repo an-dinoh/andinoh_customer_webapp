@@ -1,0 +1,26 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/customers/pickup-requests/"
+  },
+  "status": 200,
+  "body": {
+    "count": 1,
+    "next": null,
+    "previous": null,
+    "results": [
+      {
+        "id": 1,
+        "confirmation_code": "PUVUFRQQ",
+        "pickup_location_name": "Murtala Muhammed International Airport",
+        "destination_address": "Palmview Resort & Spa, Lekki",
+        "pickup_date": "2026-10-19",
+        "pickup_time": "11:30:00",
+        "total_fare": "19789.28",
+        "status": "PENDING",
+        "status_display": "Pending",
+        "created_at": "2026-10-12T23:50:05.489397Z"
+      }
+    ]
+  }
+}

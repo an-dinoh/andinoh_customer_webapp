@@ -1,0 +1,27 @@
+{
+  "request": {
+    "method": "PATCH",
+    "path": "/auth/profile/",
+    "body": {
+      "phone_number": "+2348039990000"
+    }
+  },
+  "status": 200,
+  "body": {
+    "id": "66145698-dd31-4dfa-82c5-b773d2547476",
+    "email": "owner@palmview.ng",
+    "role": "hotel",
+    "full_name": "Ada Obi",
+    "phone_number": "+2348039990000",
+    "is_active": true,
+    "is_verified": false,
+    "is_superuser": false,
+    "created_at": "2026-10-12T23:50:06.244829Z",
+    "updated_at": "2026-10-12T23:50:08.318209Z",
+    "hotel_name": "Palmview Resort & Spa",
+    "hotel_address": "",
+    "hotel_license_number": "",
+    "inspector_license_number": null,
+    "inspector_certification": null
+  }
+}

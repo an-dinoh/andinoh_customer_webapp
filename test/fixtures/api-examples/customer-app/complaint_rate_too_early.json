@@ -1,0 +1,14 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/customers/complaints/CMPG3Q3B54/rate/",
+    "body": {
+      "rating": 4,
+      "is_satisfied": true
+    }
+  },
+  "status": 400,
+  "body": {
+    "error": "Can only rate resolved complaints"
+  }
+}

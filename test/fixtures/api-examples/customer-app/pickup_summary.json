@@ -1,0 +1,44 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/customers/pickup-requests/summary/"
+  },
+  "status": 200,
+  "body": {
+    "statistics": {
+      "total_requests": 1,
+      "total_spent": 19789.28,
+      "completed_requests": 0,
+      "cancelled_requests": 0,
+      "average_rating": 0.0
+    },
+    "recent_pickups": [
+      {
+        "id": 1,
+        "confirmation_code": "PUVUFRQQ",
+        "pickup_location_name": "Murtala Muhammed International Airport",
+        "destination_address": "Palmview Resort & Spa, Lekki",
+        "pickup_date": "2026-10-19",
+        "pickup_time": "11:30:00",
+        "total_fare": "19789.28",
+        "status": "PENDING",
+        "status_display": "Pending",
+        "created_at": "2026-10-12T23:50:05.489397Z"
+      }
+    ],
+    "upcoming_pickups": [
+      {
+        "id": 1,
+        "confirmation_code": "PUVUFRQQ",
+        "pickup_location_name": "Murtala Muhammed International Airport",
+        "destination_address": "Palmview Resort & Spa, Lekki",
+        "pickup_date": "2026-10-19",
+        "pickup_time": "11:30:00",
+        "total_fare": "19789.28",
+        "status": "PENDING",
+        "status_display": "Pending",
+        "created_at": "2026-10-12T23:50:05.489397Z"
+      }
+    ]
+  }
+}

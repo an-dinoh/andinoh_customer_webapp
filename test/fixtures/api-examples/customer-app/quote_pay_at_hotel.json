@@ -1,0 +1,56 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/bookings/quote/",
+    "body": {
+      "hotel_id": "6d5e551c-e520-42ed-bb07-ee8add772705",
+      "check_in_date": "2026-10-19",
+      "check_out_date": "2026-10-21",
+      "adults": 2,
+      "children": 0,
+      "rooms": [
+        {
+          "room_id": "e48b2d1f-d506-4ef2-8601-372144689896",
+          "quantity": 1
+        }
+      ],
+      "services": [
+        {
+          "offering_id": "b40cce0b-7677-4aea-b80e-4674cba8eb53",
+          "quantity": 1
+        }
+      ],
+      "payment_method": "cash"
+    }
+  },
+  "status": 200,
+  "body": {
+    "hotel_id": "6d5e551c-e520-42ed-bb07-ee8add772705",
+    "currency": "NGN",
+    "nights": 2,
+    "rooms": [
+      {
+        "room_id": "e48b2d1f-d506-4ef2-8601-372144689896",
+        "room_type": "deluxe",
+        "quantity": 1,
+        "nights": 2,
+        "list_total": "110000.00",
+        "discount_total": "16500.00",
+        "total": "93500.00",
+        "price_per_night": "46750.00",
+        "list_price_per_night": "55000.00",
+        "discounts": [
+          "Lagoon Escape 15% off"
+        ]
+      }
+    ],
+    "room_charges": "93500.00",
+    "services": "25000.00",
+    "taxes": "7012.50",
+    "service_fee": "5925.00",
+    "points_discount": "0.00",
+    "total": "131437.50",
+    "pay_at_hotel": true,
+    "due_online_now": "31027.50"
+  }
+}

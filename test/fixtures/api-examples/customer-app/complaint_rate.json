@@ -1,0 +1,17 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/customers/complaints/CMPG3Q3B54/rate/",
+    "body": {
+      "rating": 4,
+      "is_satisfied": true,
+      "feedback": "Fixed within the hour."
+    }
+  },
+  "status": 200,
+  "body": {
+    "message": "Thank you for your feedback",
+    "complaint_id": "CMPG3Q3B54",
+    "status": "CLOSED"
+  }
+}

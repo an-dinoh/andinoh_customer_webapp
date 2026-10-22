@@ -1,0 +1,29 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/customers/pickup-locations/",
+    "query": {
+      "type": "AIRPORT"
+    }
+  },
+  "status": 200,
+  "body": {
+    "count": 1,
+    "next": null,
+    "previous": null,
+    "results": [
+      {
+        "id": 1,
+        "name": "Murtala Muhammed International Airport",
+        "location_type": "AIRPORT",
+        "address": "Ikeja, Lagos",
+        "latitude": "6.577400",
+        "longitude": "3.321200",
+        "pickup_fee": "5000.00",
+        "terminal": "International",
+        "gate": "",
+        "is_active": true
+      }
+    ]
+  }
+}

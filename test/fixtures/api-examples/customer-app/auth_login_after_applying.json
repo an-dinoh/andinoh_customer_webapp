@@ -1,0 +1,22 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/auth/login/",
+    "body": {
+      "email": "ada@example.com",
+      "password": "Sunny@Lagos2026"
+    }
+  },
+  "status": 200,
+  "body": {
+    "refresh_token": "eyJhbGciOiJIUzI1…(JWT)",
+    "access_token": "eyJhbGciOiJIUzI1…(JWT)",
+    "user": {
+      "id": "7b026867-fdaf-4cce-9a03-ec81678f92f0",
+      "email": "ada@example.com",
+      "role": "customer",
+      "full_name": "Ada N. Obi",
+      "inspector_status": "draft"
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/support/articles/when-can-i-withdraw/"
+  },
+  "status": 200,
+  "body": {
+    "id": "42db3280-5103-41cc-a986-9c8595754b5a",
+    "title": "When can I withdraw my earnings?",
+    "slug": "when-can-i-withdraw",
+    "category": {
+      "id": "14713b5a-0a12-4626-9621-8a59a09ef5d4",
+      "title": "Payments & payouts",
+      "slug": "payments-payouts",
+      "icon": "wallet",
+      "description": "Wallet, withdrawals and fees"
+    },
+    "body": "Revenue for a stay becomes withdrawable once the guest checks in.",
+    "views_count": 1,
+    "was_helpful_yes": 0,
+    "was_helpful_no": 0,
+    "tags": "wallet,withdrawal,payout",
+    "created_at": "2026-10-12T23:50:08.281586Z"
+  }
+}

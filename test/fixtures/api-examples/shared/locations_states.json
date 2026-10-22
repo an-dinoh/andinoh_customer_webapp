@@ -1,0 +1,17 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/shared/locations/states/",
+    "query": {
+      "country": "845f93a4-3a25-447c-b5f1-19ee176f70ba"
+    }
+  },
+  "status": 200,
+  "body": [
+    {
+      "id": "648b7c88-b198-481b-9892-0360bccd6461",
+      "name": "Lagos",
+      "country": "845f93a4-3a25-447c-b5f1-19ee176f70ba"
+    }
+  ]
+}

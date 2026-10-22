@@ -1,0 +1,93 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/hotels/6d5e551c-e520-42ed-bb07-ee8add772705/"
+  },
+  "status": 200,
+  "body": {
+    "id": "6d5e551c-e520-42ed-bb07-ee8add772705",
+    "name": "Palmview Resort & Spa",
+    "description": "",
+    "hotel_type": "resort",
+    "star_rating": 4,
+    "address": "12 Admiralty Way, Lekki Phase 1",
+    "country_name": "Nigeria",
+    "state_name": "Lagos",
+    "city_name": "Ikeja",
+    "country": "8a030f46-cd23-4097-9c92-db8c71444399",
+    "state": "003b51ef-c3df-461f-b8d9-b4da277c879e",
+    "city": "a069223f-5d3c-4245-94b3-23a6b361afae",
+    "area": null,
+    "latitude": "6.442500",
+    "longitude": "3.471100",
+    "phone": "+2348031234567",
+    "email": "frontdesk@example.com",
+    "website": "",
+    "check_in_time": "14:00:00",
+    "check_out_time": "11:00:00",
+    "amenities": [],
+    "images": [],
+    "videos": [],
+    "policies": [],
+    "average_rating": null,
+    "total_rooms": 4,
+    "total_reviews": 0,
+    "rooms": [
+      {
+        "id": "e48b2d1f-d506-4ef2-8601-372144689896",
+        "hotel": "6d5e551c-e520-42ed-bb07-ee8add772705",
+        "room_type": "deluxe",
+        "title": "Deluxe Lagoon View",
+        "description": "King bed, lagoon view, rain shower.",
+        "room_size": 38,
+        "bed_type": "king",
+        "max_occupancy": 3,
+        "base_price": "55000.00",
+        "current_price": 46750.0,
+        "offer": {
+          "nights": 1,
+          "list_price_per_night": "55000.00",
+          "price_per_night": "46750.00",
+          "list_total": "55000.00",
+          "total": "46750.00",
+          "discount": "8250.00",
+          "discount_titles": [
+            "Lagoon Escape 15% off"
+          ]
+        },
+        "display_price": null,
+        "is_available": true,
+        "total_rooms": 4,
+        "primary_image": null,
+        "availability_summary": {
+          "date": "2026-10-12",
+          "rooms_available": 4,
+          "is_available": true
+        },
+        "fully_booked_dates": [],
+        "min_availability_for_search": null
+      }
+    ],
+    "allows_pay_at_hotel": true,
+    "deposit_required_pct": "20.00",
+    "cancellation_type": "flexible",
+    "services": [
+      {
+        "id": "b40cce0b-7677-4aea-b80e-4674cba8eb53",
+        "service_type": "SPA",
+        "name": "Deep Tissue Massage",
+        "description": "",
+        "price": "25000.00",
+        "is_active": true,
+        "created_at": "2026-10-12T23:50:04.376227Z",
+        "updated_at": "2026-10-12T23:50:04.376234Z"
+      }
+    ],
+    "verification": {
+      "verified": true,
+      "inspected": false,
+      "last_inspected_at": null,
+      "inspection_rating": null
+    }
+  }
+}

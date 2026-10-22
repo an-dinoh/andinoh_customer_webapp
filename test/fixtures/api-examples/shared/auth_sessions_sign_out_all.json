@@ -1,0 +1,11 @@
+{
+  "request": {
+    "method": "DELETE",
+    "path": "/auth/sessions/all/"
+  },
+  "status": 200,
+  "body": {
+    "message": "1 session(s) revoked successfully.",
+    "revoked_count": 1
+  }
+}

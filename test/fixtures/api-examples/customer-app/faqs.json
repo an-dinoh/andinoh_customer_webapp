@@ -1,0 +1,15 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/customers/faqs/"
+  },
+  "status": 200,
+  "body": [
+    {
+      "id": "1b4272f1-23b0-4608-b314-f69e538d39fa",
+      "question": "When can I withdraw my earnings?",
+      "answer": "Revenue for a stay becomes withdrawable once the guest checks in.",
+      "category": "Payments & payouts"
+    }
+  ]
+}

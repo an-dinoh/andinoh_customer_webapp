@@ -1,0 +1,26 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/customers/hotels/6d5e551c-e520-42ed-bb07-ee8add772705/reviews/stats/"
+  },
+  "status": 200,
+  "body": {
+    "hotel_id": "6d5e551c-e520-42ed-bb07-ee8add772705",
+    "total_reviews": 1,
+    "average_rating": 5.0,
+    "rating_distribution": {
+      "5_star": 1,
+      "4_star": 0,
+      "3_star": 0,
+      "2_star": 0,
+      "1_star": 0
+    },
+    "category_averages": {
+      "cleanliness": 5.0,
+      "service": 5.0,
+      "location": 4.0,
+      "value": 4.0,
+      "amenities": 5.0
+    }
+  }
+}

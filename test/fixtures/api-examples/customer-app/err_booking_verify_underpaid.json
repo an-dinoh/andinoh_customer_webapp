@@ -1,0 +1,14 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/bookings/f5f60630-0689-456b-9a20-49e75df0c8b3/verify-payment/",
+    "body": {
+      "transaction_id": "9300002"
+    }
+  },
+  "status": 400,
+  "body": {
+    "error": "Payment amount mismatch detected",
+    "code": "amount_mismatch"
+  }
+}

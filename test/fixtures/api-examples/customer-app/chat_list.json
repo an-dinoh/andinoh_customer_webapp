@@ -1,0 +1,68 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/customers/chats/"
+  },
+  "status": 200,
+  "body": {
+    "count": 1,
+    "next": null,
+    "previous": null,
+    "results": [
+      {
+        "id": "62746e11-6ca2-4d41-ab28-28fc5badbfa1",
+        "customer": "7b026867-fdaf-4cce-9a03-ec81678f92f0",
+        "booking": "e1b274cb-2cf3-4292-8fd2-9df2e9176a35",
+        "hotel_id": "6d5e551c-e520-42ed-bb07-ee8add772705",
+        "hotel_name": "Palmview Resort & Spa",
+        "status": "active",
+        "status_display": "Active",
+        "subject": "Towels",
+        "assigned_staff_id": null,
+        "assigned_staff_name": "",
+        "last_message_at": "2026-10-12T23:50:05.440660Z",
+        "last_message_by": "staff",
+        "unread_count": 1,
+        "messages": [
+          {
+            "id": "b8c78543-9a54-472f-a9e9-c2191564e5e0",
+            "chat": "62746e11-6ca2-4d41-ab28-28fc5badbfa1",
+            "sender_type": "customer",
+            "sender_type_display": "Customer",
+            "sender_id": "7b026867-fdaf-4cce-9a03-ec81678f92f0",
+            "sender_name": "Ada N. Obi",
+            "message_type": "text",
+            "message": "Could we get two extra towels please?",
+            "media_url": "",
+            "attachment_url": "",
+            "attachment_type": "",
+            "status": "sent",
+            "is_read": false,
+            "read_at": null,
+            "created_at": "2026-10-12T23:50:05.436807Z"
+          },
+          {
+            "id": "8b437b3c-fd03-4ce7-989f-1d8fd60a6a8c",
+            "chat": "62746e11-6ca2-4d41-ab28-28fc5badbfa1",
+            "sender_type": "staff",
+            "sender_type_display": "Staff",
+            "sender_id": "b0f2cbf9-9ec9-404e-9007-c58b24e60eb5",
+            "sender_name": "Ada Obi",
+            "message_type": "text",
+            "message": "On the way to your room now.",
+            "media_url": "",
+            "attachment_url": "",
+            "attachment_type": "",
+            "status": "sent",
+            "is_read": false,
+            "read_at": null,
+            "created_at": "2026-10-12T23:50:05.440660Z"
+          }
+        ],
+        "created_at": "2026-10-12T23:50:05.436591Z",
+        "updated_at": "2026-10-12T23:50:05.440910Z",
+        "closed_at": null
+      }
+    ]
+  }
+}

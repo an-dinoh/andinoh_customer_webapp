@@ -1,0 +1,63 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/customers/pickup-requests/PUVUFRQQ/cancel/",
+    "body": {
+      "cancellation_reason": "Taking a taxi instead"
+    }
+  },
+  "status": 200,
+  "body": {
+    "message": "Pickup request cancelled successfully",
+    "pickup_request": {
+      "id": 1,
+      "customer_name": "Ada N. Obi",
+      "booking": "f5f60630-0689-456b-9a20-49e75df0c8b3",
+      "pickup_location": 1,
+      "pickup_location_name": "Murtala Muhammed International Airport",
+      "custom_pickup_address": "",
+      "destination_address": "Palmview Resort & Spa, Lekki",
+      "destination_latitude": "6.442500",
+      "destination_longitude": "3.471100",
+      "pickup_date": "2026-10-19",
+      "pickup_time": "11:30:00",
+      "estimated_duration": 38,
+      "passenger_count": 2,
+      "luggage_count": 4,
+      "special_requirements": "",
+      "vehicle_type": "SUV",
+      "vehicle_type_display": "SUV",
+      "base_fare": "19289.28",
+      "additional_charges": "500.00",
+      "total_fare": "19789.28",
+      "driver_name": "",
+      "driver_phone": "",
+      "vehicle_details": "",
+      "license_plate": "",
+      "status": "CANCELLED",
+      "status_display": "Cancelled",
+      "confirmation_code": "PUVUFRQQ",
+      "flight_number": "BA75",
+      "airline": "British Airways",
+      "arrival_time": null,
+      "confirmed_at": null,
+      "driver_assigned_at": null,
+      "picked_up_at": null,
+      "completed_at": null,
+      "cancelled_at": "2026-10-12T23:50:05.515849Z",
+      "cancellation_reason": "Taking a taxi instead",
+      "cancellation_fee": "0.00",
+      "customer_rating": null,
+      "customer_feedback": "",
+      "driver_rating": null,
+      "driver_feedback": "",
+      "created_at": "2026-10-12T23:50:05.489397Z",
+      "updated_at": "2026-10-12T23:50:05.516202Z",
+      "payment_status": "refund_pending",
+      "amount_paid": "19789.28",
+      "currency": "NGN",
+      "paid_at": "2026-10-12T23:50:05.495580Z",
+      "refunded_amount": "0.00"
+    }
+  }
+}

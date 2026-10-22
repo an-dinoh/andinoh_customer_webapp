@@ -1,0 +1,30 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/shared/currencies/"
+  },
+  "status": 200,
+  "body": {
+    "count": 2,
+    "next": null,
+    "previous": null,
+    "results": [
+      {
+        "id": "8e097455-e619-4e53-a81d-4a813f704700",
+        "code": "NGN",
+        "name": "Nigerian Naira",
+        "symbol": "₦",
+        "rate_to_usd": "1550.000000",
+        "is_active": true
+      },
+      {
+        "id": "7c385db1-a788-4eb1-8d05-ae2d7de1ca3f",
+        "code": "USD",
+        "name": "US Dollar",
+        "symbol": "$",
+        "rate_to_usd": "1.000000",
+        "is_active": true
+      }
+    ]
+  }
+}

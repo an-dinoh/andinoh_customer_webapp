@@ -1,0 +1,14 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/customers/statement/range/"
+  },
+  "status": 200,
+  "body": {
+    "opened_at": "2026-10-13T00:50:04.389434+01:00",
+    "now": "2026-10-13T00:50:05.654183+01:00",
+    "currencies": [
+      "NGN"
+    ]
+  }
+}

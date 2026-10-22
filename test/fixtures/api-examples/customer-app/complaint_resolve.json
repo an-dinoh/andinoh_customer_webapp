@@ -1,0 +1,11 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/customers/complaints/CMPG3Q3B54/resolve/"
+  },
+  "status": 200,
+  "body": {
+    "message": "Complaint marked as resolved",
+    "complaint_id": "CMPG3Q3B54"
+  }
+}

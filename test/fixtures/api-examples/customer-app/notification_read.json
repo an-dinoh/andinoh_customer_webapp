@@ -1,0 +1,10 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/customers/profile/notifications/13/read/"
+  },
+  "status": 200,
+  "body": {
+    "message": "Notification marked as read"
+  }
+}

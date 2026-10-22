@@ -1,0 +1,22 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/flights/locations/",
+    "query": {
+      "keyword": "lon"
+    }
+  },
+  "status": 200,
+  "body": [
+    {
+      "iata_code": "LHR",
+      "name": "HEATHROW",
+      "detailed_name": "LONDON/GB:HEATHROW",
+      "city": "LONDON",
+      "country": "GB",
+      "type": "AIRPORT",
+      "latitude": 51.4775,
+      "longitude": -0.46138
+    }
+  ]
+}

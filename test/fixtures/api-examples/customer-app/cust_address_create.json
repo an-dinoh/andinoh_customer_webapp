@@ -1,0 +1,30 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/customers/profile/addresses/",
+    "body": {
+      "address_type": "HOME",
+      "street_address": "14 Adeola Odeku Street",
+      "city": "Lagos",
+      "state_province": "Lagos",
+      "postal_code": "101241",
+      "country": "Nigeria",
+      "is_default": true
+    }
+  },
+  "status": 201,
+  "body": {
+    "id": 1,
+    "address_type": "HOME",
+    "street_address": "14 Adeola Odeku Street",
+    "apartment_number": "",
+    "city": "Lagos",
+    "state_province": "Lagos",
+    "postal_code": "101241",
+    "country": "Nigeria",
+    "latitude": null,
+    "longitude": null,
+    "is_primary": false,
+    "created_at": "2026-10-12T23:50:05.593253Z"
+  }
+}

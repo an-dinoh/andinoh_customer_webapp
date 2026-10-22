@@ -1,0 +1,15 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/customers/bookings/claim/",
+    "body": {
+      "confirmation_code": "MHYQJ5QKOT",
+      "token": "a0B5T4GNN9QeMnA7_A8Apf56-lYg4gKXwDzZ0tIhZkw"
+    }
+  },
+  "status": 200,
+  "body": {
+    "message": "Booking added to your account.",
+    "booking_id": "6fb821b0-5674-407f-81ed-d4a28d2060be"
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/bookings/guest/",
+    "body": {
+      "hotel_id": "6d5e551c-e520-42ed-bb07-ee8add772705",
+      "check_in_date": "2026-10-19",
+      "check_out_date": "2026-10-21",
+      "adults": 2,
+      "children": 0,
+      "rooms": [
+        {
+          "room_id": "e48b2d1f-d506-4ef2-8601-372144689896",
+          "quantity": 1
+        }
+      ],
+      "services": [],
+      "payment_method": "online"
+    }
+  },
+  "status": 400,
+  "body": {
+    "error": "Validation failed: guest_name: Tell us who is staying., guest_email: We need an email to send your booking to.",
+    "code": "validation_error",
+    "request_id": "af4d1ec1bd0f497a",
+    "errors": {
+      "guest_name": [
+        "Tell us who is staying."
+      ],
+      "guest_email": [
+        "We need an email to send your booking to."
+      ]
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/customers/tips/stats/"
+  },
+  "status": 200,
+  "body": {
+    "total_tips": 1,
+    "total_amount": 5000.0,
+    "currency": "NGN"
+  }
+}

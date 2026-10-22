@@ -1,0 +1,22 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/customers/complaints/CMPG3Q3B54/responses/",
+    "body": {
+      "message": "Still warm this morning."
+    }
+  },
+  "status": 201,
+  "body": {
+    "message": "Response added successfully",
+    "response": {
+      "id": 1,
+      "responder_name": "Ada N. Obi",
+      "responder_role": "Customer",
+      "message": "Still warm this morning.",
+      "is_internal_note": false,
+      "attachment": null,
+      "created_at": "2026-10-12T23:50:05.528275Z"
+    }
+  }
+}

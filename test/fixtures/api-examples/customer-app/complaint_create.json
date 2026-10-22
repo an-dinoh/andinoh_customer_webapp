@@ -1,0 +1,27 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/customers/complaints/",
+    "body": {
+      "booking_id": "e1b274cb-2cf3-4292-8fd2-9df2e9176a35",
+      "complaint_type": "ROOM",
+      "subject": "Air conditioning not cooling",
+      "description": "The AC in room 102 blows warm air since last night.",
+      "priority": "MEDIUM"
+    }
+  },
+  "status": 201,
+  "body": {
+    "id": 1,
+    "complaint_id": "CMPG3Q3B54",
+    "complaint_type": "ROOM",
+    "subject": "Air conditioning not cooling",
+    "description": "The AC in room 102 blows warm air since last night.",
+    "hotel_id": null,
+    "hotel_name": "",
+    "room_number": "",
+    "incident_date": null,
+    "incident_location": "",
+    "attachments": []
+  }
+}

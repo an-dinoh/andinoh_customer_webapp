@@ -1,0 +1,38 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/flights/bookings/4aff2637-36a9-454c-9b6c-c0ea8fd4d598/pay/",
+    "body": {}
+  },
+  "status": 200,
+  "body": {
+    "status": "success",
+    "message": "Payment initiated",
+    "data": {
+      "link": "https://checkout.test/pay/ANDINOH-FL-B6F75EEF-8A0C2B94",
+      "tx_ref": "ANDINOH-FL-B6F75EEF-8A0C2B94"
+    },
+    "checkout": {
+      "public_key": "FLWPUBK_TEST-tests-only",
+      "tx_ref": "ANDINOH-FL-B6F75EEF-8A0C2B94",
+      "amount": "1450000.00",
+      "currency": "NGN",
+      "payment_options": "card,banktransfer,ussd,account",
+      "customer": {
+        "email": "ada@example.com",
+        "name": "Ada N. Obi",
+        "phonenumber": "+2348031234567"
+      },
+      "customizations": {
+        "title": "Andinoh Flight Booking",
+        "description": "Payment for flight LOS → LHR — FL-B6F75EEF",
+        "logo": "https://res.cloudinary.com/andinoh/image/upload/v1/assets/logo_wide.png"
+      },
+      "meta": {
+        "flight_booking_id": "4aff2637-36a9-454c-9b6c-c0ea8fd4d598",
+        "kind": "flight_booking"
+      },
+      "redirect_url": "https://app.test/payments/complete"
+    }
+  }
+}

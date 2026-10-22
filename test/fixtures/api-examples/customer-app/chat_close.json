@@ -1,0 +1,11 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/customers/chats/62746e11-6ca2-4d41-ab28-28fc5badbfa1/close/"
+  },
+  "status": 200,
+  "body": {
+    "message": "Chat closed successfully",
+    "chat_id": "62746e11-6ca2-4d41-ab28-28fc5badbfa1"
+  }
+}

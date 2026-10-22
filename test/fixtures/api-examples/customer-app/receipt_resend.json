@@ -1,0 +1,10 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/customers/receipts/bceac707-b93e-4645-ba9a-ca26669b2cb3/resend/"
+  },
+  "status": 200,
+  "body": {
+    "message": "Receipt AND-20261012-509351 sent to ada@example.com."
+  }
+}

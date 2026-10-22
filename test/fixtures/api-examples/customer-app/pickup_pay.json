@@ -1,0 +1,38 @@
+{
+  "request": {
+    "method": "POST",
+    "path": "/customers/pickup-requests/PUVUFRQQ/pay/",
+    "body": {}
+  },
+  "status": 200,
+  "body": {
+    "status": "success",
+    "message": "Payment initiated",
+    "data": {
+      "link": "https://checkout.test/pay/ANDINOH-PU-PUVUFRQQ-578A7477",
+      "tx_ref": "ANDINOH-PU-PUVUFRQQ-578A7477"
+    },
+    "checkout": {
+      "public_key": "FLWPUBK_TEST-tests-only",
+      "tx_ref": "ANDINOH-PU-PUVUFRQQ-578A7477",
+      "amount": "19789.28",
+      "currency": "NGN",
+      "payment_options": "card,banktransfer,ussd,account",
+      "customer": {
+        "email": "ada@example.com",
+        "name": "Ada N. Obi",
+        "phonenumber": "+2348031234567"
+      },
+      "customizations": {
+        "title": "Andinoh Pickup",
+        "description": "Pickup PUVUFRQQ on 2026-10-19",
+        "logo": "https://res.cloudinary.com/andinoh/image/upload/v1/assets/logo_wide.png"
+      },
+      "meta": {
+        "pickup_id": "1",
+        "kind": "pickup"
+      },
+      "redirect_url": "https://app.test/payments/complete"
+    }
+  }
+}

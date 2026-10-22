@@ -1,0 +1,25 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/auth/sessions/"
+  },
+  "status": 200,
+  "body": [
+    {
+      "id": "0ded1f5f-1b0b-4816-9837-cc95a42473a1",
+      "device_name": "Front desk iPad",
+      "platform": "ios",
+      "ip_address": "127.0.0.1",
+      "last_seen_at": "2026-10-12T23:50:06.386155+00:00",
+      "created_at": "2026-10-12T23:50:06.386160+00:00"
+    },
+    {
+      "id": "d9523983-5568-45e1-85c5-2b0e6f39f90a",
+      "device_name": "Unknown device",
+      "platform": "unknown",
+      "ip_address": "127.0.0.1",
+      "last_seen_at": "2026-10-12T23:50:06.249643+00:00",
+      "created_at": "2026-10-12T23:50:06.249648+00:00"
+    }
+  ]
+}
