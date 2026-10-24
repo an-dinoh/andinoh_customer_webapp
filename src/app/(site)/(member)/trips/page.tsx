@@ -2,15 +2,14 @@
 
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
-import { useAuth } from "@/contexts/AuthContext";
 import { useLiveReload } from "@/contexts/LiveContext";
 import { bookingsApi } from "@/services/api";
 import { useDebounced, useMutation, useQuery } from "@/hooks/useApi";
 import { useGuestBookings } from "@/hooks/useGuestBookings";
 import TripCard, { TripCardSkeleton } from "@/components/bookings/TripCard";
 import { Container } from "@/components/shell/SiteShell";
-import { Button, Callout, EmptyState, ErrorState, PageHeader, SearchBox, StatTile, Tabs } from "@/components/ui";
-import { Calendar, Crown, Gift, Hotel, Import } from "@/components/icons";
+import { Button, Callout, EmptyState, ErrorState, PageHeader, SearchBox, Tabs } from "@/components/ui";
+import { Calendar, Import } from "@/components/icons";
 import { formatDate } from "@/utils/format";
 import { isHotel, tripGroup, type TripGroup } from "@/utils/bookings";
 import { guestBookings } from "@/utils/guestBookings";
@@ -45,7 +44,6 @@ function DeviceBookings({ onMoved }: { onMoved: () => void }) {
 export default function TripsPage() {
   const params = useSearchParams();
   const router = useRouter();
-  const { profile } = useAuth();
   const tab = (["upcoming", "past", "cancelled"].includes(params.get("tab") ?? "") ? params.get("tab") : "upcoming") as TripGroup;
   const [search, setSearch] = useState("");
   const q = useDebounced(search.trim(), 300);
@@ -65,7 +63,6 @@ export default function TripsPage() {
     }
     return { all, count, more: next };
   }, [q, pages]);
-  const summary = useQuery(() => bookingsApi.summary(), []);
   useLiveReload(["booking_status_update"], list.reload);
 
   const groups: Record<TripGroup, HotelBooking[]> = { upcoming: [], past: [], cancelled: [] };
@@ -73,17 +70,10 @@ export default function TripsPage() {
   // Upcoming soonest first; the rest newest first.
   groups.upcoming.sort((a, b) => (((a as { check_in_date: string }).check_in_date < (b as { check_in_date: string }).check_in_date) ? -1 : 1));
   const rows = groups[tab];
-  const stats = summary.data?.statistics;
 
   return (
     <Container>
       <PageHeader title="My trips" description="Your stays, with receipts and everything you can do for each." />
-      <div className="mb-6 grid grid-cols-2 gap-3 lg:grid-cols-4">
-        <StatTile label="Bookings" icon={Calendar} value={stats?.total_bookings ?? "—"} loading={summary.loading} />
-        <StatTile label="Upcoming" icon={Hotel} tone="info" value={summary.data?.upcoming_bookings.length ?? "—"} loading={summary.loading} />
-        <StatTile label="Points" icon={Gift} tone="gold" value={(profile?.available_points ?? stats?.loyalty_points ?? 0).toLocaleString()} loading={summary.loading} onClick={() => router.push("/account/rewards")} />
-        <StatTile label="Membership" icon={Crown} tone="violet" value={profile?.membership_tier_display ?? stats?.membership_tier ?? "—"} loading={summary.loading} />
-      </div>
       <div className="mb-6"><DeviceBookings onMoved={() => void list.reload()} /></div>
 
       <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">

@@ -148,7 +148,7 @@ export const COMPLAINT_TYPES: { value: ComplaintType; label: string }[] = [
   { value: "ROOM", label: "Room problem" }, { value: "CLEANLINESS", label: "Cleanliness" }, { value: "NOISE", label: "Noise" },
   { value: "SERVICE", label: "Service" }, { value: "STAFF", label: "Staff" }, { value: "AMENITIES", label: "Amenities" },
   { value: "BILLING", label: "Billing" }, { value: "REFUND", label: "Refund" }, { value: "BOOKING", label: "Booking" },
-  { value: "PICKUP", label: "Pickup" }, { value: "WEBSITE", label: "Website or app" }, { value: "OTHER", label: "Something else" },
+  { value: "WEBSITE", label: "Website or app" }, { value: "OTHER", label: "Something else" },
 ];
 
 function ComplaintBody({ open, onClose, booking, onDone }: { open: boolean; onClose: () => void; booking?: HotelBooking; onDone?: (complaintId: string) => void }) {
@@ -197,6 +197,10 @@ export const ComplaintSheet = whenOpen(ComplaintBody);
 
 // ---- review (11.1) -----------------------------------------------------------------------------------
 
+// Free text on the server; these are the mobile app's choices (andinoh_mobile review_draft.dart), so both apps send the same words.
+const TRIP_TYPES = ["leisure", "business", "family", "romantic"];
+const COMPANIONS = ["solo", "partner", "family", "friends", "colleagues"];
+
 function ReviewBody({ open, onClose, booking, onDone }: Props) {
   const [r, setR] = useState({ overall_rating: 0, cleanliness_rating: 0, service_rating: 0, location_rating: 0, value_rating: 0, amenities_rating: 0 });
   const [form, setForm] = useState({ title: "", review_text: "", pros: "", cons: "", trip_type: "leisure", traveled_with: "", is_anonymous: false });
@@ -230,8 +234,8 @@ function ReviewBody({ open, onClose, booking, onDone }: Props) {
         <FormGrid>
           <Input label="What you liked" value={form.pros} onChange={e => setForm(f => ({ ...f, pros: e.target.value }))} />
           <Input label="What could be better" value={form.cons} onChange={e => setForm(f => ({ ...f, cons: e.target.value }))} />
-          <Select label="Trip" value={form.trip_type} onChange={e => setForm(f => ({ ...f, trip_type: e.target.value }))} options={[{ value: "leisure", label: "Leisure" }, { value: "business", label: "Business" }, { value: "family", label: "Family" }, { value: "romantic", label: "Romantic" }, { value: "solo", label: "Solo" }]} />
-          <Select label="Travelled with" placeholder="—" value={form.traveled_with} onChange={e => setForm(f => ({ ...f, traveled_with: e.target.value }))} options={[{ value: "partner", label: "Partner" }, { value: "family", label: "Family" }, { value: "friends", label: "Friends" }, { value: "colleagues", label: "Colleagues" }, { value: "alone", label: "Alone" }]} />
+          <Select label="Trip" value={form.trip_type} onChange={e => setForm(f => ({ ...f, trip_type: e.target.value }))} options={TRIP_TYPES.map(v => ({ value: v, label: v[0].toUpperCase() + v.slice(1) }))} />
+          <Select label="Travelled with" placeholder="—" value={form.traveled_with} onChange={e => setForm(f => ({ ...f, traveled_with: e.target.value }))} options={COMPANIONS.map(v => ({ value: v, label: v === "solo" ? "On my own" : v[0].toUpperCase() + v.slice(1) }))} />
         </FormGrid>
         <div>
           <p className="text-[13px] font-medium text-ink-2">Photos (optional, +20 points)</p>

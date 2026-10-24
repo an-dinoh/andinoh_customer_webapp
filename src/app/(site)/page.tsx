@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import { hotelsApi, profileApi } from "@/services/api";
@@ -10,7 +9,7 @@ import StaySearch from "@/components/hotels/StaySearch";
 import { EmptyFeed, FeedSections, FeedSkeleton, visibleSections } from "@/components/home/Feed";
 import { Container } from "@/components/shell/SiteShell";
 import { Button, Callout } from "@/components/ui";
-import { ArrowRight, Car, Gps, MessageQuestion, SearchStatus, ShieldCheck, Verify, Wallet, type Icon } from "@/components/icons";
+import { Gps } from "@/components/icons";
 import { defaultPlan } from "@/utils/stay";
 import { currentLocation } from "@/utils/device";
 import { useGuestBookings } from "@/hooks/useGuestBookings";
@@ -36,17 +35,7 @@ function useKnownLocation(): [Coords | null, () => Promise<boolean>] {
   return [coords, ask];
 }
 
-const SHORTCUTS: { href: string; title: string; text: string; icon: Icon; tone: string }[] = [
-  { href: "/pickups/new", title: "Airport pickups", text: "A driver waiting when you land", icon: Car, tone: "bg-success-50 text-success" },
-  { href: "/bookings/find", title: "Find a booking", text: "Booked without an account? Get your link", icon: SearchStatus, tone: "bg-info-50 text-info" },
-  { href: "/help", title: "Help centre", text: "Payments, refunds and your stay", icon: MessageQuestion, tone: "bg-violet-50 text-violet" },
-];
 
-const PROMISES: { icon: Icon; title: string; text: string }[] = [
-  { icon: Verify, title: "Verified hotels", text: "Andinoh checks every hotel’s documents, and inspectors visit in person." },
-  { icon: Wallet, title: "Pay your way", text: "Pay online by card, transfer or USSD, or pay at the hotel where it’s offered." },
-  { icon: ShieldCheck, title: "Clear refunds", text: "Every hotel’s cancellation rules are shown before you book." },
-];
 
 export default function HomePage() {
   const { isAuthenticated, profile } = useAuth();
@@ -81,19 +70,6 @@ export default function HomePage() {
       </section>
 
       <Container className="space-y-12">
-        <div className="grid gap-3 sm:grid-cols-3">
-          {SHORTCUTS.map(s => (
-            <Link key={s.href} href={s.href} className="card-lift group flex items-center gap-4 rounded-2xl border border-line bg-surface p-4 hover:border-primary/30">
-              <span className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl ${s.tone}`}><s.icon className="h-5 w-5" /></span>
-              <span className="min-w-0 flex-1">
-                <span className="block text-sm font-semibold text-ink">{s.title}</span>
-                <span className="block truncate text-xs text-muted">{s.text}</span>
-              </span>
-              <ArrowRight className="h-4 w-4 text-subtle transition-transform group-hover:translate-x-0.5 group-hover:text-primary" />
-            </Link>
-          ))}
-        </div>
-
         {!isAuthenticated && saved.length > 0 && (
           <Callout tone="info" title={`You have ${saved.length === 1 ? "a booking" : `${saved.length} bookings`} on this device`}
             action={<Button size="sm" variant="secondary" href="/bookings">View</Button>}>
@@ -116,17 +92,6 @@ export default function HomePage() {
 
         {feed.loading ? <FeedSkeleton /> : sections.length ? <FeedSections sections={sections} /> : <EmptyFeed />}
 
-        <section className="grid gap-4 rounded-3xl border border-line bg-surface p-6 sm:grid-cols-3 sm:p-8">
-          {PROMISES.map(p => (
-            <div key={p.title} className="flex gap-4">
-              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary-50 text-primary"><p.icon className="h-5 w-5" /></span>
-              <div>
-                <p className="text-sm font-semibold text-ink">{p.title}</p>
-                <p className="mt-1 text-sm text-muted">{p.text}</p>
-              </div>
-            </div>
-          ))}
-        </section>
       </Container>
     </>
   );
