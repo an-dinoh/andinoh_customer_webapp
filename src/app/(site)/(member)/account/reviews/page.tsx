@@ -50,7 +50,7 @@ export default function MyReviewsPage() {
             </div>
             {r.title && <p className="mt-3 text-sm font-semibold text-ink">{r.title}</p>}
             <p className="mt-1 text-sm text-ink-2">{r.review_text}</p>
-            {r.images.length > 0 && <div className="mt-3 flex gap-2">{r.images.map(i => <Img key={i.id} src={i.image} className="h-16 w-20 rounded-lg object-cover" />)}</div>}
+            {r.images.length > 0 && <div className="mt-3 flex flex-wrap gap-2">{r.images.map(i => <Img key={i.id} src={i.image} className="h-16 w-20 rounded-lg object-cover" />)}</div>}
             {r.hotel_response && <div className="mt-3 rounded-xl bg-surface-2 p-3 text-sm"><p className="flex items-center gap-1.5 text-xs font-semibold text-ink"><MessageText className="h-4 w-4 text-primary" />The hotel replied</p><p className="mt-1 text-ink-2">{r.hotel_response}</p></div>}
             <div className="mt-3 flex gap-2">
               <Button size="sm" variant="outline" icon={Edit} onClick={() => setEditing(r)}>Edit</Button>

@@ -80,6 +80,10 @@ function Security() {
   const { adoptSession } = useAuth();
   const [pw, setPw] = useState({ current: "", next: "" });
   const sessions = useQuery(() => authApi.sessions(), []);
+  const [allSessions, setAllSessions] = useState(false);
+  // Most recently active first; long lists are folded.
+  const sorted = [...(sessions.data ?? [])].sort((a, b) => b.last_seen_at.localeCompare(a.last_seen_at));
+  const shown = allSessions ? sorted : sorted.slice(0, 5);
   const devices = useQuery(() => devicesApi.list(), []);
   const change = useMutation(() => authApi.changePassword(pw.current, pw.next), {
     success: "Password changed. Other devices were signed out.",
@@ -99,13 +103,18 @@ function Security() {
       </Panel>
       <Panel title="Signed-in devices" icon={Monitor} actions={(sessions.data?.length ?? 0) > 1 && <Button size="sm" variant="outline" loading={others.busy} onClick={() => others.run()}>Sign out others</Button>}>
         {!sessions.data ? <Skeleton className="h-16 w-full" /> : (
-          <ul className="divide-y divide-line">{sessions.data.map(s => (
+          <ul className="divide-y divide-line">{shown.map(s => (
             <li key={s.id} className="flex items-center gap-3 py-3 first:pt-0 last:pb-0">
               <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-surface-2 text-ink-2">{s.platform === "web" ? <Monitor className="h-[18px] w-[18px]" /> : <Mobile className="h-[18px] w-[18px]" />}</span>
               <span className="min-w-0 flex-1"><span className="block truncate text-sm font-medium text-ink">{s.device_name || "Unknown device"}</span>
                 <span className="block text-xs text-muted">{[s.os_version, s.ip_address, `active ${timeAgo(s.last_seen_at)}`].filter(Boolean).join(" · ")}</span></span>
             </li>
           ))}</ul>
+        )}
+        {sorted.length > 5 && (
+          <button type="button" onClick={() => setAllSessions(v => !v)} className="mt-3 text-sm font-medium text-primary hover:underline">
+            {allSessions ? "Show fewer" : `Show all ${sorted.length}`}
+          </button>
         )}
       </Panel>
       {(devices.data?.results.length ?? 0) > 0 && (

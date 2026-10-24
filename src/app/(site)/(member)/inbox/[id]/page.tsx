@@ -10,7 +10,7 @@ import { useMutation, useQuery } from "@/hooks/useApi";
 import { MessageBubble, messageFile } from "@/components/chat/MessageBubble";
 import FileViewer, { type ViewerFile } from "@/components/files/FileViewer";
 import { Avatar, Button, Callout, ConfirmDialog, ErrorState, Skeleton } from "@/components/ui";
-import { ArrowLeft, Paperclip, Send, X } from "@/components/icons";
+import { ArrowLeft, Calendar, Paperclip, Send, X } from "@/components/icons";
 import { errorMessage } from "@/utils/api";
 import { formatDate } from "@/utils/format";
 import { canChange, isOwnMessage, MEDIA_LABELS, sendChatFile, socketMessage } from "@/utils/chatUpload";
@@ -128,7 +128,10 @@ export default function ChatPage() {
             <p className="truncate text-xs text-muted">{typing ? <span className="text-primary">Typing…</span> : c ? `${c.subject || "Front desk"}${c.assigned_staff_name ? ` · ${c.assigned_staff_name}` : ""}` : ""}</p>
           </div>
           {active && <Button size="sm" variant="ghost" loading={close.busy} onClick={() => close.run()}>Close</Button>}
-          {c && <Button size="sm" variant="outline" href={`/trips/${c.booking}`}>Booking</Button>}
+          {c && <>
+            <span className="hidden sm:inline-flex"><Button size="sm" variant="outline" href={`/trips/${c.booking}`}>Booking</Button></span>
+            <Link href={`/trips/${c.booking}`} aria-label="Open the booking" className="rounded-lg p-1.5 text-muted hover:bg-surface-2 sm:hidden"><Calendar className="h-5 w-5" /></Link>
+          </>}
         </header>
 
         <div className="min-h-0 flex-1 space-y-2 overflow-y-auto bg-background/60 px-3 py-4 sm:px-5">
