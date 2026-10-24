@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import { AUTH_ONLY, matches, needsAccount } from "@/config/routes";
+import { AUTH_ONLY, GUEST_ONLY, matches, needsAccount } from "@/config/routes";
 
 /**
  * Sends signed-out visitors to /login from pages that need an account, and signed-in ones away from the
@@ -15,6 +15,10 @@ export function proxy(request: NextRequest) {
     const login = new URL("/login", request.url);
     login.searchParams.set("from", pathname + search);
     return NextResponse.redirect(login);
+  }
+
+  if (matches(pathname, GUEST_ONLY) && hasSession) {
+    return NextResponse.redirect(new URL("/trips", request.url));
   }
 
   if (matches(pathname, AUTH_ONLY) && hasSession && !request.nextUrl.searchParams.has("expired")) {

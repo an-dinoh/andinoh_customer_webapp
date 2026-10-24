@@ -15,6 +15,9 @@ export const SIGNED_IN_ONLY = [
 /** Sign-in pages a signed-in customer doesn't need. */
 export const AUTH_ONLY = ["/login", "/register", "/forgot-password"];
 
+/** Guest-only pages: signed in, the bookings are in My trips (guest bookings with the same email move in). */
+export const GUEST_ONLY = ["/bookings/find"];
+
 export const matches = (pathname: string, routes: string[]) =>
   routes.some(r => pathname === r || pathname.startsWith(`${r}/`));
 

@@ -20,9 +20,10 @@ import {
  * site, rather than inside a back-office pane.
  */
 
-const SECTIONS: { href: string; label: string; icon: Icon; match: (p: string) => boolean }[] = [
+const SECTIONS: { href: string; label: string; icon: Icon; match: (p: string) => boolean; guestOnly?: boolean }[] = [
   { href: "/", label: "Stays", icon: Hotel, match: p => p === "/" || p.startsWith("/hotels") || p.startsWith("/checkout") },
-  { href: "/bookings/find", label: "Find a booking", icon: SearchStatus, match: p => p.startsWith("/bookings") },
+  // Signed in, bookings are in Trips (on the right of the bar).
+  { href: "/bookings/find", label: "Find a booking", icon: SearchStatus, match: p => p.startsWith("/bookings"), guestOnly: true },
   { href: "/help", label: "Help", icon: MessageQuestion, match: p => p.startsWith("/help") },
 ];
 
@@ -123,7 +124,7 @@ function TopBar() {
       <div className="mx-auto flex h-16 max-w-[1240px] items-center gap-4 px-4 sm:px-6 lg:px-8">
         <Link href="/" aria-label="Andinoh home" className="shrink-0"><Logo priority /></Link>
         <nav aria-label="Main" className="ml-4 hidden items-center gap-1 lg:flex">
-          {SECTIONS.map(s => {
+          {SECTIONS.filter(s => !(s.guestOnly && isAuthenticated)).map(s => {
             const active = s.match(pathname);
             return (
               <Link key={s.href} href={s.href} aria-current={active ? "page" : undefined}
@@ -174,7 +175,7 @@ function TabBar() {
   const tabs: { href: string; label: string; icon: Icon; match: (p: string) => boolean }[] = [
     { href: "/", label: "Home", icon: Home, match: p => p === "/" },
     { href: "/hotels", label: "Search", icon: Search, match: p => p.startsWith("/hotels") || p.startsWith("/checkout") },
-    { href: isAuthenticated ? "/trips" : "/bookings", label: "Bookings", icon: Calendar, match: p => p.startsWith("/trips") || p.startsWith("/bookings") || p.startsWith("/inbox") },
+    { href: isAuthenticated ? "/trips" : "/bookings/find", label: "Bookings", icon: Calendar, match: p => p.startsWith("/trips") || p.startsWith("/bookings") || p.startsWith("/inbox") },
     { href: isAuthenticated ? "/account" : `/login?from=${encodeURIComponent(pathname)}`, label: "Profile", icon: Profile, match: p => p.startsWith("/account") || p.startsWith("/login") || p.startsWith("/register") },
   ];
   return (
