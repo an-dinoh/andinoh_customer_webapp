@@ -49,13 +49,12 @@ export function readableError(error: string | undefined, errors?: Record<string,
   return /^(this field|this value|ensure this|enter a valid|a valid|invalid|not a valid)/i.test(message) ? `${humanize(field[0])}: ${message}` : message;
 }
 
-/** Where a customer notification opens (guide 12.1): the booking, the chat or the pickup. */
+/** Where a customer notification opens (guide 12.1): the booking or the chat; anything else stays in the list. */
 export function notificationHref(n: { reference_type?: string | null; reference_id?: string | null }): string {
   const id = n.reference_id ? encodeURIComponent(n.reference_id) : '';
   switch (n.reference_type) {
     case 'booking': return id ? `/trips/${id}` : '/trips';
     case 'chat': return id ? `/inbox/${id}` : '/inbox';
-    case 'pickup': return id ? `/pickups/${id}` : '/pickups';
     default: return '/notifications';
   }
 }

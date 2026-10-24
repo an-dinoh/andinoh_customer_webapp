@@ -8,7 +8,7 @@ import { useMutation, useQuery } from "@/hooks/useApi";
 import { Container } from "@/components/shell/SiteShell";
 import { ActionRow, Avatar, Button, Callout, FormGrid, Input, Panel, Select, StatTile } from "@/components/ui";
 import {
-  Calendar, Camera, Car, Coin, Gift, Location, Logout, MessageQuestion, Receipt, Setting, Shield, Sms, Star, Verify, Warning,
+  Calendar, Camera, Coin, Gift, Location, Logout, MessageQuestion, Receipt, Setting, Shield, Sms, Star, Verify, Warning,
 } from "@/components/icons";
 import { formatDate } from "@/utils/format";
 import type { CustomerProfile, Gender } from "@/types/api";
@@ -79,7 +79,6 @@ export default function AccountPage() {
         <Panel padded={false}>
           <div className="p-2">
             <ActionRow icon={Gift} tone="primary" title="Points and referrals" description="Your tier, points and invite codes" href="/account/rewards" />
-            <ActionRow icon={Car} title="Airport pickups" description="Rides to and from your hotel" href="/pickups" />
             <ActionRow icon={Coin} title="Tips" description="Thank-yous you’ve sent" href="/account/tips" />
             <ActionRow icon={Star} title="My reviews" href="/account/reviews" />
             <ActionRow icon={Warning} title="Complaints" description="Problems you’ve reported" href="/account/complaints" />

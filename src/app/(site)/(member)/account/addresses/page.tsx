@@ -45,7 +45,7 @@ export default function AddressesPage() {
   const rows = list.data?.results ?? [];
   return (
     <Container narrow>
-      <PageHeader crumbs={[{ label: "Account", href: "/account" }, { label: "Addresses" }]} title="Saved addresses" description="For pickups and receipts."
+      <PageHeader crumbs={[{ label: "Account", href: "/account" }, { label: "Addresses" }]} title="Saved addresses" description="For receipts and your profile."
         actions={<Button icon={Plus} onClick={() => setEditing({ open: true, address: null })}>Add address</Button>} />
       {list.error ? <ErrorState error={list.error} onRetry={list.reload} /> : list.loading ? <Skeleton className="h-24 w-full rounded-2xl" /> : rows.length === 0 ? (
         <div className="rounded-2xl border border-line bg-surface"><EmptyState icon={Location} title="No addresses yet" action={<Button variant="secondary" onClick={() => setEditing({ open: true, address: null })}>Add one</Button>} /></div>

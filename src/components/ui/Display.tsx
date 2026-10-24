@@ -103,7 +103,7 @@ const STATUS_TONES: Record<string, Tone> = {
   refund_pending: "warning", refund_failed: "danger",
   // chat / tickets / complaints
   closed: "neutral", archived: "neutral", in_progress: "info", resolved: "success", escalated: "danger", pending_customer: "warning",
-  // pickups
+  // pickups (statuses can still arrive in notifications)
   driver_assigned: "info", en_route: "info", arrived: "primary", picked_up: "info",
   // flights, referrals
   cancellation_requested: "violet", withdrawn: "neutral",
