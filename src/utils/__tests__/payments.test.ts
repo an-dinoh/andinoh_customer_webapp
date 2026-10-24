@@ -1,7 +1,6 @@
 import { ApiError } from '@/utils/api';
 import { bookingsApi, guestBookingsApi, tipsApi } from '@/services/api';
 import { failureMessage, forgetPayment, nav, openCheckout, paymentReturnUrl, pendingPayment, rememberPayment, startPayment, verifyPayment } from '@/utils/payments';
-import { guestBookings } from '@/utils/guestBookings';
 import { example } from '@/services/api/__tests__/harness';
 import type { PaymentStart } from '@/types/api';
 
@@ -20,7 +19,6 @@ beforeEach(() => {
   assign = jest.spyOn(nav, 'go').mockImplementation(() => undefined);
   sessionStorage.clear();
   localStorage.clear();
-  guestBookings.reset();
 });
 
 describe('starting a payment', () => {
@@ -38,9 +36,8 @@ describe('starting a payment', () => {
   });
   it('pays a guest booking with its saved token', async () => {
     await expect(startPayment({ kind: 'guest', ref: 'LER6', back: '/' })).rejects.toThrow(/booking email/);
-    guestBookings.save({ confirmation_code: 'LER6', access_token: 'secret' });
     (guestBookingsApi.pay as jest.Mock).mockResolvedValue(start);
-    await startPayment({ kind: 'guest', ref: 'LER6', back: '/' });
+    await startPayment({ kind: 'guest', ref: 'LER6', back: '/', token: 'secret' });
     expect(guestBookingsApi.pay).toHaveBeenCalledWith('LER6', 'secret', `${origin}/payments/complete?kind=guest&ref=LER6`);
   });
   it('remembers only the payment that matches the reference coming back', () => {
@@ -86,19 +83,16 @@ describe('verifying (guide 6.4)', () => {
   });
 });
 
-describe('guest bookings on this device (guide 7.1)', () => {
-  it('saves newest first, refreshes in place, removes and tells listeners', () => {
-    const heard = jest.fn();
-    const off = guestBookings.subscribe(heard);
-    guestBookings.save({ confirmation_code: 'A', access_token: 't1', hotel_name: 'One' });
-    guestBookings.save({ confirmation_code: 'B', access_token: 't2' });
-    guestBookings.save({ confirmation_code: 'A', access_token: 't3' });
-    expect(guestBookings.list().map(b => [b.confirmation_code, b.access_token, b.hotel_name])).toEqual([['A', 't3', 'One'], ['B', 't2', undefined]]);
-    guestBookings.remove('B');
-    expect(guestBookings.get('B')).toBeUndefined();
-    expect(heard).toHaveBeenCalledTimes(4);
-    off();
-    guestBookings.reset();
-    expect(guestBookings.list()).toHaveLength(1); // kept in localStorage
+describe('guest bookings are not kept on the device', () => {
+  it('carries the token with the payment only, and nothing goes to localStorage', async () => {
+    (guestBookingsApi.pay as jest.Mock).mockResolvedValue(start);
+    await startPayment({ kind: 'guest', ref: 'LER6', back: '/bookings/manage?code=LER6&token=secret', token: 'secret' });
+    expect(localStorage.length).toBe(0);
+    expect(pendingPayment(start.checkout.tx_ref)?.token).toBe('secret'); // this tab's session, for the return trip
+    (guestBookingsApi.verifyPayment as jest.Mock).mockResolvedValue(example('guest_verify').body);
+    await expect(verifyPayment('guest', 'LER6', { transaction_id: '1' }, 'secret')).resolves.toMatchObject({ state: 'paid' });
+    expect(guestBookingsApi.verifyPayment).toHaveBeenCalledWith('LER6', 'secret', { transaction_id: '1' });
+    forgetPayment();
+    expect(sessionStorage.length).toBe(0);
   });
 });

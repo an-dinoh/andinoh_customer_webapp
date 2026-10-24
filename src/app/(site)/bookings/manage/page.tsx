@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter, useSearchParams } from "next/navigation";
-import { Suspense, useEffect, useState } from "react";
+import { Suspense, useState } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import { bookingsApi, guestBookingsApi } from "@/services/api";
 import { useMutation, useQuery } from "@/hooks/useApi";
@@ -12,48 +12,37 @@ import { CheckCircle, CloseCircle, Coin, Import, Lock, UserAdd } from "@/compone
 import { ApiError, errorMessage } from "@/utils/api";
 import { money } from "@/utils/format";
 import { awaitingPayment, refundPreview } from "@/utils/bookings";
-import { guestBookings } from "@/utils/guestBookings";
 import { startPayment } from "@/utils/payments";
 import type { GuestBooking } from "@/types/api";
 
 /**
- * A booking reached with its confirmation code and secret token (guide 7.2–7.3): the emailed link
- * (…/bookings/manage?code=&token=) or one saved in this browser. The token is kept here, then dropped
- * from the address bar so it isn't left in history or shared by accident.
+ * A booking reached with its confirmation code and secret token (guide 7.2–7.3), from the link in the
+ * booking email (…/bookings/manage?code=&token=). Nothing is saved on the device: the link is the key, so
+ * it stays in the address bar for refreshes and coming back from payment.
  */
 function Manage() {
   const params = useSearchParams();
   const router = useRouter();
   const { isAuthenticated } = useAuth();
   const code = (params.get("code") ?? "").toUpperCase();
-  const urlToken = params.get("token");
-  const [token] = useState(() => urlToken ?? guestBookings.get(code)?.access_token ?? null);
+  const token = params.get("token");
   const [cancelling, setCancelling] = useState(false);
   const [reason, setReason] = useState("");
 
   const booking = useQuery(() => guestBookingsApi.get(code, token!), [code, token], { enabled: !!code && !!token });
 
-  useEffect(() => {
-    const b = booking.data;
-    if (b && token) {
-      guestBookings.save({ confirmation_code: b.confirmation_code, access_token: token, hotel_name: b.hotel_name, check_in_date: b.check_in_date,
-        check_out_date: b.check_out_date, guest_name: b.guest_name, guest_email: b.guest_email });
-      if (urlToken) router.replace(`/bookings/manage?code=${b.confirmation_code}`);
-    }
-  }, [booking.data, token, urlToken, router]);
-
   // A token that stopped working: a new link was sent, or the booking moved into an account (7.2).
   const gone = booking.error instanceof ApiError && booking.error.status === 404;
-  useEffect(() => { if (gone && code) guestBookings.remove(code); }, [gone, code]);
 
-  const pay = useMutation(() => startPayment({ kind: "guest", ref: code, back: `/bookings/manage?code=${code}`, label: booking.data?.hotel_name }));
+  const here = `/bookings/manage?code=${code}&token=${encodeURIComponent(token ?? "")}`;
+  const pay = useMutation(() => startPayment({ kind: "guest", ref: code, back: here, label: booking.data?.hotel_name, token: token ?? undefined }));
   const cancel = useMutation(() => guestBookingsApi.cancel(code, token!, reason.trim() || undefined), {
     success: r => (Number(r.refund_amount) > 0 ? `Cancelled. ${money(r.refund_amount)} is on its way back to you.` : "Booking cancelled"),
     onSuccess: r => { setCancelling(false); booking.setData(r.booking); },
   });
   const claim = useMutation(() => bookingsApi.claim(code, token!), {
     success: "Booking added to your account",
-    onSuccess: r => { guestBookings.remove(code); router.replace(`/trips/${r.booking_id}`); },
+    onSuccess: r => router.replace(`/trips/${r.booking_id}`),
   });
 
   if (!code || !token || gone) {
