@@ -200,9 +200,9 @@ export default function StaySearch({ initialWhere, initialPlan, variant = "hero"
   const dateCls = "w-full bg-transparent text-[15px] font-medium text-ink focus:outline-none [color-scheme:inherit]";
   return (
     <form onSubmit={submit} className="w-full">
-      <div className={`flex flex-col divide-y divide-line rounded-2xl border border-line bg-surface md:flex-row md:items-stretch md:divide-x md:divide-y-0 ${hero ? "shadow-2xl md:rounded-full md:p-1.5" : "md:rounded-full md:p-1"}`}>
+      <div className={`flex flex-col divide-y divide-line rounded-2xl border border-line bg-surface lg:flex-row lg:items-stretch lg:divide-x lg:divide-y-0 ${hero ? "shadow-2xl lg:rounded-full lg:p-1.5" : "lg:rounded-full lg:p-1"}`}>
         <WhereField value={where} onChange={setWhere} onLocate={locate} locating={locating} />
-        <div className="grid grid-cols-2 divide-x divide-line md:flex md:w-[380px] md:shrink-0">
+        <div className="grid grid-cols-2 divide-x divide-line lg:flex lg:w-[380px] lg:shrink-0">
           <label className="flex min-w-0 flex-1 items-center gap-3 px-4 py-2.5">
             <Calendar className="hidden h-5 w-5 shrink-0 text-primary sm:block" />
             <span className="min-w-0 flex-1">
@@ -219,13 +219,15 @@ export default function StaySearch({ initialWhere, initialPlan, variant = "hero"
             </span>
           </label>
         </div>
-        <div className="flex items-stretch md:w-[270px] md:shrink-0">
+        <div className="flex items-stretch lg:w-[270px] lg:shrink-0 lg:border-r-0!">
           <div className="min-w-0 flex-1"><GuestsField plan={plan} onChange={p => setPlan(x => ({ ...x, ...p }))} /></div>
-          <div className="hidden items-center pr-1 md:flex">
-            <Button type="submit" size={hero ? "lg" : "md"} className="rounded-full" icon={Search} aria-label="Search hotels">{hero ? "Search" : undefined}</Button>
+          <div className="hidden items-center pl-2 pr-0.5 lg:flex">
+            {/* Pill in the hero, a circle in the compact bar: the same round shape as the bar around it. */}
+            <Button type="submit" icon={Search} aria-label="Search hotels"
+              className={hero ? "h-12 rounded-full px-6 text-[15px]" : "h-10 w-10 rounded-full px-0"}>{hero ? "Search" : undefined}</Button>
           </div>
         </div>
-        <div className="p-2 md:hidden"><Button type="submit" size="lg" fullWidth icon={Search}>Search hotels</Button></div>
+        <div className="p-2 lg:hidden"><Button type="submit" size="lg" fullWidth icon={Search}>Search hotels</Button></div>
       </div>
       {error && <p role="alert" className={`mt-2 text-sm ${hero ? "rounded-xl bg-danger-50 px-3 py-2 text-danger-fg" : "text-danger"}`}>{error}</p>}
     </form>

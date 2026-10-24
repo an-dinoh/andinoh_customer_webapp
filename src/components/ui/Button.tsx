@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { forwardRef } from "react";
+import { twMerge } from "tailwind-merge";
 import { Spinner, type Icon } from "@/components/icons";
 
 type Variant = "primary" | "secondary" | "outline" | "ghost" | "danger-ghost" | "danger" | "success" | "gold";
@@ -42,15 +43,16 @@ const sizes: Record<Size, string> = {
 
 const iconSizes: Record<Size, string> = { sm: "w-4 h-4", md: "w-[18px] h-[18px]", lg: "w-5 h-5", icon: "w-5 h-5" };
 
+/** Classes for a button; later classes win over the variant's and size's (e.g. rounded-full, hidden). */
 export function buttonClass(variant: Variant = "primary", size: Size = "md", extra = "") {
-  return `${base} ${variants[variant]} ${sizes[size]} ${extra}`;
+  return twMerge(base, variants[variant], sizes[size], extra);
 }
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
   { variant = "primary", size = "md", icon: IconLeft, iconRight: IconRight, loading = false, fullWidth = false, href, className = "", type = "button", disabled, children, ...rest },
   ref,
 ) {
-  const cls = `${buttonClass(variant, size)} ${fullWidth ? "w-full" : ""} ${className}`;
+  const cls = buttonClass(variant, size, `${fullWidth ? "w-full" : ""} ${className}`);
   const content = (
     <>
       {loading ? <Spinner className={`${iconSizes[size]} animate-spin`} /> : IconLeft && <IconLeft className={iconSizes[size]} />}
