@@ -38,3 +38,14 @@ ROOT_URLCONF = 'live_urls'
 
 # Payment returns land on the local web app.
 FRONTEND_URL = os.environ.get('LIVE_FRONTEND_URL', 'http://localhost:3000')
+
+# LIVE_PAYMENTS=sandbox: real Flutterwave checkout pages in test mode, with the backend's own test keys
+# (andinoh_monolith/.env). Refuses anything but test keys, so no real money can move.
+if os.environ.get('LIVE_PAYMENTS') == 'sandbox':
+    from dotenv import dotenv_values
+    _env = dotenv_values(os.path.join(os.environ['DJANGO_MONOLITH_DIR'], '.env'))
+    FLUTTERWAVE_PUBLIC_KEY = _env.get('FLUTTERWAVE_PUBLIC_KEY') or ''
+    FLUTTERWAVE_SECRET_KEY = _env.get('FLUTTERWAVE_SECRET_KEY') or ''
+    FLUTTERWAVE_ENCRYPTION_KEY = _env.get('FLUTTERWAVE_ENCRYPTION_KEY') or ''
+    if '_TEST' not in FLUTTERWAVE_PUBLIC_KEY or '_TEST' not in FLUTTERWAVE_SECRET_KEY:
+        raise RuntimeError('LIVE_PAYMENTS=sandbox needs Flutterwave TEST keys in andinoh_monolith/.env')

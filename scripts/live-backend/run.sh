@@ -19,11 +19,13 @@ export PYTHONPATH="$here:$monolith"
 export DJANGO_SETTINGS_MODULE=live_settings
 export DJANGO_MONOLITH_DIR="$monolith"
 
-rm -rf "$LIVE_DIR"
-mkdir -p "$LIVE_DIR/media"
-
 cd "$monolith"
-venv/bin/python manage.py migrate --run-syncdb -v 0
-venv/bin/python manage.py shell -c "exec(open('$here/seed.py').read())"
+# LIVE_KEEP_DATA=1 restarts on the existing database (e.g. to switch payments) instead of reseeding.
+if [ -z "${LIVE_KEEP_DATA:-}" ] || [ ! -f "$LIVE_DIR/live.sqlite3" ]; then
+  rm -rf "$LIVE_DIR"
+  mkdir -p "$LIVE_DIR/media"
+  venv/bin/python manage.py migrate --run-syncdb -v 0
+  venv/bin/python manage.py shell -c "exec(open('$here/seed.py').read())"
+fi
 echo "Live backend on http://127.0.0.1:$port/api/v1"
 exec venv/bin/python "$here/serve.py" "$port"
