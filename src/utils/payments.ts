@@ -1,6 +1,5 @@
 import { ApiError } from './api';
 import { bookingsApi, guestBookingsApi, tipsApi } from '@/services/api';
-import { guestBookings } from './guestBookings';
 import type { AlreadyPaid, PaymentStart, VerifyIds } from '@/types/api';
 
 /**
@@ -26,6 +25,11 @@ export interface PendingPayment {
   /** What was paid for, for the result screen ("Palmview Resort & Spa"). */
   label?: string;
   tx_ref?: string;
+  /**
+   * A guest booking's secret token, needed to pay and to verify. It rides with this one payment (this
+   * tab's sessionStorage) and is forgotten once verified; bookings themselves aren't kept on the device.
+   */
+  token?: string;
 }
 
 const KEY = 'andinoh-customer:payment';
@@ -127,15 +131,14 @@ export function failureMessage(err: unknown): { message: string; code?: string }
 }
 
 /** Asks the backend whether the payment counted, for any kind of payment. */
-export async function verifyPayment(kind: PaymentKind, ref: string, ids: VerifyIds): Promise<VerifyOutcome> {
+export async function verifyPayment(kind: PaymentKind, ref: string, ids: VerifyIds, token?: string): Promise<VerifyOutcome> {
   try {
     let status: string | undefined;
     let message: string | undefined;
     if (kind === 'booking') ({ status, message } = await bookingsApi.verifyPayment(ref, ids));
     else if (kind === 'tip') ({ status, message } = await tipsApi.verifyPayment(ref, ids));
     else {
-      const token = guestBookings.get(ref)?.access_token;
-      if (!token) return { state: 'failed', message: 'Open the link from your booking email to finish paying for this booking.' };
+      if (!token) return { state: 'failed', message: 'Open the link from your booking email to see whether this payment went through.' };
       ({ status, message } = await guestBookingsApi.verifyPayment(ref, token, ids));
     }
     if (status === 'processing') return { state: 'processing', message: message ?? 'Your payment is still clearing.' };
@@ -154,9 +157,8 @@ export async function startPayment(p: PendingPayment): Promise<'redirected' | 'a
   let start: PaymentStart | AlreadyPaid;
   if (p.kind === 'booking') start = await bookingsApi.pay(p.ref, back);
   else if (p.kind === 'guest') {
-    const token = guestBookings.get(p.ref)?.access_token;
-    if (!token) throw new Error('Open the link from your booking email to pay for this booking.');
-    start = await guestBookingsApi.pay(p.ref, token, back);
+    if (!p.token) throw new Error('Open the link from your booking email to pay for this booking.');
+    start = await guestBookingsApi.pay(p.ref, p.token, back);
   } else throw new Error('Tips are paid when they’re created.');
   if (isAlreadyPaid(start)) return 'already_paid';
   await openCheckout(start, p);

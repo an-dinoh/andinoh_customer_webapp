@@ -16,7 +16,6 @@ import { ApiError, errorMessage } from "@/utils/api";
 import { formatDate, money, toNumber } from "@/utils/format";
 import { LIMITS, datesProblem, guestsLabel, planQuery, readPlan, stayRequest } from "@/utils/stay";
 import { POLICY_RULES } from "@/utils/bookings";
-import { guestBookings } from "@/utils/guestBookings";
 import { startPayment } from "@/utils/payments";
 import type { HotelBooking, StayPaymentMethod } from "@/types/api";
 
@@ -67,11 +66,11 @@ function Checkout() {
       const { points_to_use: _drop, ...noPoints } = request as typeof request & { points_to_use?: number };
       const created = await guestBookingsApi.create({ ...noPoints, ...details });
       const b = created.booking;
-      guestBookings.save({ confirmation_code: b.confirmation_code, access_token: created.access_token, hotel_name: b.hotel_name,
-        check_in_date: b.check_in_date, check_out_date: b.check_out_date, guest_name: b.guest_name, guest_email: b.guest_email });
-      if (!created.payment_required || b.status === "confirmed") { router.push(`/bookings/manage?code=${b.confirmation_code}&booked=1`); return; }
-      const r = await startPayment({ kind: "guest", ref: b.confirmation_code, back: `/bookings/manage?code=${b.confirmation_code}`, label: b.hotel_name });
-      if (r === "already_paid") router.push(`/bookings/manage?code=${b.confirmation_code}&booked=1`);
+      // Nothing is kept on the device: the booking opens through its link (also emailed to the guest).
+      const manage = `/bookings/manage?code=${b.confirmation_code}&token=${encodeURIComponent(created.access_token)}`;
+      if (!created.payment_required || b.status === "confirmed") { router.push(`${manage}&booked=1`); return; }
+      const r = await startPayment({ kind: "guest", ref: b.confirmation_code, back: manage, label: b.hotel_name, token: created.access_token });
+      if (r === "already_paid") router.push(`${manage}&booked=1`);
       return;
     }
     let booking: HotelBooking;

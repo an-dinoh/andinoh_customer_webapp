@@ -8,12 +8,10 @@ import { useQuery } from "@/hooks/useApi";
 import StaySearch from "@/components/hotels/StaySearch";
 import { EmptyFeed, FeedSections, FeedSkeleton, visibleSections } from "@/components/home/Feed";
 import { Container } from "@/components/shell/SiteShell";
-import { Button, Callout } from "@/components/ui";
+import { Button } from "@/components/ui";
 import { Gps } from "@/components/icons";
 import { defaultPlan } from "@/utils/stay";
 import { currentLocation } from "@/utils/device";
-import { useGuestBookings } from "@/hooks/useGuestBookings";
-import { formatDate } from "@/utils/format";
 
 type Coords = { latitude: number; longitude: number };
 
@@ -42,7 +40,6 @@ export default function HomePage() {
   const [coords, askLocation] = useKnownLocation();
   const [locationDenied, setLocationDenied] = useState(false);
   const feed = useQuery(() => hotelsApi.homeFeed(coords ?? undefined), [coords?.latitude, coords?.longitude, isAuthenticated]);
-  const saved = useGuestBookings();
   const plan = defaultPlan();
 
   // Signed in: remember where they are for "hotels around you" (guide 5.1).
@@ -70,12 +67,6 @@ export default function HomePage() {
       </section>
 
       <Container className="space-y-12">
-        {!isAuthenticated && saved.length > 0 && (
-          <Callout tone="info" title={`You have ${saved.length === 1 ? "a booking" : `${saved.length} bookings`} on this device`}
-            action={<Button size="sm" variant="secondary" href="/bookings">View</Button>}>
-            {saved[0].hotel_name ?? saved[0].confirmation_code}{saved[0].check_in_date ? `, from ${formatDate(saved[0].check_in_date)}` : ""}
-          </Callout>
-        )}
 
         {!hasNearby && !coords && !feed.loading && (
           <div className="flex flex-col items-start justify-between gap-3 rounded-2xl border border-line bg-surface p-4 sm:flex-row sm:items-center">

@@ -15,7 +15,7 @@ const POLL_FOR = 120_000;
 function backFor(kind: PaymentKind, ref: string): string {
   switch (kind) {
     case "booking": return `/trips/${ref}`;
-    case "guest": return `/bookings/manage?code=${encodeURIComponent(ref)}`;
+    case "guest": return "/bookings/find";
     default: return "/account/tips";
   }
 }
@@ -51,7 +51,7 @@ function Complete() {
     let stopped = false;
     // Verifying twice is harmless: the backend applies a payment once.
     const check = async () => {
-      const r = await verifyPayment(kind, ref, ids);
+      const r = await verifyPayment(kind, ref, ids, saved?.token);
       if (stopped) return;
       setVerified(r);
       if (r.state === "processing" && Date.now() - begun < POLL_FOR) timer = setTimeout(check, POLL_EVERY);
@@ -66,7 +66,7 @@ function Complete() {
     if (!kind || kind === "tip") return;
     setRetrying(true);
     try {
-      const r = await startPayment({ kind, ref, back, label: saved?.label });
+      const r = await startPayment({ kind, ref, back, label: saved?.label, token: saved?.token });
       if (r === "already_paid") setRetried({ state: "paid", message: "This was already paid." });
     } catch (e) {
       setRetried({ state: "failed", message: errorMessage(e) });

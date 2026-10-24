@@ -4,42 +4,13 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { useLiveReload } from "@/contexts/LiveContext";
 import { bookingsApi } from "@/services/api";
-import { useDebounced, useMutation, useQuery } from "@/hooks/useApi";
-import { useGuestBookings } from "@/hooks/useGuestBookings";
+import { useDebounced, useQuery } from "@/hooks/useApi";
 import TripCard, { TripCardSkeleton } from "@/components/bookings/TripCard";
 import { Container } from "@/components/shell/SiteShell";
-import { Button, Callout, EmptyState, ErrorState, PageHeader, SearchBox, Tabs } from "@/components/ui";
-import { Calendar, Import } from "@/components/icons";
-import { formatDate } from "@/utils/format";
+import { Button, EmptyState, ErrorState, PageHeader, SearchBox, Tabs } from "@/components/ui";
+import { Calendar } from "@/components/icons";
 import { isHotel, tripGroup, type TripGroup } from "@/utils/bookings";
-import { guestBookings } from "@/utils/guestBookings";
 import type { HotelBooking } from "@/types/api";
-
-/** Guest bookings saved in this browser: move them into the account with their link (guide 7.6). */
-function DeviceBookings({ onMoved }: { onMoved: () => void }) {
-  const saved = useGuestBookings();
-  const claim = useMutation(async (code: string, token: string) => {
-    try {
-      return await bookingsApi.claim(code, token);
-    } finally {
-      // Moved, or the token no longer works (already moved or a new link was sent): either way it's done here.
-      guestBookings.remove(code);
-    }
-  }, { success: "Booking added to your account", onSuccess: onMoved });
-  if (!saved.length) return null;
-  return (
-    <Callout tone="info" icon={Import} title="Bookings made on this device without signing in">
-      <ul className="mt-2 space-y-2">
-        {saved.map(b => (
-          <li key={b.confirmation_code} className="flex flex-wrap items-center justify-between gap-2">
-            <span>{b.hotel_name ?? b.confirmation_code}{b.check_in_date ? ` · ${formatDate(b.check_in_date)}` : ""} <span className="font-mono text-xs opacity-75">{b.confirmation_code}</span></span>
-            <Button size="sm" variant="secondary" loading={claim.busy} onClick={() => claim.run(b.confirmation_code, b.access_token)}>Add to my account</Button>
-          </li>
-        ))}
-      </ul>
-    </Callout>
-  );
-}
 
 export default function TripsPage() {
   const params = useSearchParams();
@@ -74,7 +45,6 @@ export default function TripsPage() {
   return (
     <Container>
       <PageHeader title="My trips" description="Your stays, with receipts and everything you can do for each." />
-      <div className="mb-6"><DeviceBookings onMoved={() => void list.reload()} /></div>
 
       <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
         <Tabs value={tab} onChange={v => router.replace(`/trips?tab=${v}`)} items={[
