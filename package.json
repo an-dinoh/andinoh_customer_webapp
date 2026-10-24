@@ -11,6 +11,7 @@
     "test": "jest",
     "test:live": "LIVE=1 jest test/live --runInBand",
     "live:backend": "scripts/live-backend/run.sh",
+    "live:backend:flutterwave": "LIVE_PAYMENTS=sandbox LIVE_KEEP_DATA=1 scripts/live-backend/run.sh",
     "api:examples": "node scripts/sync-api-examples.mjs",
     "icons:build": "node scripts/figma-icons.mjs build",
     "icons:fetch": "node scripts/figma-icons.mjs fetch"
@@ -21,7 +22,8 @@
     "next": "16.1.0",
     "react": "19.2.3",
     "react-dom": "19.2.3",
-    "react-hot-toast": "^2.6.0"
+    "react-hot-toast": "^2.6.0",
+    "tailwind-merge": "^3.3.1"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
