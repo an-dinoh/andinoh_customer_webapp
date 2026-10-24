@@ -8,6 +8,7 @@ import { Button, Callout, Checkbox, Input, Spinnerish } from "@/components/ui";
 import { UserAdd } from "@/components/icons";
 import PasswordRules from "@/components/auth/PasswordRules";
 import { safeFrom } from "@/components/RequireAccount";
+import GoogleButton, { OrDivider } from "@/components/auth/GoogleButton";
 import { ApiError, errorMessage } from "@/utils/api";
 import { passwordOk } from "@/utils/stay";
 
@@ -47,7 +48,9 @@ function RegisterForm() {
     <>
       <h1 className="text-2xl font-semibold tracking-tight text-ink">Create your account</h1>
       <p className="mt-1 text-sm text-muted">Book faster, earn points and keep every trip in one place.</p>
-      <form onSubmit={submit} className="mt-6 space-y-4">
+      <div className="mt-6"><GoogleButton text="signup_with" onSignedIn={() => router.replace(from)} /></div>
+      <OrDivider />
+      <form onSubmit={submit} className="space-y-4">
         <Input label="Full name" autoComplete="name" required value={form.full_name} onChange={set("full_name")} error={fe.full_name} />
         <Input label="Email" type="email" autoComplete="email" required value={form.email} onChange={set("email")} error={fe.email} />
         <Input label="Phone" type="tel" autoComplete="tel" placeholder="+234…" value={form.phone_number} onChange={set("phone_number")} error={fe.phone_number} hint="Optional. Hotels use it if they need to reach you." />
