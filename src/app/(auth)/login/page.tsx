@@ -7,6 +7,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { Button, Callout, Input, Spinnerish } from "@/components/ui";
 import { Login } from "@/components/icons";
 import { safeFrom } from "@/components/RequireAccount";
+import GoogleButton, { OrDivider } from "@/components/auth/GoogleButton";
 import { errorMessage } from "@/utils/api";
 
 function LoginForm() {
@@ -38,7 +39,9 @@ function LoginForm() {
       <p className="mt-1 text-sm text-muted">Sign in to see your trips, points and messages.</p>
       {params.has("expired") && <div className="mt-5"><Callout tone="info">Your session ended. Please sign in again.</Callout></div>}
       {params.has("reset") && <div className="mt-5"><Callout tone="success">Password changed. Sign in with your new password.</Callout></div>}
-      <form onSubmit={submit} className="mt-6 space-y-4">
+      <div className="mt-6"><GoogleButton text="signin_with" onSignedIn={() => router.replace(from)} /></div>
+      <OrDivider />
+      <form onSubmit={submit} className="space-y-4">
         <Input label="Email" type="email" autoComplete="email" required value={email} onChange={e => setEmail(e.target.value)} />
         <Input label="Password" type="password" autoComplete="current-password" required value={password} onChange={e => setPassword(e.target.value)} />
         <div className="flex justify-end"><Link href={`/forgot-password${email ? `?email=${encodeURIComponent(email)}` : ""}`} className="text-sm font-medium text-primary hover:underline">Forgot password?</Link></div>
