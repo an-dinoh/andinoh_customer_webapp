@@ -1,5 +1,5 @@
 import { ApiError } from '@/utils/api';
-import { bookingsApi, guestBookingsApi, pickupsApi, tipsApi } from '@/services/api';
+import { bookingsApi, guestBookingsApi, tipsApi } from '@/services/api';
 import { failureMessage, forgetPayment, nav, openCheckout, paymentReturnUrl, pendingPayment, rememberPayment, startPayment, verifyPayment } from '@/utils/payments';
 import { guestBookings } from '@/utils/guestBookings';
 import { example } from '@/services/api/__tests__/harness';
@@ -8,7 +8,6 @@ import type { PaymentStart } from '@/types/api';
 jest.mock('@/services/api', () => ({
   bookingsApi: { pay: jest.fn(), verifyPayment: jest.fn() },
   guestBookingsApi: { pay: jest.fn(), verifyPayment: jest.fn() },
-  pickupsApi: { pay: jest.fn(), verifyPayment: jest.fn() },
   tipsApi: { verifyPayment: jest.fn() },
 }));
 
@@ -37,11 +36,7 @@ describe('starting a payment', () => {
     await expect(startPayment({ kind: 'booking', ref: 'b-1', back: '/x' })).resolves.toBe('already_paid');
     expect(assign).not.toHaveBeenCalled();
   });
-  it('pays a pickup by its code and a guest booking with its saved token', async () => {
-    (pickupsApi.pay as jest.Mock).mockResolvedValue(start);
-    await startPayment({ kind: 'pickup', ref: 'PU1', back: '/pickups/PU1' });
-    expect(pickupsApi.pay).toHaveBeenCalledWith('PU1', `${origin}/payments/complete?kind=pickup&ref=PU1`);
-
+  it('pays a guest booking with its saved token', async () => {
     await expect(startPayment({ kind: 'guest', ref: 'LER6', back: '/' })).rejects.toThrow(/booking email/);
     guestBookings.save({ confirmation_code: 'LER6', access_token: 'secret' });
     (guestBookingsApi.pay as jest.Mock).mockResolvedValue(start);
@@ -77,12 +72,10 @@ describe('verifying (guide 6.4)', () => {
     expect(failed).toMatchObject({ state: 'failed', code: 'amount_mismatch' });
     expect(failed.message).toMatch(/refunded automatically/);
   });
-  it('verifies tips and pickups with their own endpoints, and guest bookings with the token', async () => {
+  it('verifies tips with their own endpoint, and guest bookings with the token', async () => {
     (tipsApi.verifyPayment as jest.Mock).mockResolvedValue(example('tip_verify').body);
     await expect(verifyPayment('tip', 't-1', { tx_ref: 'R' })).resolves.toMatchObject({ state: 'paid' });
     expect(tipsApi.verifyPayment).toHaveBeenCalledWith('t-1', { tx_ref: 'R' });
-    (pickupsApi.verifyPayment as jest.Mock).mockResolvedValue(example('pickup_verify').body);
-    await expect(verifyPayment('pickup', 'PU1', { transaction_id: '9' })).resolves.toMatchObject({ state: 'paid' });
     await expect(verifyPayment('guest', 'NOPE', {})).resolves.toMatchObject({ state: 'failed' });
   });
   it('explains each failure code in plain words', () => {

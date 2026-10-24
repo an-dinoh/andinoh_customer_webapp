@@ -59,7 +59,6 @@ export interface StayActions {
   payBalance: boolean;
   cancel: boolean;
   extend: boolean;
-  pickup: boolean;
   chat: boolean;
   tip: boolean;
   complaint: boolean;
@@ -75,7 +74,6 @@ export function stayActions(b: HotelBooking, now = Date.now()): StayActions {
     payBalance: s === 'confirmed' && balance && !b.pay_at_hotel,
     cancel: s === 'confirmed' || s === 'checked_in' || awaitingPayment(b, now),
     extend: s === 'confirmed' || s === 'checked_in',
-    pickup: s === 'confirmed' || s === 'checked_in',
     chat: s === 'checked_in' && (b.pay_at_hotel || toNumber(b.paid_amount) > 0),
     tip: s === 'checked_in',
     complaint: s === 'checked_in' || s === 'checked_out',
@@ -118,7 +116,10 @@ export function tripGroup(b: AnyBooking, today = todayISO()): TripGroup {
   return 'upcoming';
 }
 
-/** Short refund rules for a policy type, for before the guest books (guide 9.3). */
+/**
+ * Short refund rules for a policy type, for before the guest books (guide 9.3). The hotel endpoint sends only
+ * the type; these mirror the backend's REFUND_POLICIES (apps/bookings/payment_service.py). Keep them in step.
+ */
 export const POLICY_RULES: Record<string, string> = {
   flexible: 'Full refund up to 7 days before check-in, 75% at 3–6 days, 50% at 1–2 days.',
   strict: 'Full refund up to 14 days before check-in, 50% at 7–13 days.',

@@ -1,5 +1,5 @@
 import { ApiError } from './api';
-import { bookingsApi, guestBookingsApi, pickupsApi, tipsApi } from '@/services/api';
+import { bookingsApi, guestBookingsApi, tipsApi } from '@/services/api';
 import { guestBookings } from './guestBookings';
 import type { AlreadyPaid, PaymentStart, VerifyIds } from '@/types/api';
 
@@ -15,11 +15,11 @@ import type { AlreadyPaid, PaymentStart, VerifyIds } from '@/types/api';
 /** Leaves for checkout (a seam for tests: jsdom can't navigate). */
 export const nav = { go: (url: string) => window.location.assign(url) };
 
-export type PaymentKind = 'booking' | 'guest' | 'tip' | 'pickup';
+export type PaymentKind = 'booking' | 'guest' | 'tip';
 
 export interface PendingPayment {
   kind: PaymentKind;
-  /** Booking id, guest confirmation code, tip id or pickup code. */
+  /** Booking id, guest confirmation code or tip id. */
   ref: string;
   /** Where "Done" goes afterwards. */
   back: string;
@@ -133,7 +133,6 @@ export async function verifyPayment(kind: PaymentKind, ref: string, ids: VerifyI
     let message: string | undefined;
     if (kind === 'booking') ({ status, message } = await bookingsApi.verifyPayment(ref, ids));
     else if (kind === 'tip') ({ status, message } = await tipsApi.verifyPayment(ref, ids));
-    else if (kind === 'pickup') ({ status, message } = await pickupsApi.verifyPayment(ref, ids));
     else {
       const token = guestBookings.get(ref)?.access_token;
       if (!token) return { state: 'failed', message: 'Open the link from your booking email to finish paying for this booking.' };
@@ -154,7 +153,6 @@ export async function startPayment(p: PendingPayment): Promise<'redirected' | 'a
   const back = paymentReturnUrl(p);
   let start: PaymentStart | AlreadyPaid;
   if (p.kind === 'booking') start = await bookingsApi.pay(p.ref, back);
-  else if (p.kind === 'pickup') start = await pickupsApi.pay(p.ref, back);
   else if (p.kind === 'guest') {
     const token = guestBookings.get(p.ref)?.access_token;
     if (!token) throw new Error('Open the link from your booking email to pay for this booking.');

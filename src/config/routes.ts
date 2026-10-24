@@ -10,7 +10,6 @@ export const SIGNED_IN_ONLY = [
   "/inbox",
   "/notifications",
   "/account",
-  "/pickups",
 ];
 
 /** Sign-in pages a signed-in customer doesn't need. */

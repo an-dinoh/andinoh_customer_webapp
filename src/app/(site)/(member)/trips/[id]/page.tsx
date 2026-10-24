@@ -11,7 +11,7 @@ import StayDetail, { PayBanner } from "@/components/bookings/StayDetail";
 import { CancelDialog, ChatStartModal, ComplaintSheet, ExtendSheet, ReviewSheet, TipSheet } from "@/components/bookings/StaySheets";
 import { Container } from "@/components/shell/SiteShell";
 import { Button, Callout, EmptyState, ErrorState, Skeleton } from "@/components/ui";
-import { CalendarAdd, Car, CheckCircle, CloseCircle, Coin, Messages, Star, Warning } from "@/components/icons";
+import { CalendarAdd, CheckCircle, CloseCircle, Coin, Messages, Star, Warning } from "@/components/icons";
 import { errorMessage } from "@/utils/api";
 import { formatDate, money } from "@/utils/format";
 import { isFlight, stayActions } from "@/utils/bookings";
@@ -36,7 +36,6 @@ function Stay({ booking, reload }: { booking: HotelBooking; reload: () => void }
       {a.payBalance && <Button icon={Coin} loading={pay.busy} onClick={() => pay.run()}>Pay balance · {money(booking.balance_due, booking.currency)}</Button>}
       {a.chat && <Button variant="secondary" icon={Messages} onClick={() => setOpen("chat")}>Message the hotel</Button>}
       {a.extend && <Button variant="outline" icon={CalendarAdd} onClick={() => setOpen("extend")}>Extend stay</Button>}
-      {a.pickup && <Button variant="outline" icon={Car} href={`/pickups/new?booking=${booking.id}`}>Book a pickup</Button>}
       {a.tip && <Button variant="outline" icon={Coin} onClick={() => setOpen("tip")}>Tip staff</Button>}
       {a.review && <Button icon={Star} onClick={() => setOpen("review")}>Write a review</Button>}
       {a.complaint && <Button variant="ghost" icon={Warning} onClick={() => setOpen("complaint")}>Report a problem</Button>}

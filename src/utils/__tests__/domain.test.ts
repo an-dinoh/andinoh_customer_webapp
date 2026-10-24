@@ -46,8 +46,8 @@ describe('what a guest can do with a stay (guide 9.1)', () => {
     expect(stayActions(b, now)).toMatchObject({ pay: false, cancel: false });
     expect(awaitingPayment(b, now)).toBe(false);
   });
-  it('confirmed: cancel, extend, pickup; balance only when something is owed and not paid at the hotel', () => {
-    expect(stayActions(booking({ status: 'confirmed' }), now)).toMatchObject({ cancel: true, extend: true, pickup: true, payBalance: false, chat: false });
+  it('confirmed: cancel and extend; balance only when something is owed and not paid at the hotel', () => {
+    expect(stayActions(booking({ status: 'confirmed' }), now)).toMatchObject({ cancel: true, extend: true, payBalance: false, chat: false });
     expect(stayActions(booking({ status: 'confirmed', balance_due: '100.00' }), now).payBalance).toBe(true);
     expect(stayActions(booking({ status: 'confirmed', balance_due: '100.00', pay_at_hotel: true }), now).payBalance).toBe(false);
   });
@@ -140,7 +140,7 @@ describe('links, notifications and errors', () => {
   it('opens what a notification is about (guide 12.1)', () => {
     expect(notificationHref({ reference_type: 'booking', reference_id: 'b1' })).toBe('/trips/b1');
     expect(notificationHref({ reference_type: 'chat', reference_id: 'c1' })).toBe('/inbox/c1');
-    expect(notificationHref({ reference_type: 'pickup', reference_id: 'PU-1' })).toBe('/pickups/PU-1');
+    expect(notificationHref({ reference_type: 'pickup', reference_id: 'PU-1' })).toBe('/notifications'); // pickups aren't offered on the web
     expect(notificationHref({ reference_type: 'other' })).toBe('/notifications');
   });
   it('turns server sentences into readable ones', () => {

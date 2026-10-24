@@ -8,7 +8,7 @@ import { CheckCircle, Clock, CloseCircle, Refresh } from "@/components/icons";
 import { forgetPayment, pendingPayment, startPayment, verifyPayment, type PaymentKind, type VerifyOutcome } from "@/utils/payments";
 import { errorMessage } from "@/utils/api";
 
-const KINDS: PaymentKind[] = ["booking", "guest", "tip", "pickup"];
+const KINDS: PaymentKind[] = ["booking", "guest", "tip"];
 const POLL_EVERY = 10_000;
 const POLL_FOR = 120_000;
 
@@ -16,7 +16,6 @@ function backFor(kind: PaymentKind, ref: string): string {
   switch (kind) {
     case "booking": return `/trips/${ref}`;
     case "guest": return `/bookings/manage?code=${encodeURIComponent(ref)}`;
-    case "pickup": return `/pickups/${encodeURIComponent(ref)}`;
     default: return "/account/tips";
   }
 }

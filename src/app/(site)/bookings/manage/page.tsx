@@ -88,7 +88,7 @@ function Manage() {
       {!isAuthenticated && (
         <Callout tone="gold" icon={UserAdd} title="Create an account to do more"
           action={<Button size="sm" variant="gold" href={`/register?name=${encodeURIComponent(b.guest_name)}&email=${encodeURIComponent(b.guest_email)}&from=${encodeURIComponent("/trips")}`}>Create account</Button>}>
-          Chat with the hotel, tip staff, book a pickup, extend your stay and earn points. This booking moves in when you sign up with {b.guest_email}.
+          Chat with the hotel, tip staff, extend your stay and earn points. This booking moves in when you sign up with {b.guest_email}.
         </Callout>
       )}
     </>

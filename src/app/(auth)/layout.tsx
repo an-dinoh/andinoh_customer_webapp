@@ -6,7 +6,7 @@ import Logo from "@/components/Logo";
 const POINTS = [
   { icon: Verify, title: "Hotels you can trust", text: "Every hotel is checked by Andinoh, and inspected in person." },
   { icon: Gift, title: "Points on every stay", text: "Earn a point for every naira and spend them on your next trip." },
-  { icon: Messages, title: "The front desk in your pocket", text: "Chat with the hotel, book a pickup and get receipts in one place." },
+  { icon: Messages, title: "The front desk in your pocket", text: "Chat with the hotel, tip staff and get receipts in one place." },
 ];
 
 export default function AuthLayout({ children }: { children: React.ReactNode }) {
