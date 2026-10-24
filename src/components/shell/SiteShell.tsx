@@ -7,6 +7,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { useLive } from "@/contexts/LiveContext";
 import { useTheme } from "@/contexts/ThemeContext";
 import Logo from "@/components/Logo";
+import Footer from "./Footer";
 import { Avatar, Button } from "@/components/ui";
 import {
   Bell, Calendar, ChevronDown, Gift, Home, Hotel, Logout, Messages, MessageQuestion, Moon, Profile, Receipt,
@@ -196,39 +197,24 @@ function TabBar() {
   );
 }
 
-function Footer() {
-  const cols = [
-    { title: "Travel", links: [["Hotels", "/hotels"], ["Find a booking", "/bookings/find"]] },
-    { title: "Help", links: [["Help centre", "/help"], ["Contact support", "/help/contact"], ["Refund policy", "/legal/refund-policy"]] },
-    { title: "Andinoh", links: [["Terms of service", "/legal/terms-of-service"], ["Privacy policy", "/legal/privacy-policy"], ["Inspect hotels with us", "/account/inspector"]] },
-  ];
-  return (
-    <footer className="mt-16 hidden border-t border-line bg-surface lg:block no-print">
-      <div className="mx-auto grid max-w-[1240px] grid-cols-4 gap-8 px-8 py-12">
-        <div>
-          <Logo />
-          <p className="mt-4 max-w-xs text-sm text-muted">Verified hotels across Nigeria, with every stay in one place.</p>
-        </div>
-        {cols.map(c => (
-          <div key={c.title}>
-            <p className="text-[11px] font-medium uppercase tracking-wide text-muted">{c.title}</p>
-            <ul className="mt-3 space-y-2">
-              {c.links.map(([label, href]) => <li key={href}><Link href={href} className="text-sm text-ink-2 hover:text-primary">{label}</Link></li>)}
-            </ul>
-          </div>
-        ))}
-      </div>
-      <p className="border-t border-line py-5 text-center text-xs text-subtle">© {new Date().getFullYear()} Andinoh. All rights reserved.</p>
-    </footer>
-  );
-}
+/** Pages laid out as a fixed-height workspace on desktop (each column scrolls on its own); no footer. */
+const FOCUSED = ["/checkout"];
 
 export default function SiteShell({ children }: { children: React.ReactNode }) {
+  const pathname = usePathname();
+  const focused = FOCUSED.some(p => pathname.startsWith(p));
   return (
     <div className="flex min-h-dvh flex-col bg-background">
       <TopBar />
-      <main className="pb-tabbar flex-1">{children}</main>
-      <Footer />
+      {focused ? (
+        <main className="pb-tabbar flex-1 lg:h-[calc(100dvh-4rem)] lg:flex-none lg:overflow-hidden lg:pb-0">{children}</main>
+      ) : (
+        <>
+          <main className="flex-1 pb-12">{children}</main>
+          {/* Room for the phone tab bar under the footer. */}
+          <div className="bg-[#071F33] pb-[calc(4rem+env(safe-area-inset-bottom))] lg:pb-0"><Footer /></div>
+        </>
+      )}
       <TabBar />
     </div>
   );

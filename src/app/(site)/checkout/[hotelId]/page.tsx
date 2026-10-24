@@ -105,13 +105,16 @@ function Checkout() {
   const payNow = quote.data ? toNumber(quote.data.due_online_now) : 0;
 
   return (
-    <Container>
-      <nav className="mb-3 text-xs text-muted"><Link href={back} className="hover:text-primary">← Back to {h.name}</Link></nav>
-      <h1 className="text-[22px] font-semibold tracking-tight text-ink sm:text-2xl">Confirm and pay</h1>
-      <p className="mt-1 text-sm text-muted">Rooms are held for 30 minutes while you pay.</p>
-
-      <form className="mt-6 grid gap-8 lg:grid-cols-[1fr_380px]" onSubmit={e => { e.preventDefault(); if (canSubmit) void book.run(); }}>
-        <div className="min-w-0 space-y-6">
+    // Desktop: the page holds still; the form and the summary each scroll on their own (SiteShell gives the
+    // checkout a viewport-high main). Phones scroll as one page.
+    <div className="mx-auto w-full max-w-[1240px] px-4 sm:px-6 lg:h-full lg:px-8">
+      <form className="grid gap-8 lg:h-full lg:grid-cols-[1fr_380px]" onSubmit={e => { e.preventDefault(); if (canSubmit) void book.run(); }}>
+        <div className="min-w-0 space-y-6 pt-6 sm:pt-8 lg:overflow-y-auto lg:overscroll-contain lg:pb-10 lg:pr-3 scrollbar-hide">
+          <div>
+            <nav className="mb-3 text-xs text-muted"><Link href={back} className="hover:text-primary">← Back to {h.name}</Link></nav>
+            <h1 className="text-[22px] font-semibold tracking-tight text-ink sm:text-2xl">Confirm and pay</h1>
+            <p className="mt-1 text-sm text-muted">Rooms are held for 30 minutes while you pay.</p>
+          </div>
           {asGuest && (
             <Callout tone="info" title="Booking without an account" icon={User}
               action={<Button size="sm" variant="outline" href={`/login?from=${encodeURIComponent(`${pathname}?${params}`)}`}>Sign in</Button>}>
@@ -189,7 +192,7 @@ function Checkout() {
           </Panel>
         </div>
 
-        <aside className="lg:sticky lg:top-24 lg:self-start">
+        <aside className="lg:overflow-y-auto lg:overscroll-contain lg:pb-10 lg:pt-8 scrollbar-hide">
           <div className="overflow-hidden rounded-2xl border border-line bg-surface shadow-sm">
             <div className="flex gap-3 border-b border-line p-4">
               <Img src={h.primary_image ?? (h.images[0]?.image_url ?? h.images[0]?.image) as string | undefined} alt="" className="h-16 w-20 shrink-0 rounded-xl object-cover" />
@@ -220,7 +223,7 @@ function Checkout() {
           </div>
         </aside>
       </form>
-    </Container>
+    </div>
   );
 }
 
