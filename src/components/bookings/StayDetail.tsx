@@ -50,7 +50,7 @@ export default function StayDetail({ booking: b, actions, banner, guest }: {
     <div className="space-y-6">
       <div className="overflow-hidden rounded-3xl border border-line bg-surface">
         <div className="relative">
-          <Img src={b.hotel_image} alt="" className="h-40 w-full object-cover sm:h-52" />
+          <Img src={b.hotel_image} alt="" className="h-52 w-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
           <div className="absolute inset-x-0 bottom-0 flex flex-wrap items-end justify-between gap-3 p-5">
             <div>

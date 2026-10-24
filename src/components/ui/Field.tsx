@@ -178,10 +178,11 @@ export function Toggle({ checked, onChange, label, description, disabled }: Togg
 
 export function Checkbox({ checked, onChange, label, disabled }: { checked: boolean; onChange: (v: boolean) => void; label: React.ReactNode; disabled?: boolean }) {
   return (
-    <label className={`inline-flex items-center gap-2.5 text-sm text-ink-2 ${disabled ? "opacity-60" : "cursor-pointer"}`}>
+    <label className={`inline-flex items-start gap-2.5 text-sm text-ink-2 ${disabled ? "opacity-60" : "cursor-pointer"}`}>
       <input type="checkbox" checked={checked} disabled={disabled} onChange={e => onChange(e.target.checked)}
-        className="h-4 w-4 rounded border-line-strong text-primary accent-primary focus:ring-primary/20" />
-      {label}
+        className="mt-0.5 h-4 w-4 shrink-0 rounded border-line-strong text-primary accent-primary focus:ring-primary/20" />
+      {/* One span, so a label with a link wraps as a sentence instead of splitting into flex items. */}
+      <span>{label}</span>
     </label>
   );
 }

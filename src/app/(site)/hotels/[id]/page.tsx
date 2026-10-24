@@ -40,7 +40,7 @@ function RoomRow({ room, quantity, onQuantity, onOpen, datesChosen }: { room: Ro
   return (
     <div className={`flex flex-col gap-4 rounded-2xl border bg-surface p-3 sm:flex-row ${quantity ? "border-primary ring-1 ring-primary/20" : "border-line"}`}>
       <button type="button" onClick={onOpen} className="shrink-0">
-        <Img src={room.primary_image} alt={room.title} className="aspect-[4/3] w-full rounded-xl object-cover sm:h-32 sm:w-44" />
+        <Img src={room.primary_image} alt={room.title} className="aspect-[16/9] w-full rounded-xl object-cover sm:aspect-auto sm:h-32 sm:w-44" />
       </button>
       <div className="flex min-w-0 flex-1 flex-col">
         <button type="button" onClick={onOpen} className="text-left text-[15px] font-semibold text-ink hover:text-primary">{room.title}</button>
@@ -137,7 +137,7 @@ function HotelPage() {
   const v = h.verification;
 
   return (
-    <Container>
+    <Container className="pb-24 lg:pb-0">
       <nav aria-label="Breadcrumb" className="mb-3 flex flex-wrap items-center gap-1 text-xs text-muted">
         <Link href="/" className="hover:text-primary">Home</Link><span>/</span>
         <Link href={`/hotels?city_id=${h.city ?? ""}&label=${encodeURIComponent(placeName(h))}&${planQuery({ ...plan, rooms: {} })}`} className="hover:text-primary">{h.city_name || "Hotels"}</Link><span>/</span>
@@ -198,7 +198,7 @@ function HotelPage() {
           <Section id="reviews" title="Guest reviews"><Reviews hotelId={h.id} /></Section>
         </div>
 
-        <aside className="lg:sticky lg:top-24 lg:self-start">
+        <aside className="order-first lg:order-none lg:sticky lg:top-24 lg:self-start">
           <StayPlanner hotelId={h.id} plan={plan} rooms={roomList} onPlan={setPlan} onReserve={() => router.push(`/checkout/${h.id}?${planQuery(plan)}`)} />
           {h.verification && !h.verification.verified && <div className="mt-3"><Callout tone="warning">This hotel hasn’t finished Andinoh’s checks yet.</Callout></div>}
         </aside>

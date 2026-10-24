@@ -15,8 +15,8 @@ export default function TripCard({ booking }: { booking: HotelBooking }) {
       <Img src={booking.hotel_image} alt="" className="h-24 w-24 shrink-0 rounded-xl object-cover sm:h-28 sm:w-36" />
       <div className="flex min-w-0 flex-1 flex-col py-0.5">
         <div className="flex items-start justify-between gap-2">
-          <p className="truncate text-[15px] font-semibold text-ink">{booking.hotel_name}</p>
-          <Pill tone={s.tone}>{s.label}</Pill>
+          <p className="line-clamp-2 text-[15px] font-semibold leading-snug text-ink">{booking.hotel_name}</p>
+          <Pill tone={s.tone} className="shrink-0">{s.label}</Pill>
         </div>
         <p className="mt-0.5 flex items-center gap-1 truncate text-xs text-muted"><Location className="h-3.5 w-3.5 shrink-0" />{booking.hotel_city}</p>
         <p className="mt-1 flex items-center gap-1 text-sm text-ink-2"><Calendar className="h-4 w-4 text-muted" />{formatDate(booking.check_in_date, { year: undefined })} – {formatDate(booking.check_out_date)} · {nights} night{nights === 1 ? "" : "s"}</p>

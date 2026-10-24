@@ -27,6 +27,7 @@ export default function StayPlanner({ hotelId, plan, rooms, onPlan, onReserve }:
   const request = stayRequest(hotelId, plan);
   const debounced = useDebounced(JSON.stringify(request), 400);
   const quote = useQuery(() => bookingsApi.quote(JSON.parse(debounced)), [debounced], { enabled: picked.length > 0 && !dateProblem });
+  const blocked = !!dateProblem || !picked.length || !!fit || !!quote.error;
 
   return (
     <div className="rounded-2xl border border-line bg-surface p-5 shadow-sm">
@@ -85,8 +86,21 @@ export default function StayPlanner({ hotelId, plan, rooms, onPlan, onReserve }:
           {fit && <div className="mt-3"><Callout tone="warning">{fit}</Callout></div>}
         </>
       )}
-      <Button size="lg" fullWidth className="mt-4" iconRight={ArrowRight} disabled={!!dateProblem || !picked.length || !!fit || !!quote.error} onClick={onReserve}>Reserve</Button>
+      <Button size="lg" fullWidth className="mt-4" iconRight={ArrowRight} disabled={blocked} onClick={onReserve}>Reserve</Button>
       <p className="mt-2 text-center text-xs text-muted">You won’t be charged yet. Add-ons and payment come next.</p>
+
+      {/* Phones and tablets: the total and Reserve stay in reach above the tab bar once a room is picked. */}
+      {picked.length > 0 && (
+        <div className="fixed inset-x-0 bottom-[calc(4rem+env(safe-area-inset-bottom))] z-20 border-t border-line bg-surface/95 px-4 py-3 shadow-[0_-8px_24px_-12px_rgb(16_24_40/0.2)] backdrop-blur lg:hidden">
+          <div className="mx-auto flex max-w-[1240px] items-center justify-between gap-3">
+            <div className="min-w-0">
+              <p className="text-base font-semibold text-ink tabular">{quote.data ? money(quote.data.total, quote.data.currency) : "…"}</p>
+              <p className="truncate text-xs text-muted">{nights} night{nights === 1 ? "" : "s"} · {picked.length} room type{picked.length === 1 ? "" : "s"} · taxes included</p>
+            </div>
+            <Button iconRight={ArrowRight} disabled={blocked} onClick={onReserve}>Reserve</Button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

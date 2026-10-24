@@ -2,19 +2,20 @@
 
 import { Document, DocumentDownload, Edit, Headphone, Play, RotateLeft, Trash } from "@/components/icons";
 import { downloadFile, type ViewerFile } from "@/components/files/FileViewer";
-import { formatTime } from "@/utils/format";
+import { apiAsset, formatTime } from "@/utils/format";
 import { extension, formatBytes, formatDuration } from "@/utils/files";
 import { MEDIA_LABELS } from "@/utils/chatUpload";
 import type { ChatMessage, ReplyPreview } from "@/types/api";
 
 /** The file a message carries, for the viewer (null for text messages). */
 export function messageFile(m: ChatMessage): ViewerFile | null {
-  const url = m.media_url || m.attachment_url;
+  // Files sent the older two-step way come back as /media/… paths on the API host.
+  const url = apiAsset(m.media_url || m.attachment_url);
   if (!url || m.is_deleted) return null;
   const name = m.media_name || decodeURIComponent(url.split(/[?#]/)[0].split("/").pop() || "") || MEDIA_LABELS[m.message_type] || "File";
   return {
     url, name, size: m.media_size ?? null, contentType: m.media_content_type || null,
-    type: m.message_type, poster: m.preview_url || null, caption: `${m.sender_name} · ${formatTime(m.created_at)}`,
+    type: m.message_type, poster: apiAsset(m.preview_url) || null, caption: `${m.sender_name} · ${formatTime(m.created_at)}`,
   };
 }
 
@@ -30,7 +31,7 @@ function Quote({ r, mine, onJump }: { r: ReplyPreview; mine: boolean; onJump: (i
         <span className={`block truncate ${r.is_deleted ? "italic" : ""}`}>{r.message || MEDIA_LABELS[r.message_type] || "Message"}</span>
       </span>
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      {r.preview_url && <img src={r.preview_url} alt="" className="h-9 w-9 shrink-0 rounded object-cover" />}
+      {r.preview_url && <img src={apiAsset(r.preview_url)} alt="" className="h-9 w-9 shrink-0 rounded object-cover" />}
     </button>
   );
 }
@@ -41,7 +42,7 @@ function Attachment({ m, file, mine, onOpen }: { m: ChatMessage; file: ViewerFil
     return (
       <button type="button" onClick={onOpen} className="mb-1 block overflow-hidden rounded-lg" aria-label={`Open photo ${file.name}`}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={m.preview_url || file.url} alt={file.name} loading="lazy" className="max-h-72 w-full min-w-[160px] object-cover" />
+        <img src={apiAsset(m.preview_url) || file.url} alt={file.name} loading="lazy" className="max-h-72 w-full min-w-[160px] object-cover" />
       </button>
     );
   }
@@ -49,7 +50,7 @@ function Attachment({ m, file, mine, onOpen }: { m: ChatMessage; file: ViewerFil
     return (
       <button type="button" onClick={onOpen} className="relative mb-1 block w-full min-w-[200px] overflow-hidden rounded-lg bg-black" aria-label={`Play video ${file.name}`}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        {m.preview_url ? <img src={m.preview_url} alt="" loading="lazy" className="max-h-72 w-full object-cover opacity-90" /> : <span className="block h-40" />}
+        {m.preview_url ? <img src={apiAsset(m.preview_url)} alt="" loading="lazy" className="max-h-72 w-full object-cover opacity-90" /> : <span className="block h-40" />}
         <span className="absolute inset-0 flex items-center justify-center"><span className="rounded-full bg-black/55 p-3 text-white"><Play className="h-6 w-6" /></span></span>
         {m.media_duration ? <span className="absolute bottom-2 right-2 rounded bg-black/60 px-1.5 py-0.5 text-[11px] text-white tabular">{formatDuration(m.media_duration)}</span> : null}
       </button>

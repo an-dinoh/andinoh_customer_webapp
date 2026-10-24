@@ -140,7 +140,7 @@ function Checkout() {
             <Panel title="Add to your stay" description="Optional extras the hotel offers.">
               <div className="divide-y divide-line">
                 {services.data!.filter(s => s.is_active).map(s => (
-                  <Stepper key={s.id} label={<>{s.name} <span className="font-normal text-muted">· {money(s.price, "NGN", { decimals: false })}</span></>} description={s.description}
+                  <Stepper key={s.id} label={s.name} description={<><span className="font-medium text-ink-2 tabular">{money(s.price, "NGN", { decimals: false })}</span>{s.description ? ` · ${s.description}` : ""}</>}
                     value={addOns[s.id] ?? 0} max={LIMITS.service} onChange={n => setAddOns(a => ({ ...a, [s.id]: n }))} />
                 ))}
               </div>

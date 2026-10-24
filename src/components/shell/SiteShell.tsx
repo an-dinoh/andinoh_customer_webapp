@@ -9,19 +9,19 @@ import { useTheme } from "@/contexts/ThemeContext";
 import Logo from "@/components/Logo";
 import { Avatar, Button } from "@/components/ui";
 import {
-  Bell, Calendar, Car, ChevronDown, Discover, Gift, Hotel, Logout, Messages, MessageQuestion, Moon, Profile, Receipt,
-  Setting, Star, Sun, Warning, type Icon,
+  Bell, Calendar, ChevronDown, Gift, Home, Hotel, Logout, Messages, MessageQuestion, Moon, Profile, Receipt,
+  Search, SearchStatus, Setting, Star, Sun, Warning, type Icon,
 } from "@/components/icons";
 
 /**
- * The customer app's frame: a top bar with stays, pickups and help, trips,
+ * The customer app's frame: a top bar with stays, finding a booking and help, trips,
  * inbox and the account menu; on phones a bottom tab bar instead. Content scrolls with the page, like a
  * site, rather than inside a back-office pane.
  */
 
 const SECTIONS: { href: string; label: string; icon: Icon; match: (p: string) => boolean }[] = [
   { href: "/", label: "Stays", icon: Hotel, match: p => p === "/" || p.startsWith("/hotels") || p.startsWith("/checkout") },
-  { href: "/pickups/new", label: "Airport pickups", icon: Car, match: p => p.startsWith("/pickups") },
+  { href: "/bookings/find", label: "Find a booking", icon: SearchStatus, match: p => p.startsWith("/bookings") },
   { href: "/help", label: "Help", icon: MessageQuestion, match: p => p.startsWith("/help") },
 ];
 
@@ -47,7 +47,8 @@ function Badge({ n }: { n: number }) {
   );
 }
 
-const roundBtn = "relative flex h-10 w-10 items-center justify-center rounded-full text-ink-2 transition-colors hover:bg-surface-2";
+// No display class here: each use says flex or hidden sm:flex (two display classes in one list clash).
+const roundBtn = "relative h-10 w-10 items-center justify-center rounded-full text-ink-2 transition-colors hover:bg-surface-2";
 
 function AccountMenu() {
   const { user, profile, logout } = useAuth();
@@ -59,7 +60,6 @@ function AccountMenu() {
   const items: { href: string; label: string; icon: Icon }[] = [
     { href: "/account", label: "Profile", icon: Profile },
     { href: "/account/rewards", label: "Points and referrals", icon: Gift },
-    { href: "/pickups", label: "Airport pickups", icon: Car },
     { href: "/account/reviews", label: "My reviews", icon: Star },
     { href: "/account/complaints", label: "Complaints", icon: Warning },
     { href: "/account/statement", label: "Statement", icon: Receipt },
@@ -138,38 +138,29 @@ function TopBar() {
               <Link href="/trips" className={`hidden h-10 items-center gap-2 rounded-full px-4 text-sm font-medium sm:inline-flex ${pathname.startsWith("/trips") ? "bg-primary-50 text-primary" : "text-ink-2 hover:bg-surface-2"}`}>
                 <Calendar className="h-[18px] w-[18px]" />Trips
               </Link>
-              <Link href="/inbox" aria-label={`Messages${unreadChats ? `, ${unreadChats} unread` : ""}`} className={`${roundBtn} hidden sm:flex`}>
+              <Link href="/inbox" aria-label={`Messages${unreadChats ? `, ${unreadChats} unread` : ""}`} className={`${roundBtn} flex`}>
                 <Messages className="h-5 w-5" /><Badge n={unreadChats} />
               </Link>
-              <Link href="/notifications" aria-label={`Notifications${unreadNotifications ? `, ${unreadNotifications} unread` : ""}`} className={roundBtn}>
+              <Link href="/notifications" aria-label={`Notifications${unreadNotifications ? `, ${unreadNotifications} unread` : ""}`} className={`${roundBtn} flex`}>
                 <Bell className="h-5 w-5" /><Badge n={unreadNotifications} />
               </Link>
               <div className="hidden lg:block"><AccountMenu /></div>
             </>
           ) : (
             <>
-              <Link href="/bookings/find" className="hidden h-10 items-center rounded-full px-4 text-sm font-medium text-ink-2 hover:bg-surface-2 md:inline-flex">Find a booking</Link>
               <button type="button" onClick={toggle} aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"} className={`${roundBtn} hidden sm:flex`}>
                 {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
               </button>
-              <Button variant="ghost" href={`/login?from=${from}`} className="hidden sm:inline-flex">Sign in</Button>
-              <Button href={`/register?from=${from}`}>Create account</Button>
+              {/* Hidden by a wrapper: Button's own inline-flex would beat a "hidden" class on it. */}
+              <span className="hidden items-center gap-1.5 sm:flex">
+                <Button variant="ghost" href={`/login?from=${from}`}>Sign in</Button>
+                <Button href={`/register?from=${from}`}>Create account</Button>
+              </span>
+              <span className="sm:hidden"><Button href={`/login?from=${from}`} size="sm">Sign in</Button></span>
             </>
           )}
         </div>
       </div>
-      {/* Phones and tablets: the sections as a scrolling row under the bar. */}
-      <nav aria-label="Sections" className="flex gap-1.5 overflow-x-auto px-4 pb-2.5 scrollbar-hide lg:hidden">
-        {SECTIONS.map(s => {
-          const active = s.match(pathname);
-          return (
-            <Link key={s.href} href={s.href} aria-current={active ? "page" : undefined}
-              className={`inline-flex h-9 shrink-0 items-center gap-1.5 rounded-full border px-3.5 text-[13px] font-medium ${active ? "border-primary/30 bg-primary-50 text-primary" : "border-line text-ink-2"}`}>
-              <s.icon className="h-4 w-4" />{s.label}
-            </Link>
-          );
-        })}
-      </nav>
     </header>
   );
 }
@@ -177,20 +168,14 @@ function TopBar() {
 function TabBar() {
   const pathname = usePathname();
   const { isAuthenticated } = useAuth();
-  const { unreadChats } = useLive();
-  const tabs: { href: string; label: string; icon: Icon; badge?: number; match: (p: string) => boolean }[] = isAuthenticated
-    ? [
-      { href: "/", label: "Explore", icon: Discover, match: p => p === "/" || p.startsWith("/hotels") },
-      { href: "/trips", label: "Trips", icon: Calendar, match: p => p.startsWith("/trips") || p.startsWith("/bookings") },
-      { href: "/inbox", label: "Inbox", icon: Messages, badge: unreadChats, match: p => p.startsWith("/inbox") },
-      { href: "/account", label: "Account", icon: Profile, match: p => p.startsWith("/account") || p.startsWith("/pickups") },
-    ]
-    : [
-      { href: "/", label: "Explore", icon: Discover, match: p => p === "/" || p.startsWith("/hotels") },
-      { href: "/bookings", label: "Bookings", icon: Calendar, match: p => p.startsWith("/bookings") },
-      { href: "/help", label: "Help", icon: MessageQuestion, match: p => p.startsWith("/help") },
-      { href: `/login?from=${encodeURIComponent(pathname)}`, label: "Sign in", icon: Profile, match: p => p.startsWith("/login") },
-    ];
+  // The mobile app's four tabs (andinoh_mobile main_screen.dart). Signed out, Bookings shows guest
+  // bookings and Profile asks to sign in, as there.
+  const tabs: { href: string; label: string; icon: Icon; match: (p: string) => boolean }[] = [
+    { href: "/", label: "Home", icon: Home, match: p => p === "/" },
+    { href: "/hotels", label: "Search", icon: Search, match: p => p.startsWith("/hotels") || p.startsWith("/checkout") },
+    { href: isAuthenticated ? "/trips" : "/bookings", label: "Bookings", icon: Calendar, match: p => p.startsWith("/trips") || p.startsWith("/bookings") || p.startsWith("/inbox") },
+    { href: isAuthenticated ? "/account" : `/login?from=${encodeURIComponent(pathname)}`, label: "Profile", icon: Profile, match: p => p.startsWith("/account") || p.startsWith("/login") || p.startsWith("/register") },
+  ];
   return (
     <nav aria-label="Tabs" className="fixed inset-x-0 bottom-0 z-30 border-t border-line bg-surface/95 pb-[env(safe-area-inset-bottom)] backdrop-blur lg:hidden no-print">
       <div className="mx-auto grid max-w-lg grid-cols-4">
@@ -201,7 +186,6 @@ function TabBar() {
               className={`relative flex flex-col items-center gap-1 py-2.5 text-[11px] font-medium ${active ? "text-primary" : "text-muted"}`}>
               <span className="relative">
                 <t.icon className="h-[22px] w-[22px]" variant={active ? "bold" : "linear"} />
-                {!!t.badge && <span className="absolute -right-1.5 -top-1 h-2.5 w-2.5 rounded-full bg-danger-solid ring-2 ring-surface" />}
               </span>
               {t.label}
             </Link>
@@ -214,7 +198,7 @@ function TabBar() {
 
 function Footer() {
   const cols = [
-    { title: "Travel", links: [["Hotels", "/hotels"], ["Airport pickups", "/pickups/new"], ["Find a booking", "/bookings/find"]] },
+    { title: "Travel", links: [["Hotels", "/hotels"], ["Find a booking", "/bookings/find"]] },
     { title: "Help", links: [["Help centre", "/help"], ["Contact support", "/help/contact"], ["Refund policy", "/legal/refund-policy"]] },
     { title: "Andinoh", links: [["Terms of service", "/legal/terms-of-service"], ["Privacy policy", "/legal/privacy-policy"], ["Inspect hotels with us", "/account/inspector"]] },
   ];
