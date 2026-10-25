@@ -19,7 +19,7 @@ interface ThemeContextType {
   /** What's showing (the system's choice when preference is "system"). */
   theme: Theme;
   setPreference: (p: ThemePreference) => void;
-  /** Light ↔ dark, from whatever is showing now. */
+  /** Light ↔ dark, from whatever is showing now; landing on the system's choice goes back to following it. */
   toggle: () => void;
 }
 
@@ -58,7 +58,12 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     setPref(p);
     try { if (p === "system") localStorage.removeItem(THEME_KEY); else localStorage.setItem(THEME_KEY, p); } catch { /* private mode */ }
   }, []);
-  const toggle = useCallback(() => setPreference(theme === "dark" ? "light" : "dark"), [theme, setPreference]);
+  // The system's setting is the default. Flipping to the opposite saves that choice; flipping back to what
+  // the system shows clears it, so the app follows the system again instead of staying pinned.
+  const toggle = useCallback(() => {
+    const next: Theme = theme === "dark" ? "light" : "dark";
+    setPreference(next === system ? "system" : next);
+  }, [theme, system, setPreference]);
 
   return <ThemeContext.Provider value={{ preference, theme, setPreference, toggle }}>{children}</ThemeContext.Provider>;
 }
