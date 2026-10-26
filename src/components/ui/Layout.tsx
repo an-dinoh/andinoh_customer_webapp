@@ -16,7 +16,7 @@ export function PageHeader({ title, description, crumbs, actions, meta }: {
           <nav aria-label="Breadcrumb" className="mb-2 flex flex-wrap items-center gap-1 text-xs text-muted">
             {crumbs.map((c, i) => (
               <span key={i} className="inline-flex items-center gap-1">
-                {c.href ? <Link href={c.href} className="hover:text-primary">{c.label}</Link> : <span className="text-ink-2">{c.label}</span>}
+                {c.href ? <Link href={c.href} className="-mx-1 -my-1.5 inline-block min-w-8 px-1 py-1.5 text-center hover:text-primary">{c.label}</Link> : <span className="text-ink-2">{c.label}</span>}
                 {i < crumbs.length - 1 && <ChevronRight className="w-3 h-3" />}
               </span>
             ))}

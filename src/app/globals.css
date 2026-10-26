@@ -237,6 +237,18 @@ body {
   font-feature-settings: "tnum" 1;
 }
 
+/*
+ * Phones and tablets (including landscape): form fields at 16px. iOS Safari zooms the whole page into any field under 16px when it's
+ * tapped. Outside a cascade layer, so it wins over Tailwind's text-sm on the fields.
+ */
+@media (max-width: 639px), (pointer: coarse) {
+  input:not([type="checkbox"]):not([type="radio"]),
+  select,
+  textarea {
+    font-size: 16px;
+  }
+}
+
 /* Figures line up in tables and tiles. */
 .tabular {
   font-variant-numeric: tabular-nums;

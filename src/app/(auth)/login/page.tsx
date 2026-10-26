@@ -44,7 +44,7 @@ function LoginForm() {
       <form onSubmit={submit} className="space-y-4">
         <Input label="Email" type="email" autoComplete="email" required value={email} onChange={e => setEmail(e.target.value)} />
         <Input label="Password" type="password" autoComplete="current-password" required value={password} onChange={e => setPassword(e.target.value)} />
-        <div className="flex justify-end"><Link href={`/forgot-password${email ? `?email=${encodeURIComponent(email)}` : ""}`} className="text-sm font-medium text-primary hover:underline">Forgot password?</Link></div>
+        <div className="flex justify-end"><Link href={`/forgot-password${email ? `?email=${encodeURIComponent(email)}` : ""}`} className="-my-1.5 py-1.5 text-sm font-medium text-primary hover:underline">Forgot password?</Link></div>
         {error && <Callout tone="danger">{error}</Callout>}
         <Button type="submit" size="lg" fullWidth loading={busy} icon={Login}>Sign in</Button>
       </form>

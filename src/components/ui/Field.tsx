@@ -72,7 +72,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
           {...rest}
         />
         {isPassword ? (
-          <button type="button" onClick={() => setShow(s => !s)} className="absolute right-3 text-muted hover:text-ink" aria-label={show ? "Hide password" : "Show password"}>
+          <button type="button" onClick={() => setShow(s => !s)} className="absolute right-1.5 rounded-lg p-1.5 text-muted hover:text-ink" aria-label={show ? "Hide password" : "Show password"}>
             {show ? <EyeOff className="w-[18px] h-[18px]" /> : <Eye className="w-[18px] h-[18px]" />}
           </button>
         ) : suffix ? (
@@ -197,7 +197,7 @@ export function Segmented<V extends string>({ value, onChange, options, label, s
       <div role="radiogroup" aria-label={label} className="inline-flex rounded-xl border border-line bg-surface-2 p-1">
         {options.map(o => (
           <button key={o.value} type="button" role="radio" aria-checked={value === o.value} onClick={() => onChange(o.value)}
-            className={`flex-1 whitespace-nowrap rounded-lg ${size === "sm" ? "px-2.5 py-1 text-xs" : "px-3.5 py-1.5 text-sm"} font-medium transition-colors ${value === o.value ? "bg-raised text-ink shadow-sm" : "text-muted hover:text-ink"}`}>
+            className={`flex-1 whitespace-nowrap rounded-lg ${size === "sm" ? "px-2.5 py-1.5 text-xs" : "px-3.5 py-1.5 text-sm"} font-medium transition-colors ${value === o.value ? "bg-raised text-ink shadow-sm" : "text-muted hover:text-ink"}`}>
             {o.label}
           </button>
         ))}

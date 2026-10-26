@@ -37,8 +37,8 @@ export default function ContactPage() {
         </Panel>
         <Panel title="Other ways">
           <ul className="space-y-3 text-sm">
-            {c?.support_email && <li><a href={`mailto:${c.support_email}`} className="flex items-center gap-2 text-primary hover:underline"><Mail className="h-4 w-4" />{c.support_email}</a></li>}
-            {c?.support_phone && <li><a href={`tel:${c.support_phone.replace(/\s/g, "")}`} className="flex items-center gap-2 text-primary hover:underline"><Call className="h-4 w-4" />{c.support_phone}</a></li>}
+            {c?.support_email && <li><a href={`mailto:${c.support_email}`} className="-my-1 flex items-center gap-2 py-1 text-primary hover:underline"><Mail className="h-4 w-4" />{c.support_email}</a></li>}
+            {c?.support_phone && <li><a href={`tel:${c.support_phone.replace(/\s/g, "")}`} className="-my-1 flex items-center gap-2 py-1 text-primary hover:underline"><Call className="h-4 w-4" />{c.support_phone}</a></li>}
           </ul>
         </Panel>
       </div>

@@ -112,7 +112,7 @@ function Security() {
           ))}</ul>
         )}
         {sorted.length > 5 && (
-          <button type="button" onClick={() => setAllSessions(v => !v)} className="mt-3 text-sm font-medium text-primary hover:underline">
+          <button type="button" onClick={() => setAllSessions(v => !v)} className="mt-2 py-1.5 text-sm font-medium text-primary hover:underline">
             {allSessions ? "Show fewer" : `Show all ${sorted.length}`}
           </button>
         )}

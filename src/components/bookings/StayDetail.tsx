@@ -134,9 +134,9 @@ export default function StayDetail({ booking: b, actions, banner, guest }: {
           <Panel title="The hotel">
             <ul className="space-y-2.5 text-sm">
               {b.hotel_address && <li className="flex gap-2 text-ink-2"><Location className="mt-0.5 h-4 w-4 shrink-0 text-muted" />{b.hotel_address}</li>}
-              {b.hotel_phone && <li><a href={`tel:${b.hotel_phone}`} className="flex gap-2 text-primary hover:underline"><Call className="h-4 w-4" />{b.hotel_phone}</a></li>}
-              {b.hotel_email && <li><a href={`mailto:${b.hotel_email}`} className="flex gap-2 text-primary hover:underline"><Mail className="h-4 w-4" />{b.hotel_email}</a></li>}
-              {mapUrl && <li><a href={mapUrl} target="_blank" rel="noreferrer" className="flex gap-2 text-primary hover:underline"><Map className="h-4 w-4" />Directions</a></li>}
+              {b.hotel_phone && <li><a href={`tel:${b.hotel_phone}`} className="-my-1 flex gap-2 py-1 text-primary hover:underline"><Call className="h-4 w-4" />{b.hotel_phone}</a></li>}
+              {b.hotel_email && <li><a href={`mailto:${b.hotel_email}`} className="-my-1 flex gap-2 py-1 text-primary hover:underline"><Mail className="h-4 w-4" />{b.hotel_email}</a></li>}
+              {mapUrl && <li><a href={mapUrl} target="_blank" rel="noreferrer" className="-my-1 flex gap-2 py-1 text-primary hover:underline"><Map className="h-4 w-4" />Directions</a></li>}
               <li className="flex gap-2 text-muted"><Clock className="h-4 w-4" />Booked {formatDateTime(b.created_at)}</li>
             </ul>
             <Button variant="outline" size="sm" className="mt-4" href={`/hotels/${b.hotel}`}>View hotel</Button>

@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { appApi } from "@/services/api";
 import { useQuery } from "@/hooks/useApi";
-import { Call, Clock, Location, Mail } from "@/components/icons";
+import { Call, Location, Mail } from "@/components/icons";
 
 /**
  * The Andinoh website's footer (andinoh_website app/components/Footer.tsx), so the two read as one
@@ -53,10 +53,6 @@ export default function Footer() {
             <p className="max-w-xs text-sm leading-relaxed text-white/70">
               Trusted hotel stays, and the software hotels run on. Every hotel is checked in person before guests can book it.
             </p>
-            <p className="inline-flex items-center gap-2 self-start rounded-full bg-white/10 px-3 py-1.5 text-xs font-medium text-white/90">
-              <Clock className="h-4 w-4" />
-              The Andinoh app is coming to iPhone and Android
-            </p>
           </div>
 
           {COLUMNS.map(col => (
@@ -64,7 +60,7 @@ export default function Footer() {
               <h2 className="text-sm font-semibold">{col.title}</h2>
               <ul className="mt-4 flex flex-col gap-3 text-sm text-white/70">
                 {col.links.map(l => (
-                  <li key={l.href}><a href={l.href} className="transition-colors hover:text-white">{l.label}</a></li>
+                  <li key={l.href}><a href={l.href} className="-my-1 inline-block py-1 transition-colors hover:text-white">{l.label}</a></li>
                 ))}
               </ul>
             </div>
@@ -75,21 +71,21 @@ export default function Footer() {
             <ul className="mt-4 flex flex-col gap-3 text-sm text-white/70">
               {c?.support_email && (
                 <li>
-                  <a href={`mailto:${c.support_email}`} className="inline-flex items-center gap-2 break-all transition-colors hover:text-white">
+                  <a href={`mailto:${c.support_email}`} className="-my-1 inline-flex items-center gap-2 break-all py-1 transition-colors hover:text-white">
                     <Mail className="h-4 w-4 shrink-0" /> {c.support_email}
                   </a>
                 </li>
               )}
               {c?.support_whatsapp && (
                 <li>
-                  <a href={`https://wa.me/${c.support_whatsapp.replace(/\D/g, "")}`} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 transition-colors hover:text-white">
+                  <a href={`https://wa.me/${c.support_whatsapp.replace(/\D/g, "")}`} target="_blank" rel="noopener noreferrer" className="-my-1 inline-flex items-center gap-2 py-1 transition-colors hover:text-white">
                     <Call className="h-4 w-4 shrink-0" /> <span className="tabular">{c.support_whatsapp}</span> (WhatsApp)
                   </a>
                 </li>
               )}
               {c?.support_phone && (
                 <li>
-                  <a href={`tel:${digits(c.support_phone)}`} className="inline-flex items-center gap-2 transition-colors hover:text-white">
+                  <a href={`tel:${digits(c.support_phone)}`} className="-my-1 inline-flex items-center gap-2 py-1 transition-colors hover:text-white">
                     <Call className="h-4 w-4 shrink-0" /> <span className="tabular">{c.support_phone}</span>
                   </a>
                 </li>
@@ -104,9 +100,9 @@ export default function Footer() {
         <div className="mt-12 flex flex-col-reverse items-start justify-between gap-4 border-t border-white/15 pt-6 sm:flex-row sm:items-center">
           <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-white/60">
             <p>© {new Date().getFullYear()} Andinoh. All rights reserved.</p>
-            <Link href="/legal/terms-of-service" className="hover:text-white">Terms</Link>
-            <Link href="/legal/privacy-policy" className="hover:text-white">Privacy</Link>
-            <Link href="/help" className="hover:text-white">Help centre</Link>
+            <Link href="/legal/terms-of-service" className="-my-1.5 py-1.5 hover:text-white">Terms</Link>
+            <Link href="/legal/privacy-policy" className="-my-1.5 py-1.5 hover:text-white">Privacy</Link>
+            <Link href="/help" className="-my-1.5 py-1.5 hover:text-white">Help centre</Link>
           </div>
           <ul className="flex items-center gap-2">
             {SOCIALS.map(s => (

@@ -37,7 +37,7 @@ export default function HotelCard({ hotel, query = "", layout = "grid" }: { hote
   if (layout === "row") {
     return (
       <Link href={href} className="card-lift group flex gap-4 rounded-2xl border border-line bg-surface p-3 hover:border-primary/30">
-        <Img src={hotel.primary_image ?? hotel.logo} alt={hotel.name} className="h-32 w-36 shrink-0 rounded-xl object-cover sm:h-36 sm:w-52" />
+        <Img src={hotel.primary_image ?? hotel.logo} alt={hotel.name} className="h-28 w-24 shrink-0 rounded-xl object-cover min-[360px]:h-32 min-[360px]:w-36 sm:h-36 sm:w-52" />
         <div className="flex min-w-0 flex-1 flex-col py-1">
           <div className="flex items-start justify-between gap-3">
             <div className="min-w-0">

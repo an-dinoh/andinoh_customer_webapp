@@ -122,7 +122,7 @@ function TopBar() {
   return (
     <header className="sticky top-0 z-30 border-b border-line bg-surface/90 backdrop-blur no-print">
       <div className="mx-auto flex h-16 max-w-[1240px] items-center gap-4 px-4 sm:px-6 lg:px-8">
-        <Link href="/" aria-label="Andinoh home" className="shrink-0"><Logo priority /></Link>
+        <Link href="/" aria-label="Andinoh home" className="-my-2 shrink-0 py-2"><Logo priority /></Link>
         <nav aria-label="Main" className="ml-4 hidden items-center gap-1 lg:flex">
           {SECTIONS.filter(s => !(s.guestOnly && isAuthenticated)).map(s => {
             const active = s.match(pathname);

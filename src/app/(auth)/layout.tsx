@@ -35,7 +35,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
       </aside>
       <main className="flex flex-1 items-center justify-center px-5 py-10">
         <div className="w-full max-w-[400px]">
-          <Link href="/" className="mb-8 inline-block lg:hidden"><Logo width={120} height={20} className="h-5 w-auto" /></Link>
+          <Link href="/" aria-label="Andinoh home" className="mb-6 inline-block py-2 lg:hidden"><Logo width={120} height={20} className="h-5 w-auto" /></Link>
           {children}
         </div>
       </main>

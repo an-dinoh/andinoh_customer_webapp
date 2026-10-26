@@ -48,7 +48,7 @@ function ReviewItem({ review }: { review: Review }) {
       )}
       {isAuthenticated && !mine && (
         <button type="button" disabled={voted || vote.busy} onClick={() => vote.run()}
-          className="mt-3 inline-flex items-center gap-1.5 text-xs font-medium text-muted hover:text-primary disabled:text-success">
+          className="mt-1.5 inline-flex items-center gap-1.5 py-1.5 text-xs font-medium text-muted hover:text-primary disabled:text-success">
           <Like className="h-4 w-4" />{voted ? "Marked helpful" : `Helpful${review.helpful_votes ? ` (${review.helpful_votes})` : ""}`}
         </button>
       )}

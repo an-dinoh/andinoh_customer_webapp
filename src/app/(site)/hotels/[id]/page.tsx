@@ -43,7 +43,7 @@ function RoomRow({ room, quantity, onQuantity, onOpen, datesChosen }: { room: Ro
         <Img src={room.primary_image} alt={room.title} className="aspect-[16/9] w-full rounded-xl object-cover sm:aspect-auto sm:h-32 sm:w-44" />
       </button>
       <div className="flex min-w-0 flex-1 flex-col">
-        <button type="button" onClick={onOpen} className="text-left text-[15px] font-semibold text-ink hover:text-primary">{room.title}</button>
+        <button type="button" onClick={onOpen} className="-my-1 py-1 text-left text-[15px] font-semibold text-ink hover:text-primary">{room.title}</button>
         <p className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-muted">
           <span className="inline-flex items-center gap-1"><Bed className="h-3.5 w-3.5" />{humanize(room.bed_type)} bed</span>
           <span className="inline-flex items-center gap-1"><Guests className="h-3.5 w-3.5" />Sleeps {room.max_occupancy}</span>
@@ -55,7 +55,7 @@ function RoomRow({ room, quantity, onQuantity, onOpen, datesChosen }: { room: Ro
           {!soldOut && left !== null && left <= 2 && <Pill tone="warning">Only {left} left</Pill>}
           {soldOut && <Pill tone="danger">Sold out for your dates</Pill>}
         </div>
-        <button type="button" onClick={onOpen} className="mt-auto pt-2 text-left text-xs font-medium text-primary hover:underline">Room details</button>
+        <button type="button" onClick={onOpen} className="-mb-1.5 mt-auto pb-1.5 pt-2 text-left text-xs font-medium text-primary hover:underline">Room details</button>
       </div>
       <div className="flex shrink-0 flex-row items-end justify-between gap-3 border-t border-line pt-3 sm:w-48 sm:flex-col sm:border-0 sm:pt-0">
         {o ? (
@@ -139,8 +139,8 @@ function HotelPage() {
   return (
     <Container className="pb-24 lg:pb-0">
       <nav aria-label="Breadcrumb" className="mb-3 flex flex-wrap items-center gap-1 text-xs text-muted">
-        <Link href="/" className="hover:text-primary">Home</Link><span>/</span>
-        <Link href={`/hotels?city_id=${h.city ?? ""}&label=${encodeURIComponent(placeName(h))}&${planQuery({ ...plan, rooms: {} })}`} className="hover:text-primary">{h.city_name || "Hotels"}</Link><span>/</span>
+        <Link href="/" className="-my-1.5 py-1.5 hover:text-primary">Home</Link><span>/</span>
+        <Link href={`/hotels?city_id=${h.city ?? ""}&label=${encodeURIComponent(placeName(h))}&${planQuery({ ...plan, rooms: {} })}`} className="-my-1.5 py-1.5 hover:text-primary">{h.city_name || "Hotels"}</Link><span>/</span>
         <span className="text-ink-2">{h.name}</span>
       </nav>
       <div className="mb-5 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
@@ -150,7 +150,7 @@ function HotelPage() {
           <div className="mt-2 flex flex-wrap items-center gap-2 text-sm text-muted">
             <RatingBadge rating={h.average_rating} reviews={h.total_reviews} />
             <span className="inline-flex items-center gap-1"><Location className="h-4 w-4" />{h.address ? `${h.address}, ` : ""}{placeName(h)}</span>
-            {mapUrl && <a href={mapUrl} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 font-medium text-primary hover:underline"><Map className="h-4 w-4" />Map</a>}
+            {mapUrl && <a href={mapUrl} target="_blank" rel="noreferrer" className="-my-1.5 py-1.5 inline-flex items-center gap-1 font-medium text-primary hover:underline"><Map className="h-4 w-4" />Map</a>}
           </div>
         </div>
         <div className="flex flex-wrap gap-2">
