@@ -77,11 +77,14 @@ function Complete() {
 
   if (!outcome) return <Spinnerish label="Confirming your payment…" />;
   const view = {
-    paid: { icon: CheckCircle, tone: "bg-success-50 text-success", title: "Payment received", text: saved?.label ? `You’re all set for ${saved.label}. We’ve emailed your receipt.` : "We’ve emailed your receipt." },
+    paid: {
+      icon: CheckCircle, tone: "bg-success-50 text-success", title: saved?.extension ? "Your stay is extended" : "Payment received",
+      text: saved?.label ? `You’re all set for ${saved.label}. We’ve emailed your receipt.` : "We’ve emailed your receipt.",
+    },
     processing: { icon: Clock, tone: "bg-warning-50 text-warning", title: "Payment processing", text: `${outcome.message} We’ll notify you as soon as it clears; you can leave this page.` },
     failed: { icon: CloseCircle, tone: "bg-danger-50 text-danger", title: outcome.code === "cancelled" ? "Payment cancelled" : "Payment not completed", text: outcome.message },
   }[outcome.state];
-  const canRetry = outcome.state === "failed" && kind && kind !== "tip" && !["already_paid", "booking_cancelled", "reference_mismatch", "duplicate_transaction"].includes(outcome.code ?? "");
+  const canRetry = outcome.state === "failed" && kind && kind !== "tip" && !saved?.extension && !["already_paid", "booking_cancelled", "reference_mismatch", "duplicate_transaction"].includes(outcome.code ?? "");
 
   return (
     <Container narrow>
@@ -91,7 +94,7 @@ function Complete() {
         <p className="mt-2 text-sm text-muted">{view.text}</p>
         <div className="mt-7 flex flex-col gap-2">
           {canRetry && <Button icon={Refresh} loading={retrying} onClick={retry}>Try again</Button>}
-          <Button variant={canRetry ? "outline" : "primary"} href={back}>{outcome.state === "paid" ? "View details" : "Back"}</Button>
+          <Button variant={canRetry ? "outline" : "primary"} href={back}>{outcome.state === "paid" ? "View details" : saved?.extension ? "Back to your booking" : "Back"}</Button>
         </div>
       </div>
     </Container>

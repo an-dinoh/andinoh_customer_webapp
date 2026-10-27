@@ -10,10 +10,10 @@ import {
 } from "@/components/ui";
 import { CloseCircle, DocumentUpload, Trash } from "@/components/icons";
 import { ApiError, errorMessage } from "@/utils/api";
-import { addDays, formatDate, money, nightsBetween, toApiAmount, isPositiveAmount } from "@/utils/format";
+import { addDays, formatDate, formatTime, money, nightsBetween, toApiAmount, isPositiveAmount } from "@/utils/format";
 import { refundPreview } from "@/utils/bookings";
-import { openCheckout } from "@/utils/payments";
-import type { ComplaintType, HotelBooking } from "@/types/api";
+import { openCheckout, paymentReturnUrl } from "@/utils/payments";
+import type { ComplaintType, ExtendResult, HotelBooking } from "@/types/api";
 
 interface Props { open: boolean; onClose: () => void; booking: HotelBooking; onDone: () => void }
 
@@ -49,29 +49,87 @@ export const CancelDialog = whenOpen(CancelBody);
 
 // ---- extend (9.4) ------------------------------------------------------------------------------------
 
+/**
+ * Two steps, like the mobile app: pick the new check-out date, then see what the backend priced the
+ * extra nights at before paying. Asking for the price holds the nights for 30 minutes (the backend
+ * prices and holds in one call); closing without paying just lets the hold lapse. A pay-at-hotel stay
+ * is extended at once, so it's asked about up front and the cost shown afterwards.
+ */
 function ExtendBody({ open, onClose, booking, onDone }: Props) {
   const [date, setDate] = useState(addDays(booking.check_out_date, 1));
+  const [result, setResult] = useState<ExtendResult | null>(null);
   const extra = nightsBetween(booking.check_out_date, date);
+  const nights = (n: number) => `${n} extra night${n === 1 ? "" : "s"}`;
   const extend = useMutation(async () => {
-    const r = await bookingsApi.extend(booking.id, date, `${window.location.origin}/payments/complete?kind=booking&ref=${booking.id}`);
-    if (r.payment_required && r.payment) {
-      await openCheckout(r.payment, { kind: "booking", ref: booking.id, back: `/trips/${booking.id}`, label: booking.hotel_name });
-      return;
-    }
-    toast.success(`Stay extended to ${formatDate(r.new_checkout_date)}`);
-    onClose();
-    onDone();
+    const r = await bookingsApi.extend(booking.id, date, paymentReturnUrl({ kind: "booking", ref: booking.id }));
+    setResult(r);
+    if (!r.payment_required) onDone();
+    return r;
   }, { silentError: true });
+  const pay = useMutation(async () => {
+    if (!result?.payment) return;
+    await openCheckout(result.payment, {
+      kind: "booking", ref: booking.id, back: `/trips/${booking.id}`, extension: true,
+      label: `${nights(result.additional_nights)} at ${booking.hotel_name}`,
+    });
+  });
   const conflict = extend.error instanceof ApiError && extend.error.status === 409;
+  const cost = result ? money(result.additional_cost, booking.currency) : "";
+  const close = () => { onClose(); if (result && !result.payment_required) toast.success(`Stay extended to ${formatDate(result.new_checkout_date)}`); };
+
+  // Extended already (nothing to pay now, or paid at the hotel).
+  if (result && !result.payment_required) {
+    return (
+      <Sheet open={open} onClose={close} title="Your stay is extended" footer={<Button onClick={close}>Done</Button>}>
+        <div className="space-y-4">
+          <ExtensionSummary from={booking.check_out_date} result={result} currency={booking.currency} />
+          <Callout tone="success">{Number(result.additional_cost) > 0 ? `${cost} has been added to your bill, to settle at the hotel.` : "There’s nothing extra to pay."}</Callout>
+        </div>
+      </Sheet>
+    );
+  }
+
+  // Priced and held: pay to confirm, or leave it.
+  if (result) {
+    return (
+      <Sheet open={open} onClose={onClose} title="Review your extension" description="Pay to confirm the extra nights."
+        footer={<><Button variant="outline" disabled={pay.busy} onClick={() => setResult(null)}>Change date</Button><Button loading={pay.busy} onClick={() => pay.run()}>Pay {cost}</Button></>}>
+        <div className="space-y-4">
+          <ExtensionSummary from={booking.check_out_date} result={result} currency={booking.currency} />
+          <p className="text-sm text-muted">
+            Priced like a new booking: that night’s rate, taxes and fee. We’re holding your room until {formatTime(result.hold_expires_at)}; if you don’t pay by then, the nights are released and nothing is charged.
+          </p>
+        </div>
+      </Sheet>
+    );
+  }
+
   return (
-    <Sheet open={open} onClose={onClose} title="Extend your stay" description={`Currently checking out ${formatDate(booking.check_out_date)}.`}
-      footer={<><Button variant="outline" onClick={onClose}>Cancel</Button><Button loading={extend.busy} disabled={extra < 1} onClick={() => extend.run()}>Continue</Button></>}>
+    <Sheet open={open} onClose={onClose} title="Extend your stay" description={`You’re checking out ${formatDate(booking.check_out_date)}.`}
+      footer={<><Button variant="outline" onClick={onClose}>Cancel</Button><Button loading={extend.busy} disabled={extra < 1} onClick={() => extend.run()}>{booking.pay_at_hotel ? "Extend stay" : "See the price"}</Button></>}>
       <div className="space-y-4">
         <Input label="New check-out date" type="date" value={date} min={addDays(booking.check_out_date, 1)} max={addDays(booking.check_out_date, 30)} onChange={e => setDate(e.target.value)} />
-        <p className="text-sm text-muted">{extra} extra night{extra === 1 ? "" : "s"}, priced like a new booking (that night’s rate, taxes and fee). {booking.pay_at_hotel ? "You’ll settle it at the hotel." : "You’ll pay to confirm them; unpaid extensions lapse after 30 minutes."}</p>
+        <p className="text-sm text-muted">
+          {extra > 0 ? `${nights(extra)}, ` : ""}priced like a new booking. {booking.pay_at_hotel ? "They’re added to your stay straight away and you settle them at the hotel." : "You’ll see the price before you pay."}
+        </p>
         {extend.error && <Callout tone={conflict ? "warning" : "danger"} title={conflict ? "Those nights aren’t free" : undefined}>{conflict ? "Your room isn’t available for those dates. Try fewer nights, or contact the hotel." : errorMessage(extend.error)}</Callout>}
       </div>
     </Sheet>
+  );
+}
+
+function ExtensionSummary({ from, result, currency }: { from: string; result: ExtendResult; currency: string }) {
+  const rows: [string, React.ReactNode][] = [
+    ["Check-out", <><span className="text-muted line-through">{formatDate(from)}</span> → {formatDate(result.new_checkout_date)}</>],
+    ["Extra nights", result.additional_nights],
+  ];
+  return (
+    <dl className="rounded-2xl border border-line bg-surface-2 p-4 text-sm">
+      {rows.map(([label, value]) => (
+        <div key={label} className="flex justify-between gap-4 py-1.5"><dt className="text-muted">{label}</dt><dd className="text-right text-ink">{value}</dd></div>
+      ))}
+      <div className="mt-2 flex justify-between gap-4 border-t border-line pt-3 text-base font-semibold text-ink"><dt>Total</dt><dd className="tabular-nums">{money(result.additional_cost, currency)}</dd></div>
+    </dl>
   );
 }
 export const ExtendSheet = whenOpen(ExtendBody);

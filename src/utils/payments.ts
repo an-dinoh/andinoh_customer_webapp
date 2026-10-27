@@ -26,6 +26,11 @@ export interface PendingPayment {
   label?: string;
   tx_ref?: string;
   /**
+   * Paying for extra nights. Those are priced and held per request, so a failed payment is retried by
+   * extending again from the booking, not by paying the booking's balance.
+   */
+  extension?: boolean;
+  /**
    * A guest booking's secret token, needed to pay and to verify. It rides with this one payment (this
    * tab's sessionStorage) and is forgotten once verified; bookings themselves aren't kept on the device.
    */

@@ -14,6 +14,7 @@ import { Button, Callout, EmptyState, ErrorState, Skeleton } from "@/components/
 import { CalendarAdd, CheckCircle, CloseCircle, Coin, Messages, Star, Warning } from "@/components/icons";
 import { errorMessage } from "@/utils/api";
 import { formatDate, money } from "@/utils/format";
+import { rememberBookingStatus } from "@/utils/notify";
 import { isFlight, stayActions } from "@/utils/bookings";
 import { startPayment } from "@/utils/payments";
 import type { HotelBooking } from "@/types/api";
@@ -71,6 +72,8 @@ export default function TripPage() {
     return () => webSocketService.unsubscribe("subscribe_booking", id);
   }, [id]);
   useLiveReload(["booking_status_update"], trip.reload, e => e.message.booking_id === id);
+  const status = trip.data && !isFlight(trip.data) ? trip.data.status : undefined;
+  useEffect(() => { if (status) rememberBookingStatus(id, status); }, [id, status]);
 
   return (
     <Container>

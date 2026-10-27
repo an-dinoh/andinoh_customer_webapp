@@ -82,6 +82,31 @@ const STAY_STATUS: Record<string, { title: string; tone: NoticeTone }> = {
   no_show: { title: 'Marked as a no-show', tone: 'warning' },
 };
 
+const STATUS_KEY = 'andinoh-customer:booking-status';
+
+function knownStatuses(): Record<string, string> {
+  try { return JSON.parse(sessionStorage.getItem(STATUS_KEY) ?? '{}') as Record<string, string>; } catch { return {}; }
+}
+
+/**
+ * Notes a booking's status as this tab last saw it. Kept for the tab (sessionStorage) so it survives the
+ * round trip to checkout; it's only a status, never the booking.
+ */
+export function rememberBookingStatus(id: string, status: string): void {
+  try { sessionStorage.setItem(STATUS_KEY, JSON.stringify({ ...knownStatuses(), [id]: status })); } catch { /* private mode: toasts may repeat */ }
+}
+
+/**
+ * Whether a `booking_status_update` is news. The backend sends one whenever a booking is saved, not only
+ * when its status changes (pricing an extension or a payment saves it), so an unchanged status is
+ * skipped; one this tab hasn't seen counts as news.
+ */
+export function isNewBookingStatus(id: string, status: string): boolean {
+  const news = !id || knownStatuses()[id] !== status;
+  if (id) rememberBookingStatus(id, status);
+  return news;
+}
+
 /** `booking_status_update`: a booking changed (e.g. a bank transfer cleared). */
 export function bookingStatusNotice(message: Record<string, unknown>): Notice {
   const status = String(message.status ?? '');

@@ -1,7 +1,7 @@
 import { awaitingPayment, clock, completedPayments, daysBeforeCheckIn, holdLeft, refundPreview, roomNumber, stayActions, statusInfo, tripGroup } from '@/utils/bookings';
 import { LIMITS, datesProblem, defaultPlan, guestsLabel, occupancyProblem, passwordOk, PASSWORD_RULES, planQuery, readPlan, stayRequest } from '@/utils/stay';
 import { resolveLink } from '@/utils/links';
-import { cleanServerText, notificationHref, readableError } from '@/utils/notify';
+import { cleanServerText, isNewBookingStatus, notificationHref, readableError, rememberBookingStatus } from '@/utils/notify';
 import { remainder } from '@/components/bookings/PriceSummary';
 import { visibleSections } from '@/components/home/Feed';
 import { example } from '@/services/api/__tests__/harness';
@@ -158,5 +158,22 @@ describe('home feed (guide 5.1)', () => {
     ] as FeedSection[];
     expect(visibleSections(sections).map(s => s.type)).toEqual(['active_bookings', 'ads_banner', 'hotel_horizontal_list']);
     expect(visibleSections(undefined)).toEqual([]);
+  });
+});
+
+describe('booking status pushes', () => {
+  beforeEach(() => sessionStorage.clear());
+
+  it('are news only when the status changed from what this tab saw', () => {
+    rememberBookingStatus('b1', 'checked_in');
+    // The backend repeats the status whenever the booking is saved (e.g. pricing an extension).
+    expect(isNewBookingStatus('b1', 'checked_in')).toBe(false);
+    expect(isNewBookingStatus('b1', 'checked_out')).toBe(true);
+    expect(isNewBookingStatus('b1', 'checked_out')).toBe(false);
+  });
+
+  it('count as news for a booking this tab hasn’t seen, once', () => {
+    expect(isNewBookingStatus('b2', 'confirmed')).toBe(true);
+    expect(isNewBookingStatus('b2', 'confirmed')).toBe(false);
   });
 });

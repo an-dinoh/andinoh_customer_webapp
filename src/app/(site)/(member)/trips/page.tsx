@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter, useSearchParams } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useLiveReload } from "@/contexts/LiveContext";
 import { bookingsApi } from "@/services/api";
 import { useDebounced, useQuery } from "@/hooks/useApi";
@@ -10,6 +10,7 @@ import { Container } from "@/components/shell/SiteShell";
 import { Button, EmptyState, ErrorState, PageHeader, SearchBox, Tabs } from "@/components/ui";
 import { Calendar } from "@/components/icons";
 import { isHotel, tripGroup, type TripGroup } from "@/utils/bookings";
+import { rememberBookingStatus } from "@/utils/notify";
 import type { HotelBooking } from "@/types/api";
 
 export default function TripsPage() {
@@ -35,6 +36,8 @@ export default function TripsPage() {
     return { all, count, more: next };
   }, [q, pages]);
   useLiveReload(["booking_status_update"], list.reload);
+  // What this tab has seen, so a repeat status push doesn't pop a toast.
+  useEffect(() => { for (const b of list.data?.all ?? []) rememberBookingStatus(b.id, b.status); }, [list.data]);
 
   const groups: Record<TripGroup, HotelBooking[]> = { upcoming: [], past: [], cancelled: [] };
   for (const b of list.data?.all ?? []) groups[tripGroup(b)].push(b);

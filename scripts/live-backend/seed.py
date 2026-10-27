@@ -105,7 +105,7 @@ def hotel(owner_email, name, city, state, *, hotel_type, stars, lat, lng, addres
     h = Hotel.objects.get(owner_id=owner_user.profile.id)
     Hotel.objects.filter(pk=h.pk).update(kyc_status='verified', is_active=True, is_verified=True)
     ok(owner.patch('/api/v1/hotels/my-hotel/policies/', policy, format='json'))
-    ok(owner.post('/api/v1/hotels/my-hotel/taxes/', {'tax_name': 'VAT', 'percentage_rate': '7.50', 'is_mandatory': True}, format='json'), 201)
+    ok(owner.post('/api/v1/hotels/my-hotel/taxes/', {'tax_name': 'Consumption tax', 'percentage_rate': '5.00', 'is_mandatory': True}, format='json'), 201)
     for i, name_ in enumerate(photos):
         ok(owner.post('/api/v1/hotels/upload-image/', {'image': photo(name_), 'image_type': 'exterior' if i == 0 else 'lobby',
                                                        'caption': '', 'is_primary': i == 0, 'order': i}, format='multipart'), 201)

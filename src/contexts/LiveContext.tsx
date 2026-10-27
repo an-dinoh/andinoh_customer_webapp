@@ -4,7 +4,7 @@ import React, { createContext, useCallback, useContext, useEffect, useMemo, useR
 import { useAuth } from "./AuthContext";
 import { chatApi, notificationsApi } from "@/services/api";
 import { webSocketService, type ServerEvent, type SocketState } from "@/services/websocket.service";
-import { bookingStatusNotice, chatNotice, notificationHref, notificationText, notificationTone } from "@/utils/notify";
+import { bookingStatusNotice, chatNotice, isNewBookingStatus, notificationHref, notificationText, notificationTone } from "@/utils/notify";
 import { showNotice } from "@/components/shell/NoticeToast";
 
 /**
@@ -72,7 +72,10 @@ export function LiveProvider({ children }: { children: React.ReactNode }) {
           break;
         }
         case "booking_status_update":
-          showNotice(bookingStatusNotice(m), { id: `booking-${m.booking_id ?? ""}` });
+          // Pages showing the booking reload either way (useLiveReload); the toast is only for real changes.
+          if (isNewBookingStatus(String(m.booking_id ?? ""), String(m.status ?? ""))) {
+            showNotice(bookingStatusNotice(m), { id: `booking-${m.booking_id ?? ""}` });
+          }
           break;
         case "new_chat_message":
           if (m.sender_type === "staff") {

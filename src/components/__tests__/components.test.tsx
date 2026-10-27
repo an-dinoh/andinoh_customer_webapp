@@ -4,6 +4,7 @@ import { searchHref, whereFromParams } from '@/components/hotels/StaySearch';
 import { BreakdownSummary, QuoteSummary } from '@/components/bookings/PriceSummary';
 import PasswordRules from '@/components/auth/PasswordRules';
 import TripCard from '@/components/bookings/TripCard';
+import { CheckCircle } from '@/components/icons';
 import { example } from '@/services/api/__tests__/harness';
 import type { HotelBooking, HotelCard as Hotel, Paginated, Quote } from '@/types/api';
 
@@ -70,5 +71,19 @@ describe('TripCard', () => {
     expect(screen.getByText('Completed')).toBeInTheDocument();
     expect(screen.getByText(b.confirmation_code)).toBeInTheDocument();
     expect(screen.getByRole('link')).toHaveAttribute('href', `/trips/${b.id}`);
+  });
+});
+
+describe('icons', () => {
+  it('keep their drawing when re-rendered, so toasts watching the DOM don’t loop', () => {
+    const { container, rerender } = render(<CheckCircle className="h-4 w-4" />);
+    const path = container.querySelector('svg')!.firstElementChild;
+    const changes: MutationRecord[] = [];
+    const watcher = new MutationObserver(list => changes.push(...list));
+    watcher.observe(container, { subtree: true, childList: true });
+    rerender(<CheckCircle className="h-5 w-5" />);
+    expect(watcher.takeRecords().concat(changes)).toHaveLength(0);
+    expect(container.querySelector('svg')!.firstElementChild).toBe(path);
+    watcher.disconnect();
   });
 });
