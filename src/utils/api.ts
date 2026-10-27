@@ -67,16 +67,14 @@ export class ApiError extends Error {
   }
 
   /**
-   * Shared guide 3: only `too_many_login_attempts` means sign-in is locked for 15 minutes; `throttled` is
-   * a short rate limit, worded with the wait from the message or the Retry-After header.
+   * Shared guide 3: only `too_many_login_attempts` means sign-in is locked for 15 minutes, which the
+   * person needs to know. Any other 429 is our rate limit, retried quietly first (see the client); when
+   * it still fails the person is just asked to try again, never told about request limits.
    */
   private static tooMany(body: ApiErrorBody): string {
     const server = body.error || body.message || body.detail || '';
     if (body.code === 'too_many_login_attempts') return server || 'Too many failed sign-ins. Sign-in to this account is locked for 15 minutes.';
-    const seconds = Number(/(\d+)\s*seconds?/i.exec(server)?.[1] ?? body.retry_after);
-    if (!Number.isFinite(seconds) || seconds <= 0) return 'Too many requests. Please wait a moment and try again.';
-    if (seconds >= 120) return `Too many requests. Try again in ${Math.ceil(seconds / 60)} minutes.`;
-    return `Too many requests. Try again in ${seconds} second${seconds === 1 ? '' : 's'}.`;
+    return 'We couldn’t complete that just now. Please try again.';
   }
 
   private static codeFor(status: number): string {
@@ -191,9 +189,28 @@ function recorded(entry: string): Promise<never> | null {
 
 // ---- client ----------------------------------------------------------------------------------------
 
-type RetriableConfig = InternalAxiosRequestConfig & { _retried?: boolean };
+type RetriableConfig = InternalAxiosRequestConfig & { _retried?: boolean; _throttled?: number };
 
 let refreshing: Promise<string> | null = null;
+
+/** Rate-limited requests are retried this many times before the person sees an error. */
+export const THROTTLE_RETRIES = 3;
+/** The longest Retry-After worth waiting for behind a spinner, in seconds. */
+const MAX_THROTTLE_WAIT = 15;
+export const throttleTiming = { sleep: (ms: number) => new Promise<void>(resolve => setTimeout(resolve, ms)) };
+
+/**
+ * How long to wait before retrying a rate-limited request, in ms: the server's Retry-After when it's
+ * short enough, else 1s, 2s, 4s. Null when it shouldn't be retried: a sign-in lockout, or a wait too long.
+ */
+function throttleWait(error: AxiosError<ApiErrorBody>, attempt: number): number | null {
+  if (error.response?.status !== 429 || attempt >= THROTTLE_RETRIES) return null;
+  const body = error.response.data;
+  if (body && typeof body === 'object' && body.code === 'too_many_login_attempts') return null;
+  const header = Number(error.response.headers?.['retry-after']);
+  if (Number.isFinite(header) && header > 0) return header <= MAX_THROTTLE_WAIT ? header * 1000 : null;
+  return 1000 * 2 ** attempt;
+}
 
 async function refreshAccessToken(): Promise<string> {
   const refreshToken = session.refresh();
@@ -254,6 +271,13 @@ class ApiClient {
     this.http.interceptors.response.use(undefined, async (error: AxiosError<ApiErrorBody>) => {
       const config = error.config as RetriableConfig | undefined;
       const isAuthCall = ['auth/login', 'auth/refresh', 'auth/register', 'auth/google'].some(p => config?.url?.startsWith(p));
+      // A 429 means the request wasn't handled, so sending it again is safe, even for a payment.
+      const wait = config ? throttleWait(error, config._throttled ?? 0) : null;
+      if (config && wait !== null) {
+        config._throttled = (config._throttled ?? 0) + 1;
+        await throttleTiming.sleep(wait);
+        return this.http(config);
+      }
       if (error.response?.status === 401 && config && !config._retried && !isAuthCall && session.refresh()) {
         config._retried = true;
         try {
@@ -275,8 +299,22 @@ class ApiClient {
     return recorded(`GET ${path} ${JSON.stringify(clean(params) ?? {})}`) ?? this.send<T>(path, params, config);
   }
 
-  private async send<T>(path: string, params?: object, config?: AxiosRequestConfig): Promise<T> {
-    return (await this.http.get<T>(path, { ...config, params: clean({ ...config?.params, ...params }) })).data;
+  /** GETs already on their way, so several parts of a page asking for the same thing share one request. */
+  private inFlight = new Map<string, Promise<unknown>>();
+
+  private send<T>(path: string, params?: object, config?: AxiosRequestConfig): Promise<T> {
+    const merged = clean({ ...config?.params, ...params });
+    // Only plain requests are shared: custom headers (a guest's booking token) or options keep their own.
+    const key = config && Object.keys(config).some(k => k !== 'params') ? null : `${session.access() ?? ''} ${path} ${JSON.stringify(merged ?? {})}`;
+    const pending = key ? this.inFlight.get(key) : undefined;
+    if (pending) return pending as Promise<T>;
+    const request = this.http.get<T>(path, { ...config, params: merged }).then(r => r.data);
+    if (key) {
+      this.inFlight.set(key, request);
+      const done = () => { this.inFlight.delete(key); };
+      request.then(done, done);
+    }
+    return request;
   }
 
   async post<T>(path: string, body?: unknown, config?: AxiosRequestConfig): Promise<T> {
